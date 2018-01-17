@@ -43,6 +43,7 @@
 .\engineer\shoottask.o: ../Inc/includes.h
 .\engineer\shoottask.o: ..\Tasks\Inc\pid_regulator.h
 .\engineer\shoottask.o: ..\Tasks\Inc\ControlTask.h
+.\engineer\shoottask.o: ..\Tasks\Inc\AMControlTask.h
 .\engineer\shoottask.o: ..\Tasks\Inc\IMUTask.h
 .\engineer\shoottask.o: ..\Tasks\Inc\CANTask.h
 .\engineer\shoottask.o: ..\Tasks\Inc\drivers_ramp.h

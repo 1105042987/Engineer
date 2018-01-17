@@ -12,24 +12,21 @@
 #include "includes.h"
 
 #define CanRxGetU16(canRxMsg, num) (((uint16_t)canRxMsg.Data[num * 2] << 8) | (uint16_t)canRxMsg.Data[num * 2 + 1])
-uint8_t isRcanStarted_CMGM = 0, isRcanStarted_ZGYRO = 0;
-CanRxMsgTypeDef CMGMCanRxMsg, ZGYROCanRxMsg;
+uint8_t isRcanStarted_CM = 0, isRcanStarted_AUX = 0;
+CanRxMsgTypeDef CMCanRxMsg, AUXCanRxMsg;
 Motor820RRxMsg_t CMFLRx,CMFRRx,CMBLRx,CMBRRx;
-Motor6623RxMsg_t GMPITCHRx,GMYAWRx;
-float ZGyroModuleAngle = 0.0;
-
+Motor2310RxMsg_t AMUD1Rx,AMUD2Rx,AMFBRx,AMSIDERx,WINDRx;
 uint8_t can1_update = 1;
-uint8_t can1_type = 0;
+uint8_t can2_type = 0;
 uint8_t can2_update = 1;
 /********************CAN发送*****************************/
-//云台底盘CAN数据依次发送保证发送资源正常
+//CAN数据标记发送，保证发送资源正常
 void HAL_CAN_TxCpltCallback(CAN_HandleTypeDef* hcan)
 {
-	if(hcan == &CMGMMOTOR_CAN){
+	if(hcan == &CMMOTOR_CAN){
 		can1_update = 1;
-		can1_type = 1 - can1_type;
 	}
-	else if(hcan == &ZGYRO_CAN)
+	else if(hcan == &AUXMOTOR_CAN)
 	{
 		can2_update = 1;
 	}
@@ -39,8 +36,8 @@ void HAL_CAN_TxCpltCallback(CAN_HandleTypeDef* hcan)
 void InitCanReception()
 {
 	//http://www.eeworld.com.cn/mcu/article_2016122732674_3.html
-	CMGMMOTOR_CAN.pRxMsg = &CMGMCanRxMsg;
-	/*##-- Configure the CAN2 Filter ###########################################*/
+	CMMOTOR_CAN.pRxMsg = &CMCanRxMsg;
+	/*##-- Configure the CAN1 Filter ###########################################*/
 	CAN_FilterConfTypeDef  sFilterConfig;
 	sFilterConfig.FilterNumber = 0;//14 - 27//14
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
@@ -52,13 +49,13 @@ void InitCanReception()
   sFilterConfig.FilterFIFOAssignment = 0;
   sFilterConfig.FilterActivation = ENABLE;
   sFilterConfig.BankNumber = 14;
-  HAL_CAN_ConfigFilter(&CMGMMOTOR_CAN, &sFilterConfig);
-	if(HAL_CAN_Receive_IT(&CMGMMOTOR_CAN, CAN_FIFO0) != HAL_OK){
+  HAL_CAN_ConfigFilter(&CMMOTOR_CAN, &sFilterConfig);
+	if(HAL_CAN_Receive_IT(&CMMOTOR_CAN, CAN_FIFO0) != HAL_OK){
 		Error_Handler(); 
 	}
-	isRcanStarted_CMGM = 1;
+	isRcanStarted_CM = 1;
 	
-	ZGYRO_CAN.pRxMsg = &ZGYROCanRxMsg;
+	AUXMOTOR_CAN.pRxMsg = &AUXCanRxMsg;
 	/*##-- Configure the CAN2 Filter ###########################################*/
 	CAN_FilterConfTypeDef sFilterConfig2;
 	sFilterConfig2.FilterNumber = 14;//14 - 27//14
@@ -71,75 +68,90 @@ void InitCanReception()
   sFilterConfig2.FilterFIFOAssignment = 0;
   sFilterConfig2.FilterActivation = ENABLE;
   sFilterConfig2.BankNumber = 14;
-  HAL_CAN_ConfigFilter(&ZGYRO_CAN, &sFilterConfig2);
-	if(HAL_CAN_Receive_IT(&ZGYRO_CAN, CAN_FIFO0) != HAL_OK){
+  HAL_CAN_ConfigFilter(&AUXMOTOR_CAN, &sFilterConfig2);
+	if(HAL_CAN_Receive_IT(&AUXMOTOR_CAN, CAN_FIFO0) != HAL_OK){
 		Error_Handler(); 
 	}
-	isRcanStarted_ZGYRO = 1;
+	isRcanStarted_AUX = 1;
 }
 
 //CAN接收中断入口函数
 void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan){
-	if(hcan == &CMGMMOTOR_CAN){//CAN1数据
-		switch(CMGMCanRxMsg.StdId){
+	if(hcan == &CMMOTOR_CAN){//CAN1数据
+		switch(CMCanRxMsg.StdId){
 			case CMFL_RXID:
-				CMFLRx.angle = CanRxGetU16(CMGMCanRxMsg, 0);
-				CMFLRx.RotateSpeed = CanRxGetU16(CMGMCanRxMsg, 1);
+				CMFLRx.angle = CanRxGetU16(CMCanRxMsg, 0);
+				CMFLRx.RotateSpeed = CanRxGetU16(CMCanRxMsg, 1);
 				break;
 			case CMFR_RXID:
-				CMFRRx.angle = CanRxGetU16(CMGMCanRxMsg, 0);
-				CMFRRx.RotateSpeed = CanRxGetU16(CMGMCanRxMsg, 1);
+				CMFRRx.angle = CanRxGetU16(CMCanRxMsg, 0);
+				CMFRRx.RotateSpeed = CanRxGetU16(CMCanRxMsg, 1);
 				break;
 			case CMBL_RXID:
-				CMBLRx.angle = CanRxGetU16(CMGMCanRxMsg, 0);
-				CMBLRx.RotateSpeed = CanRxGetU16(CMGMCanRxMsg, 1);
+				CMBLRx.angle = CanRxGetU16(CMCanRxMsg, 0);
+				CMBLRx.RotateSpeed = CanRxGetU16(CMCanRxMsg, 1);
 				break;
 			case CMBR_RXID:
-				CMBRRx.angle = CanRxGetU16(CMGMCanRxMsg, 0);
-				CMBRRx.RotateSpeed = CanRxGetU16(CMGMCanRxMsg, 1);
+				CMBRRx.angle = CanRxGetU16(CMCanRxMsg, 0);
+				CMBRRx.RotateSpeed = CanRxGetU16(CMCanRxMsg, 1);
 				break;
-			case GMYAW_RXID:
-				GMYAWRx.angle = CanRxGetU16(CMGMCanRxMsg, 0);
-				GMYAWRx.realIntensity = CanRxGetU16(CMGMCanRxMsg, 1);
-				GMYAWRx.giveIntensity = CanRxGetU16(CMGMCanRxMsg, 2);
+			//以下两个正式版要注释掉delete
+			case 0x205u :
 				break;
-			case GMPITCH_RXID:
-				GMPITCHRx.angle = CanRxGetU16(CMGMCanRxMsg, 0);
-				GMPITCHRx.realIntensity = CanRxGetU16(CMGMCanRxMsg, 1);
-				GMPITCHRx.giveIntensity = CanRxGetU16(CMGMCanRxMsg, 2);
+			case 0x206u :
 				break;
 			default:
 			Error_Handler();
 		}
-		if(HAL_CAN_Receive_IT(&CMGMMOTOR_CAN, CAN_FIFO0) != HAL_OK){
-			isRcanStarted_CMGM = 0;
+		if(HAL_CAN_Receive_IT(&CMMOTOR_CAN, CAN_FIFO0) != HAL_OK){
+			isRcanStarted_CM = 0;
 		}else{
-			isRcanStarted_CMGM = 1;
+			isRcanStarted_CM = 1;
 		}
 	}
-	else if(hcan == &ZGYRO_CAN)//CAN2数据
+	else if(hcan == &AUXMOTOR_CAN)//CAN2数据
 	{
-		switch(ZGYROCanRxMsg.StdId)
+		switch(AUXCanRxMsg.StdId)
 		{
-			case ZGYRO_RXID:
-			 {
-				CanRxMsgTypeDef *msg = &ZGYROCanRxMsg;
-				ZGyroModuleAngle = -0.01f*((int32_t)(msg->Data[0]<<24)|(int32_t)(msg->Data[1]<<16) | (int32_t)(msg->Data[2]<<8) | (int32_t)(msg->Data[3])); 
-			 }
-			 break;
+			case AMUD1_RXID:
+				AMUD1Rx.angle = CanRxGetU16(AUXCanRxMsg, 0);
+				AMUD1Rx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
+				break;
+			case AMUD2_RXID:
+				AMUD2Rx.angle = CanRxGetU16(AUXCanRxMsg, 0);
+				AMUD2Rx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
+				break;
+			case AMFB_RXID:
+				AMFBRx.angle = CanRxGetU16(AUXCanRxMsg, 0);
+				AMFBRx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
+				break;
+			case AMSIDE_RXID:
+				AMSIDERx.angle = CanRxGetU16(AUXCanRxMsg, 0);
+				AMSIDERx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
+				break;
+			case WIND_RXID:
+				WINDRx.angle = CanRxGetU16(AUXCanRxMsg, 0);
+				WINDRx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
+				break;
+			//以下一个正式版要注释掉delete
+			case 0x401u:
+				break;
 			default:
 			Error_Handler();
 		}
-		if(HAL_CAN_Receive_IT(&ZGYRO_CAN, CAN_FIFO0) != HAL_OK)
+		if(HAL_CAN_Receive_IT(&AUXMOTOR_CAN, CAN_FIFO0) != HAL_OK)
 		{
-			isRcanStarted_ZGYRO = 0;
+			isRcanStarted_AUX = 0;
 		}else{
-			isRcanStarted_ZGYRO = 1;
+			isRcanStarted_AUX = 1;
 		}
 	}
 }
 
+//delete
 //单轴陀螺仪初始化，在主控制任务中，开机三秒后执行
+#define ZGYRO_TXID   0x404u
+#define ZGYRO_CAN hcan2
 void GYRO_RST(void)
 {
 	CanTxMsgTypeDef pData;

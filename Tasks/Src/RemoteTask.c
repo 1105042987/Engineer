@@ -13,6 +13,7 @@
 uint8_t rc_data[18];
 RC_Ctl_t RC_CtrlData;
 InputMode_e inputmode = REMOTE_INPUT; 
+FunctionMode_e functionmode = NORMAL;
 ChassisSpeed_Ref_t ChassisSpeedRef; 
 RemoteSwitch_t g_switch1;
 extern RampGen_t frictionRamp ;  //摩擦轮斜坡
@@ -20,7 +21,16 @@ extern RampGen_t LRSpeedRamp ;   //键盘速度斜坡
 extern RampGen_t FBSpeedRamp  ;   
 
 float yawAngleTarget = 0.0;
-float pitchAngleTarget = 0.0;
+
+double AMUD1AngleTarget = 0.0;
+double AMUD2AngleTarget = 0.0;
+double AMFBAngleTarget = 0.0;
+double WINDAngleTarget = 0.0;
+double AMSIDEAngleTarget = 0.0;
+
+#define ANGLE_STEP 10
+#define IGNORE_RANGE 50
+#define STEPMODE 1
 
 //遥控器控制量初始化
 void RemoteTaskInit()
@@ -31,7 +41,12 @@ void RemoteTaskInit()
 	FBSpeedRamp.ResetCounter(&FBSpeedRamp);
 	
 	yawAngleTarget = 0.0;
-	pitchAngleTarget = 0.0;
+	//机械臂电机目标物理角度值
+	AMUD1AngleTarget = 0.0;
+	AMUD2AngleTarget = 0.0;
+	AMFBAngleTarget = 0.0;
+	AMSIDEAngleTarget = 0.0;
+	WINDAngleTarget = 0.0;
 	/*底盘速度初始化*/
 	ChassisSpeedRef.forward_back_ref = 0.0f;
 	ChassisSpeedRef.left_right_ref = 0.0f;
@@ -42,14 +57,57 @@ void RemoteTaskInit()
 float rotate_forward = 0.0;
 void RemoteControlProcess(Remote *rc)
 {
+	int16_t channel0 = (rc->ch0 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //右横
+	int16_t channel1 = (rc->ch1 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //右纵
+	int16_t channel2 = (rc->ch2 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //左横
+	int16_t channel3 = (rc->ch3 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //左纵
+	
 	if(WorkState == NORMAL_STATE)
 	{
-		ChassisSpeedRef.forward_back_ref = (rc->ch1 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT;
-		ChassisSpeedRef.left_right_ref   = (rc->ch0 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; 
+		ChassisSpeedRef.forward_back_ref = channel1;
+		ChassisSpeedRef.left_right_ref   = channel0;
 		
-		pitchAngleTarget += (rc->ch3 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_PITCH_ANGLE_INC_FACT;
-		rotate_forward = (rc->ch2 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_YAW_ANGLE_INC_FACT; 
+		rotate_forward = channel2 / 50;
 		yawAngleTarget   -= rotate_forward;
+		
+		if(STEPMODE==0)
+		{
+		if(channel3 > IGNORE_RANGE) AMSIDEAngleTarget = ANGLE_STEP;
+		else if(channel3 < -IGNORE_RANGE) AMSIDEAngleTarget =- ANGLE_STEP;
+		else AMSIDEAngleTarget =0;
+		}
+		else
+		{
+		if(channel3 > IGNORE_RANGE) AMSIDEAngleTarget += ANGLE_STEP/20;
+		else if(channel3 < -IGNORE_RANGE) AMSIDEAngleTarget -= ANGLE_STEP/20;
+		}
+	}
+	if(WorkState == GETBULLET_STATE || WorkState == BYPASS_STATE)
+	{
+		ChassisSpeedRef.forward_back_ref = 0;
+		ChassisSpeedRef.left_right_ref   = channel0;
+		
+		if(STEPMODE==0)
+		{
+		if(channel3 > IGNORE_RANGE) {AMUD1AngleTarget=ANGLE_STEP;AMUD2AngleTarget=ANGLE_STEP;}
+		else if(channel3 < -IGNORE_RANGE) {AMUD1AngleTarget=-ANGLE_STEP;AMUD2AngleTarget=-ANGLE_STEP;}
+		else {AMUD1AngleTarget =0;AMUD2AngleTarget =0;}
+		if(channel1 > IGNORE_RANGE) AMFBAngleTarget = ANGLE_STEP;
+		else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget =- ANGLE_STEP;
+		else AMFBAngleTarget =0;
+		if(channel2 > IGNORE_RANGE) WINDAngleTarget = ANGLE_STEP;
+		else if(channel2 < -IGNORE_RANGE) WINDAngleTarget =- ANGLE_STEP;
+		else WINDAngleTarget =0;
+		}
+		else
+		{
+		if(channel3 > IGNORE_RANGE) {AMUD1AngleTarget+=ANGLE_STEP/20;AMUD2AngleTarget-=ANGLE_STEP/20;}
+		else if(channel3 < -IGNORE_RANGE) {AMUD1AngleTarget-=ANGLE_STEP/20;AMUD2AngleTarget-=ANGLE_STEP/20;}
+		if(channel1 > IGNORE_RANGE) AMFBAngleTarget += ANGLE_STEP/20;
+		else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget -= ANGLE_STEP/20;
+		if(channel2 > IGNORE_RANGE) WINDAngleTarget += ANGLE_STEP/20;
+		else if(channel2 < -IGNORE_RANGE) WINDAngleTarget -= ANGLE_STEP/20;
+		}
 	}
 }
 
@@ -62,8 +120,7 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 	{
 		VAL_LIMIT(mouse->x, -150, 150); 
 		VAL_LIMIT(mouse->y, -150, 150); 
-	
-		pitchAngleTarget -= mouse->y* MOUSE_TO_PITCH_ANGLE_INC_FACT;  
+	 
 		yawAngleTarget    -= mouse->x* MOUSE_TO_YAW_ANGLE_INC_FACT;
 
 		//speed mode: normal speed/high speed 
@@ -239,6 +296,11 @@ void RemoteDataProcess(uint8_t *pData)
 	else if(RC_CtrlData.rc.s2 == 3) inputmode = KEY_MOUSE_INPUT; 
 	else inputmode = STOP; 
 	
+	//功能状态设置
+	if(RC_CtrlData.rc.s1 == 1) functionmode = NORMAL; 
+	else if(RC_CtrlData.rc.s1 == 3) functionmode = GET; 
+	else functionmode = AUTO; 
+	
 	/*左上角拨杆状态（RC_CtrlData.rc.s1）获取*/	//用于遥控器发射控制
 	GetRemoteSwitchAction(&g_switch1, RC_CtrlData.rc.s1);
 	
@@ -246,7 +308,7 @@ void RemoteDataProcess(uint8_t *pData)
 	{
 		case REMOTE_INPUT:               
 		{
-			if(WorkState == NORMAL_STATE)
+			if(WorkState != STOP_STATE && WorkState != PREPARE_STATE)
 			{ 
 				RemoteControlProcess(&(RC_CtrlData.rc));
 			}

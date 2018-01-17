@@ -43,6 +43,7 @@
 .\engineer\cantask.o: ../Inc/includes.h
 .\engineer\cantask.o: ..\Tasks\Inc\pid_regulator.h
 .\engineer\cantask.o: ..\Tasks\Inc\ControlTask.h
+.\engineer\cantask.o: ..\Tasks\Inc\AMControlTask.h
 .\engineer\cantask.o: ..\Tasks\Inc\IMUTask.h
 .\engineer\cantask.o: ..\Tasks\Inc\CANTask.h
 .\engineer\cantask.o: ..\Tasks\Inc\drivers_ramp.h

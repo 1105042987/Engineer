@@ -113,6 +113,13 @@ typedef enum
 	STOP = 2,
 }InputMode_e;
 
+typedef enum
+{
+	NORMAL = 1,
+	GET = 3,
+	AUTO = 2,
+}FunctionMode_e;
+
 typedef __packed struct
 {
     int16_t forward_back_ref;
@@ -136,8 +143,13 @@ typedef __packed struct
 extern float rotate_forward;
 extern ChassisSpeed_Ref_t ChassisSpeedRef; 
 extern InputMode_e inputmode;
+extern FunctionMode_e functionmode;
 extern float yawAngleTarget;
-extern float pitchAngleTarget;
+extern double AMUD1AngleTarget;
+extern double AMUD2AngleTarget;
+extern double AMFBAngleTarget;
+extern double AMSIDEAngleTarget;
+extern double WINDAngleTarget;
 
 extern uint8_t rc_data[18];
 extern uint8_t rc_first_frame;
@@ -145,7 +157,7 @@ extern uint8_t rc_update;
 extern uint8_t rc_cnt;
 
 void RemoteDataProcess(uint8_t *pData);
-void InitRemoteControl();
-void RemoteTaskInit();
+void InitRemoteControl(void);
+void RemoteTaskInit(void);
 
 #endif /*__ REMOTETASK_H */

@@ -509,6 +509,11 @@
               <FilePath>..\Tasks\Src\ControlTask.c</FilePath>
             </File>
             <File>
+              <FileName>AMControlTask.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Tasks\Src\AMControlTask.c</FilePath>
+            </File>
+            <File>
               <FileName>IMUTask.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Tasks\Src\IMUTask.c</FilePath>

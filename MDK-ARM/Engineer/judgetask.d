@@ -43,6 +43,7 @@
 .\engineer\judgetask.o: ../Inc/includes.h
 .\engineer\judgetask.o: ..\Tasks\Inc\pid_regulator.h
 .\engineer\judgetask.o: ..\Tasks\Inc\ControlTask.h
+.\engineer\judgetask.o: ..\Tasks\Inc\AMControlTask.h
 .\engineer\judgetask.o: ..\Tasks\Inc\IMUTask.h
 .\engineer\judgetask.o: ..\Tasks\Inc\CANTask.h
 .\engineer\judgetask.o: ..\Tasks\Inc\drivers_ramp.h

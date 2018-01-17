@@ -64,19 +64,15 @@
 typedef enum
 {
 	PREPARE_STATE,     	
-	NORMAL_STATE,		    
+	NORMAL_STATE,
+	GETBULLET_STATE,
+	BYPASS_STATE,//涵道电机
 	STOP_STATE        
 }WorkState_e;
 
 extern WorkState_e WorkState;
-extern fw_PID_Regulator_t pitchPositionPID;
-extern fw_PID_Regulator_t yawPositionPID;
-extern fw_PID_Regulator_t pitchSpeedPID;
-extern fw_PID_Regulator_t yawSpeedPID;
-
-extern float yawRealAngle;
-extern float pitchRealAngle;
 
 void CMControlInit(void);
+void WorkStateFSM(void);
 
 #endif /*__ CONTROLTASK_H */

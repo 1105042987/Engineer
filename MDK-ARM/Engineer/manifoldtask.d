@@ -43,6 +43,7 @@
 .\engineer\manifoldtask.o: ../Inc/includes.h
 .\engineer\manifoldtask.o: ..\Tasks\Inc\pid_regulator.h
 .\engineer\manifoldtask.o: ..\Tasks\Inc\ControlTask.h
+.\engineer\manifoldtask.o: ..\Tasks\Inc\AMControlTask.h
 .\engineer\manifoldtask.o: ..\Tasks\Inc\IMUTask.h
 .\engineer\manifoldtask.o: ..\Tasks\Inc\CANTask.h
 .\engineer\manifoldtask.o: ..\Tasks\Inc\drivers_ramp.h

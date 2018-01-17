@@ -43,6 +43,7 @@
 .\engineer\main.o: ../Inc/includes.h
 .\engineer\main.o: ..\Tasks\Inc\pid_regulator.h
 .\engineer\main.o: ..\Tasks\Inc\ControlTask.h
+.\engineer\main.o: ..\Tasks\Inc\AMControlTask.h
 .\engineer\main.o: ..\Tasks\Inc\IMUTask.h
 .\engineer\main.o: ..\Tasks\Inc\CANTask.h
 .\engineer\main.o: ..\Tasks\Inc\drivers_ramp.h

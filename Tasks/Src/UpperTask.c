@@ -114,16 +114,16 @@ void zykProcessData()
 		if(strcmp(buf,"U")==0)
 		{
 			printf("UP\r\n");
-			pitchAngleTarget+=5;
+			//pitchAngleTarget+=5;
 		}
 		else if(strcmp(buf,"D")==0)
 		{
 			printf("DOWN\r\n");
-			pitchAngleTarget-=5;
+			//pitchAngleTarget-=5;
 		}
 		else if(strcmp(buf,"OK")==0)
 		{
-			printf("OK\r\n");
+	  	printf("OK\r\n");
 		}
 		if(strcmp(buf,"L")==0)
 		{
@@ -139,86 +139,86 @@ void zykProcessData()
 		else if(ComProtocal(buf,"#GMYPP","$","@",data))
 		{
 			float p=atof(data[0]);
-			yawPositionPID.kp=p;
-			printf("Yaw position P change to %f\r\n",yawPositionPID.kp);
+			//yawPositionPID.kp=p;
+			//printf("Yaw position P change to %f\r\n",yawPositionPID.kp);
 		}
 		else if(ComProtocal(buf,"#GMYPI","$","@",data))
 		{
 			float p=atof(data[0]);
-			yawPositionPID.ki=p;
-			printf("Yaw position I change to %f\r\n",yawPositionPID.ki);
+			//yawPositionPID.ki=p;
+			//printf("Yaw position I change to %f\r\n",yawPositionPID.ki);
 		}
 		else if(ComProtocal(buf,"#GMYPD","$","@",data))
 		{
 			float p=atof(data[0]);
-			yawPositionPID.kd=p;
-			printf("Yaw position D change to %f\r\n",yawPositionPID.kd);
+			//yawPositionPID.kd=p;
+			//printf("Yaw position D change to %f\r\n",yawPositionPID.kd);
 		}
 		else if(ComProtocal(buf,"#GMYSP","$","@",data))
 		{
 			float p=atof(data[0]);
-			yawSpeedPID.kp=p;
-			printf("Yaw speed P change to %f\r\n",yawSpeedPID.kp);
+			//yawSpeedPID.kp=p;
+			//printf("Yaw speed P change to %f\r\n",yawSpeedPID.kp);
 		}
 		else if(ComProtocal(buf,"#GMYSI","$","@",data))
 		{
 			float p=atof(data[0]);
-			yawSpeedPID.ki=p;
-			printf("Yaw speed I change to %f\r\n",yawSpeedPID.ki);
+			//yawSpeedPID.ki=p;
+			//printf("Yaw speed I change to %f\r\n",yawSpeedPID.ki);
 		}
 		else if(ComProtocal(buf,"#GMYSD","$","@",data))
 		{
 			float p=atof(data[0]);
-			yawSpeedPID.kd=p;
-			printf("Yaw speed D change to %f\r\n",yawSpeedPID.kd);
+			//yawSpeedPID.kd=p;
+			//printf("Yaw speed D change to %f\r\n",yawSpeedPID.kd);
 		}
 				/////////// GM PID ￡¨pitch￡?
 		else if(ComProtocal(buf,"#GMPPP","$","@",data))
 		{
 			float p=atof(data[0]);
-			pitchPositionPID.kp=p;
-			printf("Pitch position P change to %f\r\n",pitchPositionPID.kp);
+			//pitchPositionPID.kp=p;
+			//printf("Pitch position P change to %f\r\n",pitchPositionPID.kp);
 		}
 		else if(ComProtocal(buf,"#GMPPI","$","@",data))
 		{
 			float p=atof(data[0]);
-			pitchPositionPID.ki=p;
-			printf("Pitch position I change to %f\r\n",pitchPositionPID.ki);
+			//pitchPositionPID.ki=p;
+			//printf("Pitch position I change to %f\r\n",pitchPositionPID.ki);
 		}
 		else if(ComProtocal(buf,"#GMPPD","$","@",data))
 		{
 			float p=atof(data[0]);
-			pitchPositionPID.kd=p;
-			printf("Pitch position D change to %f\r\n",pitchPositionPID.kd);
+			//pitchPositionPID.kd=p;
+			//printf("Pitch position D change to %f\r\n",pitchPositionPID.kd);
 		}
 		else if(ComProtocal(buf,"#GMPSP","$","@",data))
 		{
 			float p=atof(data[0]);
-			pitchSpeedPID.kp=p;
-			printf("Pitch speed P change to %f\r\n",pitchSpeedPID.kp);
+			//pitchSpeedPID.kp=p;
+			//printf("Pitch speed P change to %f\r\n",pitchSpeedPID.kp);
 		}
 		else if(ComProtocal(buf,"#GMPSI","$","@",data))
 		{
 			float p=atof(data[0]);
-			pitchSpeedPID.ki=p;
-			printf("Pitch speed I change to %f\r\n",pitchSpeedPID.ki);
+			//pitchSpeedPID.ki=p;
+			//printf("Pitch speed I change to %f\r\n",pitchSpeedPID.ki);
 		}
 		else if(ComProtocal(buf,"#GMPSD","$","@",data))
 		{
 			float p=atof(data[0]);
-			pitchSpeedPID.kd=p;
-			printf("Pitch speed D change to %f\r\n",pitchSpeedPID.kd);
+			//pitchSpeedPID.kd=p;
+			//printf("Pitch speed D change to %f\r\n",pitchSpeedPID.kd);
 		}
 		///////////////////UPPER
 		else if(strcmp(buf,"RD1")==0)
 		{
 			float realSpeed2=-gYroZs;
-			printf("#DATA%.2f@%.2f@%.2f$",yawPositionPID.output,realSpeed2,yawRealAngle);
+			//printf("#DATA%.2f@%.2f@%.2f$",yawPositionPID.output,realSpeed2,yawRealAngle);
 		}
 		else if(strcmp(buf,"RD2")==0)
 		{
 			float realSpeed2=-gYroXs;
-			printf("#DATA%.2f@%.2f@%.2f$",pitchPositionPID.output,realSpeed2,pitchRealAngle);
+			//printf("#DATA%.2f@%.2f@%.2f$",pitchPositionPID.output,realSpeed2,pitchRealAngle);
 		}
 		strcpy(buf,"\0");
 		RX_STA=0;

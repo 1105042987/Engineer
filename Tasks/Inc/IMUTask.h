@@ -141,8 +141,9 @@ typedef struct
 extern float gYroXs;
 extern float gYroYs;
 extern float gYroZs;
+extern double RealAngle;
 
 uint8_t InitMPU6500(void);
-void IMURefresh();
+void IMURefresh(void);
 
 #endif /*__ IMUTASK_H */

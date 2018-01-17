@@ -14,25 +14,29 @@
 
 #include "includes.h"
 
-#define CMGMMOTOR_CAN hcan1
-#define ZGYRO_CAN hcan2
+#define CMMOTOR_CAN hcan1
+#define AUXMOTOR_CAN hcan2
 
 //RxID
+//can1
 #define CMFL_RXID 0x201u
 #define CMFR_RXID 0x202u
 #define CMBL_RXID 0x203u
 #define CMBR_RXID 0x204u
 
-#define GMYAW_RXID 0x205u
-#define GMPITCH_RXID 0x206u
-
-#define ZGYRO_RXID   0x401u
+//can2
+#define AMUD1_RXID 0x201u
+#define AMUD2_RXID 0x202u
+#define AMFB_RXID 0x203u
+#define WIND_RXID 0x204u		//绕线电机
+#define AMSIDE_RXID 0x205u
 
 //TxID
+//can1
 #define CM_TXID 0x200u
-#define GM_TXID 0x1FFu
-
-#define ZGYRO_TXID   0x404u
+//can2
+#define AMGET_TXID 0x200u	//取弹电机
+#define AMSEND_TXID 0x1FFu //送弹电机
 
 typedef struct{
 	uint16_t angle;
@@ -41,23 +45,26 @@ typedef struct{
 
 typedef struct{
 	uint16_t angle;
-	int16_t realIntensity;
-	int16_t giveIntensity;
-}Motor6623RxMsg_t;
+	int16_t RotateSpeed;//RPM
+}Motor2310RxMsg_t;
+
 
 extern Motor820RRxMsg_t CMFLRx;
 extern Motor820RRxMsg_t CMFRRx;
 extern Motor820RRxMsg_t CMBLRx;
 extern Motor820RRxMsg_t CMBRRx;
-extern Motor6623RxMsg_t GMPITCHRx;
-extern Motor6623RxMsg_t	GMYAWRx;
-extern float ZGyroModuleAngle;
+
+extern Motor2310RxMsg_t AMUD1Rx;
+extern Motor2310RxMsg_t AMUD2Rx;
+extern Motor2310RxMsg_t AMFBRx; 
+extern Motor2310RxMsg_t AMSIDERx;
+extern Motor2310RxMsg_t WINDRx;
 
 extern uint8_t can1_update;
-extern uint8_t can1_type;
 extern uint8_t can2_update;
 
-void InitCanReception();
+void InitCanReception(void);
+//delete
 void GYRO_RST(void);
 
 #endif /*__ CANTASK_H */
