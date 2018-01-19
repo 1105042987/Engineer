@@ -77,7 +77,7 @@ void setSendBulletAMMotor()
 	AUXMOTOR_CAN.pTxMsg->Data[6] = 0;
 	AUXMOTOR_CAN.pTxMsg->Data[7] = 0;
 
-	if(can2_update == 1)
+	if(can2_update == 1 && can_type == 2)
 	{
 		//CAN通信前关中断
 		HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
@@ -92,7 +92,9 @@ void setSendBulletAMMotor()
 		{
 			Error_Handler();
 		}
-		can1_update = 0;
+		can2_update = 0;
+		if(WorkState == GETBULLET_STATE || WorkState == BYPASS_STATE) can_type = 3;
+		else can_type = 1;
 		//CAN通信后开中断，防止中断影响CAN信号发送
 		HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
@@ -126,7 +128,7 @@ void setGetBulletAMMotor(void)
 	AUXMOTOR_CAN.pTxMsg->Data[6] = (uint8_t)(WINDIntensity >> 8);
 	AUXMOTOR_CAN.pTxMsg->Data[7] = (uint8_t)WINDIntensity;
 
-	if(can2_update)
+	if(can2_update && can_type == 3)
 	{
 		HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
 		HAL_NVIC_DisableIRQ(CAN2_RX0_IRQn);
@@ -141,6 +143,7 @@ void setGetBulletAMMotor(void)
 			Error_Handler();
 		}
 		can2_update = 0;
+		can_type = 1;
 		HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(USART1_IRQn);

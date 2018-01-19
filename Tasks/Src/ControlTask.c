@@ -100,18 +100,14 @@ void ControlCMBR(void)
 #define NORMALIZE_ANGLE180(angle) angle = ((angle) > 180) ? ((angle) - 360) : (((angle) < -180) ? (angle) + 360 : angle)
 float gap_angle = 0.0;
 //底盘旋转控制
-//注意一下可行性，由于底盘震动引起的角速度可能会导致角度积分出来的结果一直在变
 void ControlRotate(void)
-{
-	gap_angle  = (RealAngle - yawAngleTarget) * 360 / 8192.0f;
-  NORMALIZE_ANGLE180(gap_angle);	
-	
+{	
 	if(WorkState == NORMAL_STATE) 
 	{
 		CMRotatePID.ref = 0;
-		CMRotatePID.fdb = gap_angle;
+		CMRotatePID.fdb = rotate_speed;
 		CMRotatePID.Calc(&CMRotatePID);   
-		ChassisSpeedRef.rotate_ref = CMRotatePID.output * 13 + rotate_forward * 90 + ChassisSpeedRef.forward_back_ref * 0.01 + ChassisSpeedRef.left_right_ref * 0.01;
+		ChassisSpeedRef.rotate_ref = CMRotatePID.output * 13 + ChassisSpeedRef.forward_back_ref * 0.01 + ChassisSpeedRef.left_right_ref * 0.01;
 	}
 }
 
@@ -137,7 +133,7 @@ void setCMMotor()
 	CMMOTOR_CAN.pTxMsg->Data[6] = (uint8_t)(CMBRIntensity >> 8);
 	CMMOTOR_CAN.pTxMsg->Data[7] = (uint8_t)CMBRIntensity;
 
-	if(can1_update == 1)
+	if(can1_update == 1 && can_type == 1)
 	{
 		//CAN通信前关中断
 		HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
@@ -153,6 +149,7 @@ void setCMMotor()
 			Error_Handler();
 		}
 		can1_update = 0;
+		can_type++;
 		//CAN通信后开中断，防止中断影响CAN信号发送
 		HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);

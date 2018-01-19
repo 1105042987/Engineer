@@ -43,25 +43,21 @@ typedef struct{
 	int16_t RotateSpeed;//RPM
 }Motor820RRxMsg_t;
 
-typedef struct{
-	uint16_t angle;
-	int16_t RotateSpeed;//RPM
-}Motor2310RxMsg_t;
 
 
 extern Motor820RRxMsg_t CMFLRx;
 extern Motor820RRxMsg_t CMFRRx;
 extern Motor820RRxMsg_t CMBLRx;
 extern Motor820RRxMsg_t CMBRRx;
-
-extern Motor2310RxMsg_t AMUD1Rx;
-extern Motor2310RxMsg_t AMUD2Rx;
-extern Motor2310RxMsg_t AMFBRx; 
-extern Motor2310RxMsg_t AMSIDERx;
-extern Motor2310RxMsg_t WINDRx;
+extern Motor820RRxMsg_t AMUD1Rx;
+extern Motor820RRxMsg_t AMUD2Rx;
+extern Motor820RRxMsg_t AMFBRx; 
+extern Motor820RRxMsg_t WINDRx;
+extern Motor820RRxMsg_t AMSIDERx;
 
 extern uint8_t can1_update;
 extern uint8_t can2_update;
+extern uint8_t can_type;
 
 void InitCanReception(void);
 //delete

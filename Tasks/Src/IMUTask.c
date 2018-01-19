@@ -17,7 +17,6 @@
 IMUDataTypedef imu_data = {0,0,0,0,0,0,0,0,0,0};
 IMUDataTypedef imu_data_offest = {0,0,0,0,0,0,0,0,0,0};
 float gYroXs, gYroYs, gYroZs;
-double RealAngle;
 //IMU积分时间
 #define IMURefreshInterval 0.01
 
@@ -58,7 +57,6 @@ uint8_t MPU_id = 0;
 uint8_t InitMPU6500(void)
 {
   uint8_t index = 0;
-	RealAngle = 0.0;
   uint8_t MPU6500_Init_Data[10][2] = 
   {
     {MPU6500_PWR_MGMT_1,    0x80},      // Reset Device
@@ -118,5 +116,4 @@ void IMURefresh()
 	gYroXs = imu_data.gx / 32.8f;
 	gYroYs = imu_data.gy / 32.8f;
 	gYroZs = imu_data.gz / 32.8f;
-	RealAngle = RealAngle + gYroZs * IMURefreshInterval;//ATTENTION!!
 }

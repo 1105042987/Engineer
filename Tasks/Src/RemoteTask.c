@@ -20,7 +20,7 @@ extern RampGen_t frictionRamp ;  //摩擦轮斜坡
 extern RampGen_t LRSpeedRamp ;   //键盘速度斜坡
 extern RampGen_t FBSpeedRamp  ;   
 
-float yawAngleTarget = 0.0;
+float rotate_speed;
 
 double AMUD1AngleTarget = 0.0;
 double AMUD2AngleTarget = 0.0;
@@ -31,6 +31,7 @@ double AMSIDEAngleTarget = 0.0;
 #define ANGLE_STEP 10
 #define IGNORE_RANGE 50
 #define STEPMODE 1
+#define ROTATE_FACTOR 0.02
 
 //遥控器控制量初始化
 void RemoteTaskInit()
@@ -40,7 +41,6 @@ void RemoteTaskInit()
 	LRSpeedRamp.ResetCounter(&LRSpeedRamp);
 	FBSpeedRamp.ResetCounter(&FBSpeedRamp);
 	
-	yawAngleTarget = 0.0;
 	//机械臂电机目标物理角度值
 	AMUD1AngleTarget = 0.0;
 	AMUD2AngleTarget = 0.0;
@@ -54,7 +54,6 @@ void RemoteTaskInit()
 }
 
 //摇杆控制量解算
-float rotate_forward = 0.0;
 void RemoteControlProcess(Remote *rc)
 {
 	int16_t channel0 = (rc->ch0 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //右横
@@ -67,8 +66,7 @@ void RemoteControlProcess(Remote *rc)
 		ChassisSpeedRef.forward_back_ref = channel1;
 		ChassisSpeedRef.left_right_ref   = channel0;
 		
-		rotate_forward = channel2 / 50;
-		yawAngleTarget   -= rotate_forward;
+		rotate_speed = channel2 * ROTATE_FACTOR;
 		
 		if(STEPMODE==0)
 		{
@@ -120,8 +118,6 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 	{
 		VAL_LIMIT(mouse->x, -150, 150); 
 		VAL_LIMIT(mouse->y, -150, 150); 
-	 
-		yawAngleTarget    -= mouse->x* MOUSE_TO_YAW_ANGLE_INC_FACT;
 
 		//speed mode: normal speed/high speed 
 		if(key->v & 0x10)//Shift

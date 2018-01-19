@@ -15,9 +15,9 @@
 uint8_t isRcanStarted_CM = 0, isRcanStarted_AUX = 0;
 CanRxMsgTypeDef CMCanRxMsg, AUXCanRxMsg;
 Motor820RRxMsg_t CMFLRx,CMFRRx,CMBLRx,CMBRRx;
-Motor2310RxMsg_t AMUD1Rx,AMUD2Rx,AMFBRx,AMSIDERx,WINDRx;
+Motor820RRxMsg_t AMUD1Rx,AMUD2Rx,AMFBRx,AMSIDERx,WINDRx;
 uint8_t can1_update = 1;
-uint8_t can2_type = 0;
+uint8_t can_type = 1;
 uint8_t can2_update = 1;
 /********************CAN发送*****************************/
 //CAN数据标记发送，保证发送资源正常
