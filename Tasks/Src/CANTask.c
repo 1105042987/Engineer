@@ -95,11 +95,6 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan){
 				CMBRRx.angle = CanRxGetU16(CMCanRxMsg, 0);
 				CMBRRx.RotateSpeed = CanRxGetU16(CMCanRxMsg, 1);
 				break;
-			//以下两个正式版要注释掉delete
-			case 0x205u :
-				break;
-			case 0x206u :
-				break;
 			default:
 			Error_Handler();
 		}
@@ -133,9 +128,6 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan){
 				WINDRx.angle = CanRxGetU16(AUXCanRxMsg, 0);
 				WINDRx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
 				break;
-			//以下一个正式版要注释掉delete
-			case 0x401u:
-				break;
 			default:
 			Error_Handler();
 		}
@@ -148,51 +140,4 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan){
 	}
 }
 
-//delete
-//单轴陀螺仪初始化，在主控制任务中，开机三秒后执行
-#define ZGYRO_TXID   0x404u
-#define ZGYRO_CAN hcan2
-void GYRO_RST(void)
-{
-	CanTxMsgTypeDef pData;
-	ZGYRO_CAN.pTxMsg = &pData;
-	
-	ZGYRO_CAN.pTxMsg->StdId = ZGYRO_TXID;
-	ZGYRO_CAN.pTxMsg->ExtId = 0;
-	ZGYRO_CAN.pTxMsg->IDE = CAN_ID_STD;
-	ZGYRO_CAN.pTxMsg->RTR = CAN_RTR_DATA;
-	ZGYRO_CAN.pTxMsg->DLC = 0x08;
-	ZGYRO_CAN.pTxMsg->Data[0] = 0x00;
-	ZGYRO_CAN.pTxMsg->Data[1] = 0x01;
-	ZGYRO_CAN.pTxMsg->Data[2] = 0x02;
-	ZGYRO_CAN.pTxMsg->Data[3] = 0x03;
-	ZGYRO_CAN.pTxMsg->Data[4] = 0x04;
-	ZGYRO_CAN.pTxMsg->Data[5] = 0x05;
-	ZGYRO_CAN.pTxMsg->Data[6] = 0x06;
-	ZGYRO_CAN.pTxMsg->Data[7] = 0x07;
 
-	if(can2_update)
-	{
-		HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
-		HAL_NVIC_DisableIRQ(CAN2_RX0_IRQn);
-		HAL_NVIC_DisableIRQ(USART1_IRQn);
-		HAL_NVIC_DisableIRQ(DMA2_Stream2_IRQn);
-		HAL_NVIC_DisableIRQ(TIM7_IRQn);
-		#ifdef DEBUG_MODE
-			HAL_NVIC_DisableIRQ(TIM1_UP_TIM10_IRQn);
-		#endif
-		if(HAL_CAN_Transmit_IT(&ZGYRO_CAN) != HAL_OK)
-		{
-			Error_Handler();
-		}
-		can2_update = 0;
-		HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
-		HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
-		HAL_NVIC_EnableIRQ(USART1_IRQn);
-		HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
-		HAL_NVIC_EnableIRQ(TIM7_IRQn);
-		#ifdef DEBUG_MODE
-			HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
-		#endif
-  }
-}
