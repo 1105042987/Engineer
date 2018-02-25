@@ -172,10 +172,8 @@ void WorkStateFSM(void)
 		case PREPARE_STATE:
 		{
 			if (inputmode == STOP) WorkState = STOP_STATE;
-			
-			if(prepare_time<5000) prepare_time++;
-			if(prepare_time == 3000) GYRO_RST();//开机三秒复位陀螺仪delete
-			if(prepare_time == 5000)//开机五秒进入正常模式
+			if(prepare_time < 3000) prepare_time++;
+			if(prepare_time == 3000)//开机三秒进入正常模式
 			{
 				WorkState = NORMAL_STATE;
 				prepare_time = 0;
@@ -190,20 +188,27 @@ void WorkStateFSM(void)
 		case GETBULLET_STATE:		//取弹模式
 		{
 			if (inputmode == STOP) WorkState = STOP_STATE;
-			if (functionmode == NORMAL) WorkState = NORMAL_STATE;
+			if (functionmode == NORMAL) {
+				WorkState = NORMAL_STATE;
+				can_type=1;
+			}
 			if (functionmode == AUTO) WorkState = BYPASS_STATE;
 		}break;
 		case BYPASS_STATE:	//涵道电机模式
 		{
 			if (inputmode == STOP) WorkState = STOP_STATE;
 			if (functionmode == GET) WorkState = GETBULLET_STATE;
-			if (functionmode == NORMAL) WorkState = NORMAL_STATE;
+			if (functionmode == NORMAL) {
+				WorkState = NORMAL_STATE;
+				can_type=1;
+			}
 		}break;
 		case STOP_STATE://紧急停止
 		{
 			if (inputmode == REMOTE_INPUT)
 			{
 				WorkState = PREPARE_STATE;
+				can_type=1;
 				RemoteTaskInit();
 			}
 		}break;
@@ -228,7 +233,7 @@ void controlLoop()
 		
 		ControlAMSIDE();
 		
-		setSendBulletAMMotor();
+//		setSendBulletAMMotor();
 	}
 }
 

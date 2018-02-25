@@ -308,7 +308,7 @@ void vice_controlLoop()
 		}
 		else
 		{
-			__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,0);
+		//	__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,0);//方便调试，暂时注释
 		}
 }
 

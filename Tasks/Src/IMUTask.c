@@ -17,8 +17,6 @@
 IMUDataTypedef imu_data = {0,0,0,0,0,0,0,0,0,0};
 IMUDataTypedef imu_data_offest = {0,0,0,0,0,0,0,0,0,0};
 float gYroXs, gYroYs, gYroZs;
-//IMU积分时间
-#define IMURefreshInterval 0.01
 
 
 //Read a register from MPU6500

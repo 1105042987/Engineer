@@ -304,6 +304,7 @@ void RemoteDataProcess(uint8_t *pData)
 	{
 		case REMOTE_INPUT:               
 		{
+			__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1300);//方便调试，暂时加入，值为1000时不转动
 			if(WorkState != STOP_STATE && WorkState != PREPARE_STATE)
 			{ 
 				RemoteControlProcess(&(RC_CtrlData.rc));
@@ -311,6 +312,7 @@ void RemoteDataProcess(uint8_t *pData)
 		}break;
 		case KEY_MOUSE_INPUT:              
 		{
+			__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1000);//方便调试，暂时加入，值为1000时不转动
 			if(WorkState == NORMAL_STATE)
 			{ 
 				MouseKeyControlProcess(&RC_CtrlData.mouse,&RC_CtrlData.key);
