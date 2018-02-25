@@ -31,7 +31,7 @@
 #include "ManifoldTask.h"
 #include "JudgeTask.h"
 #include "UpperTask.h"
-
+#include "visualscope.h"
 
 //所有待调整参数，可以用查找找到位置
 //IMURefreshInterval 									感觉积分时间间隔取得有点长（0.1）导致了第一次崩溃

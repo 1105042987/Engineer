@@ -149,7 +149,7 @@ void setCMMotor()
 			Error_Handler();
 		}
 		can1_update = 0;
-		can_type++;
+//		can_type++;
 		//CAN通信后开中断，防止中断影响CAN信号发送
 		HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
@@ -174,7 +174,7 @@ void WorkStateFSM(void)
 			if (inputmode == STOP) WorkState = STOP_STATE;
 			
 			if(prepare_time<5000) prepare_time++;
-			if(prepare_time == 3000) GYRO_RST();//开机三秒复位陀螺仪delete
+			//if(prepare_time == 3000) GYRO_RST();//开机三秒复位陀螺仪delete
 			if(prepare_time == 5000)//开机五秒进入正常模式
 			{
 				WorkState = NORMAL_STATE;
@@ -228,7 +228,7 @@ void controlLoop()
 		
 		ControlAMSIDE();
 		
-		setSendBulletAMMotor();
+//		setSendBulletAMMotor();
 	}
 }
 
