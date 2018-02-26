@@ -31,7 +31,7 @@
 #include "ManifoldTask.h"
 #include "JudgeTask.h"
 #include "UpperTask.h"
-#include "visualscope.h"
+//#include "visualscope.h"
 
 //所有待调整参数，可以用查找找到位置
 //AMUD1PositionPID =             			以及后跟随9项

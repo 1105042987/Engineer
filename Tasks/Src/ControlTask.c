@@ -133,7 +133,7 @@ void setCMMotor()
 	CMMOTOR_CAN.pTxMsg->Data[6] = (uint8_t)(CMBRIntensity >> 8);
 	CMMOTOR_CAN.pTxMsg->Data[7] = (uint8_t)CMBRIntensity;
 
-	if(can1_update == 1 && can_type == 1)
+	if(can1_update == 1)
 	{
 		//CAN通信前关中断
 		HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
@@ -149,7 +149,6 @@ void setCMMotor()
 			Error_Handler();
 		}
 		can1_update = 0;
-		can_type++;
 		//CAN通信后开中断，防止中断影响CAN信号发送
 		HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
@@ -233,7 +232,7 @@ void controlLoop()
 		
 		ControlAMSIDE();
 		
-//		setSendBulletAMMotor();
+		setSendBulletAMMotor();
 	}
 }
 

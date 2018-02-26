@@ -136,9 +136,7 @@ int main(void)
 	HAL_TIM_Base_Start_IT(&htim6);
 	HAL_TIM_Base_Start_IT(&htim7);
 	
-	//用于初始化摩擦轮的时钟，正式版上应该删去delete
 	HAL_TIM_PWM_Start(&htim12, TIM_CHANNEL_1);
-	HAL_TIM_PWM_Start(&htim12, TIM_CHANNEL_2);
 	
 	HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 	HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
@@ -158,7 +156,7 @@ int main(void)
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
-		VisualScope(&huart3,0,0,0,0);
+//		VisualScope(&huart3,0,0,0,0);
 		//IMU数据更新放在主循环中
 		IMURefresh();
 		
