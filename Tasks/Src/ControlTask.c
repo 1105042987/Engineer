@@ -279,8 +279,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	}
 	else if (htim->Instance == htim10.Instance)  //10ms，处理上位机数据，优先级不高
 	{
+		
 		#ifdef DEBUG_MODE
-		zykProcessData();
+		//zykProcessData();
+		dataCallBack();
 		#endif
+		
+		
 	}
 }

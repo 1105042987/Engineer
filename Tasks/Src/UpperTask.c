@@ -103,7 +103,25 @@ uint8_t ComProtocal(char*rxbuf,char*head,char*end,char* separater,char dataout[]
 }
 
 //--------------------任务循环部分-------------------//
-void zykProcessData()
+//debug监测变量
+extern int16_t channel3,AMSIDERealAngle;
+extern int16_t AMSIDEIntensity;
+
+void dataCallBack()
+{
+	static uint16_t pcnt = 0;
+	if(pcnt>100)
+		{
+			printf("AMSIDEAngleTarget %f\r\n", AMSIDEAngleTarget);
+			printf("AMSIDERealAngle %d\r\n", AMSIDERealAngle);
+			printf("AMSIDEIntensity %d\r\n", AMSIDEIntensity);
+			
+			pcnt = 0;
+		}
+		else pcnt++;
+}
+
+/*void zykProcessData()
 {	
 	  //printf("ok");
 		if(RX_DONE)
@@ -224,4 +242,5 @@ void zykProcessData()
 		RX_STA=0;
 	}
 }
+*/
 #endif

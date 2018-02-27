@@ -14,7 +14,7 @@
 
 #include "includes.h"
 
-//#define DEBUG_MODE
+#define DEBUG_MODE
 
 #ifdef DEBUG_MODE
 //--------------------底层接收驱动部分-------------------//
@@ -32,7 +32,8 @@ extern uint16_t RX_STA;
 uint8_t ComProtocal(char*rxbuf,char*head,char*end,char* separater,char dataout[][15]);
 
 //--------------------任务循环部分-------------------//
-void zykProcessData();
+//void zykProcessData();
+void dataCallBack(void);
 #endif 
 
 #endif /*__ UPPERTASK_H */

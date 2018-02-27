@@ -16,7 +16,6 @@ InputMode_e inputmode = REMOTE_INPUT;
 FunctionMode_e functionmode = NORMAL;
 ChassisSpeed_Ref_t ChassisSpeedRef; 
 RemoteSwitch_t g_switch1;
-extern RampGen_t frictionRamp ;  //摩擦轮斜坡
 extern RampGen_t LRSpeedRamp ;   //键盘速度斜坡
 extern RampGen_t FBSpeedRamp  ;   
 
@@ -28,9 +27,8 @@ double AMFBAngleTarget = 0.0;
 double WINDAngleTarget = 0.0;
 double AMSIDEAngleTarget = 0.0;
 
-#define ANGLE_STEP 10
+#define ANGLE_STEP (double)2
 #define IGNORE_RANGE 50
-#define STEPMODE 1
 #define ROTATE_FACTOR 0.02
 
 //遥控器控制量初始化
@@ -54,12 +52,16 @@ void RemoteTaskInit()
 }
 
 //摇杆控制量解算
+int16_t channel0 = 0;
+int16_t channel1 = 0;
+int16_t channel2 = 0;
+int16_t channel3 = 0;
 void RemoteControlProcess(Remote *rc)
 {
-	int16_t channel0 = (rc->ch0 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //右横
-	int16_t channel1 = (rc->ch1 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //右纵
-	int16_t channel2 = (rc->ch2 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //左横
-	int16_t channel3 = (rc->ch3 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //左纵
+	channel0 = (rc->ch0 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //右横
+	channel1 = (rc->ch1 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //右纵
+	channel2 = (rc->ch2 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //左横
+	channel3 = (rc->ch3 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //左纵
 	
 	if(WorkState == NORMAL_STATE)
 	{
@@ -67,26 +69,21 @@ void RemoteControlProcess(Remote *rc)
 		ChassisSpeedRef.left_right_ref   = channel0;
 		
 		rotate_speed = channel2 * ROTATE_FACTOR;
-		
-		if(STEPMODE==0)
-		{
+		/*
 		if(channel3 > IGNORE_RANGE) AMSIDEAngleTarget = ANGLE_STEP;
 		else if(channel3 < -IGNORE_RANGE) AMSIDEAngleTarget =- ANGLE_STEP;
 		else AMSIDEAngleTarget =0;
-		}
-		else
-		{
-		if(channel3 > IGNORE_RANGE) AMSIDEAngleTarget += ANGLE_STEP/20;
-		else if(channel3 < -IGNORE_RANGE) AMSIDEAngleTarget -= ANGLE_STEP/20;
-		}
+		*/
+	
+		if(channel3 > IGNORE_RANGE)	AMSIDEAngleTarget = AMSIDEAngleTarget + ANGLE_STEP/2;
+		else if(channel3 < -IGNORE_RANGE) AMSIDEAngleTarget = AMSIDEAngleTarget - ANGLE_STEP/2;
+			
 	}
 	if(WorkState == GETBULLET_STATE || WorkState == BYPASS_STATE)
 	{
 		ChassisSpeedRef.forward_back_ref = 0;
 		ChassisSpeedRef.left_right_ref   = channel0;
-		
-		if(STEPMODE==0)
-		{
+		/*
 		if(channel3 > IGNORE_RANGE) {AMUD1AngleTarget=ANGLE_STEP;AMUD2AngleTarget=ANGLE_STEP;}
 		else if(channel3 < -IGNORE_RANGE) {AMUD1AngleTarget=-ANGLE_STEP;AMUD2AngleTarget=-ANGLE_STEP;}
 		else {AMUD1AngleTarget =0;AMUD2AngleTarget =0;}
@@ -96,16 +93,19 @@ void RemoteControlProcess(Remote *rc)
 		if(channel2 > IGNORE_RANGE) WINDAngleTarget = ANGLE_STEP;
 		else if(channel2 < -IGNORE_RANGE) WINDAngleTarget =- ANGLE_STEP;
 		else WINDAngleTarget =0;
+		*/
+		if(channel3 > IGNORE_RANGE) {
+			AMUD1AngleTarget=AMUD1AngleTarget+ANGLE_STEP/2;
+			AMUD2AngleTarget=AMUD2AngleTarget+ANGLE_STEP/2;
 		}
-		else
-		{
-		if(channel3 > IGNORE_RANGE) {AMUD1AngleTarget+=ANGLE_STEP/20;AMUD2AngleTarget-=ANGLE_STEP/20;}
-		else if(channel3 < -IGNORE_RANGE) {AMUD1AngleTarget-=ANGLE_STEP/20;AMUD2AngleTarget-=ANGLE_STEP/20;}
-		if(channel1 > IGNORE_RANGE) AMFBAngleTarget += ANGLE_STEP/20;
-		else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget -= ANGLE_STEP/20;
-		if(channel2 > IGNORE_RANGE) WINDAngleTarget += ANGLE_STEP/20;
-		else if(channel2 < -IGNORE_RANGE) WINDAngleTarget -= ANGLE_STEP/20;
+		else if(channel3 < -IGNORE_RANGE) {
+			AMUD1AngleTarget=AMUD1AngleTarget-ANGLE_STEP/2;
+			AMUD2AngleTarget=AMUD2AngleTarget-ANGLE_STEP/2;
 		}
+		if(channel1 > IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget + ANGLE_STEP/2;
+		else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget - ANGLE_STEP/2;
+		//if(channel2 > IGNORE_RANGE) WINDAngleTarget += ANGLE_STEP/20;
+		//else if(channel2 < -IGNORE_RANGE) WINDAngleTarget -= ANGLE_STEP/20;
 	}
 }
 
