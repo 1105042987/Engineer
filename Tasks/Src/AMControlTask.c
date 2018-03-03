@@ -88,6 +88,7 @@ void setSendBulletAMMotor()
 		#ifdef DEBUG_MODE
 			HAL_NVIC_DisableIRQ(TIM1_UP_TIM10_IRQn);
 		#endif
+
 		if(HAL_CAN_Transmit_IT(&AUXMOTOR_CAN) != HAL_OK)
 		{
 			Error_Handler();
@@ -127,7 +128,7 @@ void setGetBulletAMMotor(void)
 	AUXMOTOR_CAN.pTxMsg->Data[6] = (uint8_t)(WINDIntensity >> 8);
 	AUXMOTOR_CAN.pTxMsg->Data[7] = (uint8_t)WINDIntensity;
 
-	if(can2_update && can_type == 0)
+	if(can2_update == 1 && can_type == 0)
 	{
 		HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
 		HAL_NVIC_DisableIRQ(CAN2_RX0_IRQn);
@@ -177,6 +178,7 @@ void ControlAMFB()
 {
 		if(s_AMFBCount == 1)
 		{		
+		#ifdef EXACT_CONTROL
 			uint16_t 	ThisAngle;	//当前电机角度
 			double 		ThisSpeed;	//当前电机转速
 			ThisAngle = AMFBRx.angle;//未处理角度
@@ -193,6 +195,10 @@ void ControlAMFB()
 			
 			s_AMFBCount = 0;
 			AMFBLastAngle = ThisAngle;
+		#endif
+		#ifdef EASY_CONTROL
+			AMFBIntensity = AMFBAngleTarget * 12;
+		#endif
 		}
 		else
 		{
@@ -202,7 +208,8 @@ void ControlAMFB()
 void ControlAMUD1()
 {
 		if(s_AMUD1Count == 1)
-		{		
+		{	
+		#ifdef EXACT_CONTROL
 			uint16_t 	ThisAngle;	
 			double 		ThisSpeed;	
 			ThisAngle = AMUD1Rx.angle;							//未处理角度
@@ -214,6 +221,10 @@ void ControlAMUD1()
 			
 			s_AMUD1Count = 0;
 			AMUD1LastAngle = ThisAngle;
+		#endif
+		#ifdef EASY_CONTROL
+			AMUD1Intensity = -800 + AMUD1AngleTarget * 9;
+		#endif
 		}
 		else
 		{
@@ -224,6 +235,7 @@ void ControlAMUD2()
 {
 		if(s_AMUD2Count == 1)
 		{		
+		#ifdef EXACT_CONTROL
 			uint16_t 	ThisAngle;	
 			double 		ThisSpeed;	
 			ThisAngle = AMUD2Rx.angle;							//未处理角度
@@ -235,6 +247,10 @@ void ControlAMUD2()
 			
 			s_AMUD2Count = 0;
 			AMUD2LastAngle = ThisAngle;
+		#endif
+		#ifdef EASY_CONTROL
+			AMUD2Intensity = -800 + AMUD2AngleTarget * 9;
+		#endif
 		}
 		else
 		{
@@ -244,7 +260,8 @@ void ControlAMUD2()
 void ControlWIND()
 {
 		if(s_WINDCount == 1)
-		{		
+		{	
+		#ifdef EXACT_CONTROL		
 			uint16_t 	ThisAngle;	
 			double 		ThisSpeed;	
 			ThisAngle = WINDRx.angle;							//未处理角度
@@ -256,6 +273,10 @@ void ControlWIND()
 			
 			s_WINDCount = 0;
 			WINDLastAngle = ThisAngle;
+		#endif
+		#ifdef EASY_CONTROL
+			WINDIntensity = 500 + WINDAngleTarget * 10;
+		#endif
 		}
 		else
 		{
@@ -266,6 +287,7 @@ void ControlAMSIDE()
 {
 	if(s_AMSIDECount == 1)
 	{		
+	#ifdef EXACT_CONTROL
 		uint16_t 	ThisAngle;	
 		double 		ThisSpeed;	
 			
@@ -282,6 +304,10 @@ void ControlAMSIDE()
 		
 		s_AMSIDECount = 0;
 		AMSIDELastAngle = ThisAngle;
+	#endif
+	#ifdef EASY_CONTROL
+		AMSIDEIntensity = 750 + AMSIDEAngleTarget * 6;
+	#endif
 	}
 	else
 	{
@@ -295,11 +321,12 @@ void ControlAMSIDE()
 //副控制循环
 void vice_controlLoop()
 {
+
 		ControlAMUD1();
 		ControlAMUD2();
 		ControlAMFB();
 		ControlWIND();
-		
+	
 		setGetBulletAMMotor();
 		if(WorkState == BYPASS_STATE)
 		{

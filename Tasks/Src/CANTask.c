@@ -77,6 +77,7 @@ void InitCanReception()
 
 //CAN接收中断入口函数
 void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan){
+	printf("CANRX \n");	
 	if(hcan == &CMMOTOR_CAN){//CAN1数据
 		switch(CMCanRxMsg.StdId){
 			case CMFL_RXID:
@@ -106,23 +107,28 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan){
 	}
 	else if(hcan == &AUXMOTOR_CAN)//CAN2数据
 	{
+		printf("Can2_Rx");
 		switch(AUXCanRxMsg.StdId)
 		{
 			case AMUD1_RXID:
 				AMUD1Rx.angle = CanRxGetU16(AUXCanRxMsg, 0);
 				AMUD1Rx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
+				printf("UD1 ok! \n");
 				break;
 			case AMUD2_RXID:
 				AMUD2Rx.angle = CanRxGetU16(AUXCanRxMsg, 0);
 				AMUD2Rx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
+			printf("UD2 ok! \n");
 				break;
 			case AMFB_RXID:
 				AMFBRx.angle = CanRxGetU16(AUXCanRxMsg, 0);
 				AMFBRx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
+			printf("FB ok! \n");
 				break;
 			case AMSIDE_RXID:
 				AMSIDERx.angle = CanRxGetU16(AUXCanRxMsg, 0);
 				AMSIDERx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
+			printf("SIDE ok! \n");
 				break;
 			case WIND_RXID:
 				WINDRx.angle = CanRxGetU16(AUXCanRxMsg, 0);

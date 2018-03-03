@@ -105,17 +105,27 @@ uint8_t ComProtocal(char*rxbuf,char*head,char*end,char* separater,char dataout[]
 //--------------------任务循环部分-------------------//
 //debug监测变量
 extern int16_t channel3,AMSIDERealAngle;
-extern int16_t AMSIDEIntensity;
+extern int16_t AMSIDEIntensity,AMFBIntensity,AMUD1Intensity,AMUD2Intensity;
+extern int16_t CMBRIntensity,CMBLIntensity,CMFRIntensity,CMFLIntensity;
 
 void dataCallBack()
 {
 	static uint16_t pcnt = 0;
 	if(pcnt>100)
 		{
-			printf("AMSIDEAngleTarget %f\r\n", AMSIDEAngleTarget);
-			printf("AMSIDERealAngle %d\r\n", AMSIDERealAngle);
-			printf("AMSIDEIntensity %d\r\n", AMSIDEIntensity);
+			//printf("AMSIDEIntensity %d\r\t", AMSIDEIntensity);
+			//printf("AMFBIntensity %d\r\t", AMFBIntensity);
+			printf("AMUD1Intensity %d\r\t", AMUD1Intensity);
+			printf("AMUD2Intensity %d\r\t", AMUD2Intensity);
+			//printf("CMBRIntensity %d\r\t", CMBRIntensity);
+			//printf("CMBLIntensity %d\r\t", CMBLIntensity);
+			//printf("CMFRIntensity %d\r\t", CMFRIntensity);
+			//printf("CMFLIntensity %d\r\t", CMFLIntensity);
 			
+			//printf("can2 update%d type%d\n",can2_update,can_type);
+			//printf("can1 update%d\t",can1_update);
+			
+			printf("\n");
 			pcnt = 0;
 		}
 		else pcnt++;

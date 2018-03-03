@@ -560,7 +560,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A59FC94)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A59FC94)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A59FC94)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A59FC94)
-F (..\Tasks\Src\CANTask.c)(0x5A92701B)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\cantask.o --omf_browse .\engineer\cantask.crf --depend .\engineer\cantask.d)
+F (..\Tasks\Src\CANTask.c)(0x5A9A935B)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\cantask.o --omf_browse .\engineer\cantask.crf --depend .\engineer\cantask.d)
 I (../Inc/includes.h)(0x5A955AC9)
 I (../Inc/main.h)(0x5A59FC94)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A59FC94)
@@ -600,7 +600,7 @@ I (../Inc/spi.h)(0x5A59FC94)
 I (../Inc/tim.h)(0x5A59FC94)
 I (../Inc/usart.h)(0x5A59FC94)
 I (../Inc/gpio.h)(0x5A59FC94)
-I (..\Tasks\Inc\RemoteTask.h)(0x5A62014E)
+I (..\Tasks\Inc\RemoteTask.h)(0x5A9A9E94)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
 I (..\Tasks\Inc\ControlTask.h)(0x5A5FB172)
 I (..\Tasks\Inc\AMControlTask.h)(0x5A5FB497)
@@ -610,7 +610,7 @@ I (..\Tasks\Inc\drivers_ramp.h)(0x5A5C8764)
 I (..\Tasks\Inc\ManifoldTask.h)(0x5A5F9106)
 I (..\Tasks\Inc\JudgeTask.h)(0x5A59FC94)
 I (..\Tasks\Inc\UpperTask.h)(0x5A955B04)
-F (..\Tasks\Src\ControlTask.c)(0x5A956E25)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\controltask.o --omf_browse .\engineer\controltask.crf --depend .\engineer\controltask.d)
+F (..\Tasks\Src\ControlTask.c)(0x5A9AA1AD)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\controltask.o --omf_browse .\engineer\controltask.crf --depend .\engineer\controltask.d)
 I (../Inc/includes.h)(0x5A955AC9)
 I (../Inc/main.h)(0x5A59FC94)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A59FC94)
@@ -650,7 +650,7 @@ I (../Inc/spi.h)(0x5A59FC94)
 I (../Inc/tim.h)(0x5A59FC94)
 I (../Inc/usart.h)(0x5A59FC94)
 I (../Inc/gpio.h)(0x5A59FC94)
-I (..\Tasks\Inc\RemoteTask.h)(0x5A62014E)
+I (..\Tasks\Inc\RemoteTask.h)(0x5A9A9E94)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
 I (..\Tasks\Inc\ControlTask.h)(0x5A5FB172)
 I (..\Tasks\Inc\AMControlTask.h)(0x5A5FB497)
@@ -660,7 +660,7 @@ I (..\Tasks\Inc\drivers_ramp.h)(0x5A5C8764)
 I (..\Tasks\Inc\ManifoldTask.h)(0x5A5F9106)
 I (..\Tasks\Inc\JudgeTask.h)(0x5A59FC94)
 I (..\Tasks\Inc\UpperTask.h)(0x5A955B04)
-F (..\Tasks\Src\AMControlTask.c)(0x5A940F6A)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\amcontroltask.o --omf_browse .\engineer\amcontroltask.crf --depend .\engineer\amcontroltask.d)
+F (..\Tasks\Src\AMControlTask.c)(0x5A9AA886)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\amcontroltask.o --omf_browse .\engineer\amcontroltask.crf --depend .\engineer\amcontroltask.d)
 I (../Inc/includes.h)(0x5A955AC9)
 I (../Inc/main.h)(0x5A59FC94)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A59FC94)
@@ -700,7 +700,7 @@ I (../Inc/spi.h)(0x5A59FC94)
 I (../Inc/tim.h)(0x5A59FC94)
 I (../Inc/usart.h)(0x5A59FC94)
 I (../Inc/gpio.h)(0x5A59FC94)
-I (..\Tasks\Inc\RemoteTask.h)(0x5A62014E)
+I (..\Tasks\Inc\RemoteTask.h)(0x5A9A9E94)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
 I (..\Tasks\Inc\ControlTask.h)(0x5A5FB172)
 I (..\Tasks\Inc\AMControlTask.h)(0x5A5FB497)
@@ -750,7 +750,7 @@ I (../Inc/spi.h)(0x5A59FC94)
 I (../Inc/tim.h)(0x5A59FC94)
 I (../Inc/usart.h)(0x5A59FC94)
 I (../Inc/gpio.h)(0x5A59FC94)
-I (..\Tasks\Inc\RemoteTask.h)(0x5A62014E)
+I (..\Tasks\Inc\RemoteTask.h)(0x5A9A9E94)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
 I (..\Tasks\Inc\ControlTask.h)(0x5A5FB172)
 I (..\Tasks\Inc\AMControlTask.h)(0x5A5FB497)
@@ -800,7 +800,7 @@ I (../Inc/spi.h)(0x5A59FC94)
 I (../Inc/tim.h)(0x5A59FC94)
 I (../Inc/usart.h)(0x5A59FC94)
 I (../Inc/gpio.h)(0x5A59FC94)
-I (..\Tasks\Inc\RemoteTask.h)(0x5A62014E)
+I (..\Tasks\Inc\RemoteTask.h)(0x5A9A9E94)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
 I (..\Tasks\Inc\ControlTask.h)(0x5A5FB172)
 I (..\Tasks\Inc\AMControlTask.h)(0x5A5FB497)
@@ -810,7 +810,7 @@ I (..\Tasks\Inc\drivers_ramp.h)(0x5A5C8764)
 I (..\Tasks\Inc\ManifoldTask.h)(0x5A5F9106)
 I (..\Tasks\Inc\JudgeTask.h)(0x5A59FC94)
 I (..\Tasks\Inc\UpperTask.h)(0x5A955B04)
-F (..\Tasks\Src\RemoteTask.c)(0x5A956E14)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\remotetask.o --omf_browse .\engineer\remotetask.crf --depend .\engineer\remotetask.d)
+F (..\Tasks\Src\RemoteTask.c)(0x5A9AA2E0)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\remotetask.o --omf_browse .\engineer\remotetask.crf --depend .\engineer\remotetask.d)
 I (../Inc/includes.h)(0x5A955AC9)
 I (../Inc/main.h)(0x5A59FC94)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A59FC94)
@@ -850,7 +850,7 @@ I (../Inc/spi.h)(0x5A59FC94)
 I (../Inc/tim.h)(0x5A59FC94)
 I (../Inc/usart.h)(0x5A59FC94)
 I (../Inc/gpio.h)(0x5A59FC94)
-I (..\Tasks\Inc\RemoteTask.h)(0x5A62014E)
+I (..\Tasks\Inc\RemoteTask.h)(0x5A9A9E94)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
 I (..\Tasks\Inc\ControlTask.h)(0x5A5FB172)
 I (..\Tasks\Inc\AMControlTask.h)(0x5A5FB497)
@@ -900,7 +900,7 @@ I (../Inc/spi.h)(0x5A59FC94)
 I (../Inc/tim.h)(0x5A59FC94)
 I (../Inc/usart.h)(0x5A59FC94)
 I (../Inc/gpio.h)(0x5A59FC94)
-I (..\Tasks\Inc\RemoteTask.h)(0x5A62014E)
+I (..\Tasks\Inc\RemoteTask.h)(0x5A9A9E94)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
 I (..\Tasks\Inc\ControlTask.h)(0x5A5FB172)
 I (..\Tasks\Inc\AMControlTask.h)(0x5A5FB497)
@@ -951,7 +951,7 @@ I (../Inc/spi.h)(0x5A59FC94)
 I (../Inc/tim.h)(0x5A59FC94)
 I (../Inc/usart.h)(0x5A59FC94)
 I (../Inc/gpio.h)(0x5A59FC94)
-I (..\Tasks\Inc\RemoteTask.h)(0x5A62014E)
+I (..\Tasks\Inc\RemoteTask.h)(0x5A9A9E94)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
 I (..\Tasks\Inc\ControlTask.h)(0x5A5FB172)
 I (..\Tasks\Inc\AMControlTask.h)(0x5A5FB497)
@@ -1001,7 +1001,7 @@ I (../Inc/spi.h)(0x5A59FC94)
 I (../Inc/tim.h)(0x5A59FC94)
 I (../Inc/usart.h)(0x5A59FC94)
 I (../Inc/gpio.h)(0x5A59FC94)
-I (..\Tasks\Inc\RemoteTask.h)(0x5A62014E)
+I (..\Tasks\Inc\RemoteTask.h)(0x5A9A9E94)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
 I (..\Tasks\Inc\ControlTask.h)(0x5A5FB172)
 I (..\Tasks\Inc\AMControlTask.h)(0x5A5FB497)
@@ -1011,7 +1011,7 @@ I (..\Tasks\Inc\drivers_ramp.h)(0x5A5C8764)
 I (..\Tasks\Inc\ManifoldTask.h)(0x5A5F9106)
 I (..\Tasks\Inc\JudgeTask.h)(0x5A59FC94)
 I (..\Tasks\Inc\UpperTask.h)(0x5A955B04)
-F (..\Tasks\Src\UpperTask.c)(0x5A956F23)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\uppertask.o --omf_browse .\engineer\uppertask.crf --depend .\engineer\uppertask.d)
+F (..\Tasks\Src\UpperTask.c)(0x5A9AA375)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\uppertask.o --omf_browse .\engineer\uppertask.crf --depend .\engineer\uppertask.d)
 I (../Inc/includes.h)(0x5A955AC9)
 I (../Inc/main.h)(0x5A59FC94)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A59FC94)
@@ -1051,7 +1051,7 @@ I (../Inc/spi.h)(0x5A59FC94)
 I (../Inc/tim.h)(0x5A59FC94)
 I (../Inc/usart.h)(0x5A59FC94)
 I (../Inc/gpio.h)(0x5A59FC94)
-I (..\Tasks\Inc\RemoteTask.h)(0x5A62014E)
+I (..\Tasks\Inc\RemoteTask.h)(0x5A9A9E94)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
 I (..\Tasks\Inc\ControlTask.h)(0x5A5FB172)
 I (..\Tasks\Inc\AMControlTask.h)(0x5A5FB497)
@@ -1136,7 +1136,7 @@ I (../Inc/tim.h)(0x5A59FC94)
 I (../Inc/usart.h)(0x5A59FC94)
 I (../Inc/gpio.h)(0x5A59FC94)
 I (../Inc/includes.h)(0x5A955AC9)
-I (..\Tasks\Inc\RemoteTask.h)(0x5A62014E)
+I (..\Tasks\Inc\RemoteTask.h)(0x5A9A9E94)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
 I (..\Tasks\Inc\ControlTask.h)(0x5A5FB172)
 I (..\Tasks\Inc\AMControlTask.h)(0x5A5FB497)

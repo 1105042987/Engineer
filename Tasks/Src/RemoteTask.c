@@ -21,15 +21,17 @@ extern RampGen_t FBSpeedRamp  ;
 
 float rotate_speed;
 
-double AMUD1AngleTarget = 0.0;
-double AMUD2AngleTarget = 0.0;
-double AMFBAngleTarget = 0.0;
-double WINDAngleTarget = 0.0;
-double AMSIDEAngleTarget = 0.0;
+int16_t AMUD1AngleTarget = 0;
+int16_t AMUD2AngleTarget = 0;
+int16_t AMFBAngleTarget = 0;
+int16_t WINDAngleTarget = 0;
+int16_t AMSIDEAngleTarget = 0;
 
-#define ANGLE_STEP (double)2
+#define ANGLE_STEP 2.0
 #define IGNORE_RANGE 50
-#define ROTATE_FACTOR 0.02
+#define ROTATE_FACTOR 0.025
+
+
 
 //遥控器控制量初始化
 void RemoteTaskInit()
@@ -40,11 +42,11 @@ void RemoteTaskInit()
 	FBSpeedRamp.ResetCounter(&FBSpeedRamp);
 	
 	//机械臂电机目标物理角度值
-	AMUD1AngleTarget = 0.0;
-	AMUD2AngleTarget = 0.0;
-	AMFBAngleTarget = 0.0;
-	AMSIDEAngleTarget = 0.0;
-	WINDAngleTarget = 0.0;
+	AMUD1AngleTarget = 0;
+	AMUD2AngleTarget = 0;
+	AMFBAngleTarget = 0;
+	AMSIDEAngleTarget = 0;
+	WINDAngleTarget = 0;
 	/*底盘速度初始化*/
 	ChassisSpeedRef.forward_back_ref = 0.0f;
 	ChassisSpeedRef.left_right_ref = 0.0f;
@@ -58,54 +60,53 @@ int16_t channel2 = 0;
 int16_t channel3 = 0;
 void RemoteControlProcess(Remote *rc)
 {
+	//max=297
 	channel0 = (rc->ch0 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //右横
 	channel1 = (rc->ch1 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //右纵
 	channel2 = (rc->ch2 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //左横
 	channel3 = (rc->ch3 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //左纵
-	
 	if(WorkState == NORMAL_STATE)
 	{
 		ChassisSpeedRef.forward_back_ref = channel1;
 		ChassisSpeedRef.left_right_ref   = channel0;
 		
 		rotate_speed = channel2 * ROTATE_FACTOR;
-		/*
-		if(channel3 > IGNORE_RANGE) AMSIDEAngleTarget = ANGLE_STEP;
-		else if(channel3 < -IGNORE_RANGE) AMSIDEAngleTarget =- ANGLE_STEP;
-		else AMSIDEAngleTarget =0;
-		*/
-	
-		if(channel3 > IGNORE_RANGE)	AMSIDEAngleTarget = AMSIDEAngleTarget + ANGLE_STEP/2;
-		else if(channel3 < -IGNORE_RANGE) AMSIDEAngleTarget = AMSIDEAngleTarget - ANGLE_STEP/2;
-			
+		
+		#ifdef EXACT_CONTROL
+			if(channel3 > IGNORE_RANGE)	AMSIDEAngleTarget = AMSIDEAngleTarget + ANGLE_STEP/2;
+			else if(channel3 < -IGNORE_RANGE) AMSIDEAngleTarget = AMSIDEAngleTarget - ANGLE_STEP/2;
+		#endif
+		
+		#ifdef EASY_CONTROL
+			AMSIDEAngleTarget = channel3;
+		#endif
 	}
 	if(WorkState == GETBULLET_STATE || WorkState == BYPASS_STATE)
 	{
 		ChassisSpeedRef.forward_back_ref = 0;
 		ChassisSpeedRef.left_right_ref   = channel0;
-		/*
-		if(channel3 > IGNORE_RANGE) {AMUD1AngleTarget=ANGLE_STEP;AMUD2AngleTarget=ANGLE_STEP;}
-		else if(channel3 < -IGNORE_RANGE) {AMUD1AngleTarget=-ANGLE_STEP;AMUD2AngleTarget=-ANGLE_STEP;}
-		else {AMUD1AngleTarget =0;AMUD2AngleTarget =0;}
-		if(channel1 > IGNORE_RANGE) AMFBAngleTarget = ANGLE_STEP;
-		else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget =- ANGLE_STEP;
-		else AMFBAngleTarget =0;
-		if(channel2 > IGNORE_RANGE) WINDAngleTarget = ANGLE_STEP;
-		else if(channel2 < -IGNORE_RANGE) WINDAngleTarget =- ANGLE_STEP;
-		else WINDAngleTarget =0;
-		*/
-		if(channel3 > IGNORE_RANGE) {
-			AMUD1AngleTarget=AMUD1AngleTarget+ANGLE_STEP/2;
-			AMUD2AngleTarget=AMUD2AngleTarget+ANGLE_STEP/2;
-		}
-		else if(channel3 < -IGNORE_RANGE) {
-			AMUD1AngleTarget=AMUD1AngleTarget-ANGLE_STEP/2;
-			AMUD2AngleTarget=AMUD2AngleTarget-ANGLE_STEP/2;
-		}
-		if(channel1 > IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget + ANGLE_STEP/2;
-		else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget - ANGLE_STEP/2;
-		//if(channel2 > IGNORE_RANGE) WINDAngleTarget += ANGLE_STEP/20;
-		//else if(channel2 < -IGNORE_RANGE) WINDAngleTarget -= ANGLE_STEP/20;
+		
+		#ifdef EXACT_CONTROL
+			if(channel3 > IGNORE_RANGE) {
+				AMUD1AngleTarget=AMUD1AngleTarget+ANGLE_STEP/2;
+				AMUD2AngleTarget=AMUD2AngleTarget+ANGLE_STEP/2;
+			}
+			else if(channel3 < -IGNORE_RANGE) {
+				AMUD1AngleTarget=AMUD1AngleTarget-ANGLE_STEP/2;
+				AMUD2AngleTarget=AMUD2AngleTarget-ANGLE_STEP/2;
+			}
+			if(channel1 > IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget - ANGLE_STEP/2;
+			else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget + ANGLE_STEP/2;
+			//if(channel2 > IGNORE_RANGE) WINDAngleTarget += ANGLE_STEP/20;
+			//else if(channel2 < -IGNORE_RANGE) WINDAngleTarget -= ANGLE_STEP/20;
+		#endif
+			
+		#ifdef EASY_CONTROL
+			AMUD1AngleTarget = -channel3;
+			AMUD2AngleTarget = -channel3;
+			AMFBAngleTarget = -channel1;
+			//WINDAngleTarget = channel2;
+		#endif
 	}
 }
 
