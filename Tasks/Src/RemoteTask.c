@@ -21,13 +21,13 @@ extern RampGen_t FBSpeedRamp  ;
 
 float rotate_speed;
 
-int16_t AMUD1AngleTarget = 0;
-int16_t AMUD2AngleTarget = 0;
-int16_t AMFBAngleTarget = 0;
-int16_t WINDAngleTarget = 0;
-int16_t AMSIDEAngleTarget = 0;
+double AMUD1AngleTarget = 0;
+double AMUD2AngleTarget = 0;
+double AMFBAngleTarget = 0;
+double WINDAngleTarget = 0;
+double AMSIDEAngleTarget = 0;
 
-#define ANGLE_STEP 2.0
+#define ANGLE_STEP 3.5
 #define IGNORE_RANGE 50
 #define ROTATE_FACTOR 0.025
 
@@ -58,6 +58,7 @@ int16_t channel0 = 0;
 int16_t channel1 = 0;
 int16_t channel2 = 0;
 int16_t channel3 = 0;
+
 void RemoteControlProcess(Remote *rc)
 {
 	//max=297
@@ -70,11 +71,11 @@ void RemoteControlProcess(Remote *rc)
 		ChassisSpeedRef.forward_back_ref = channel1;
 		ChassisSpeedRef.left_right_ref   = channel0;
 		
-		rotate_speed = channel2 * ROTATE_FACTOR;
+		rotate_speed = -channel2 * ROTATE_FACTOR;
 		
 		#ifdef EXACT_CONTROL
-			if(channel3 > IGNORE_RANGE)	AMSIDEAngleTarget = AMSIDEAngleTarget + ANGLE_STEP/2;
-			else if(channel3 < -IGNORE_RANGE) AMSIDEAngleTarget = AMSIDEAngleTarget - ANGLE_STEP/2;
+			if(channel3 > IGNORE_RANGE)	AMSIDEAngleTarget = AMSIDEAngleTarget + ANGLE_STEP/4;
+			else if(channel3 < -IGNORE_RANGE) AMSIDEAngleTarget = AMSIDEAngleTarget - ANGLE_STEP/4;
 		#endif
 		
 		#ifdef EASY_CONTROL
@@ -88,17 +89,17 @@ void RemoteControlProcess(Remote *rc)
 		
 		#ifdef EXACT_CONTROL
 			if(channel3 > IGNORE_RANGE) {
-				AMUD1AngleTarget=AMUD1AngleTarget+ANGLE_STEP/2;
-				AMUD2AngleTarget=AMUD2AngleTarget+ANGLE_STEP/2;
+				AMUD1AngleTarget=AMUD1AngleTarget-ANGLE_STEP;
+				AMUD2AngleTarget=AMUD2AngleTarget-ANGLE_STEP;
 			}
 			else if(channel3 < -IGNORE_RANGE) {
-				AMUD1AngleTarget=AMUD1AngleTarget-ANGLE_STEP/2;
-				AMUD2AngleTarget=AMUD2AngleTarget-ANGLE_STEP/2;
+				AMUD1AngleTarget=AMUD1AngleTarget+ANGLE_STEP;
+				AMUD2AngleTarget=AMUD2AngleTarget+ANGLE_STEP;
 			}
-			if(channel1 > IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget - ANGLE_STEP/2;
-			else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget + ANGLE_STEP/2;
-			//if(channel2 > IGNORE_RANGE) WINDAngleTarget += ANGLE_STEP/20;
-			//else if(channel2 < -IGNORE_RANGE) WINDAngleTarget -= ANGLE_STEP/20;
+			if(channel1 > IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget + ANGLE_STEP;
+			else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget - ANGLE_STEP;
+			//if(channel2 > IGNORE_RANGE) WINDAngleTarget += ANGLE_STEP;
+			//else if(channel2 < -IGNORE_RANGE) WINDAngleTarget -= ANGLE_STEP;
 		#endif
 			
 		#ifdef EASY_CONTROL
@@ -107,6 +108,9 @@ void RemoteControlProcess(Remote *rc)
 			AMFBAngleTarget = -channel1;
 			//WINDAngleTarget = channel2;
 		#endif
+			
+			if(channel2 > IGNORE_RANGE) HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_RESET);
+			else if(channel2 < -IGNORE_RANGE) HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_SET);
 	}
 }
 

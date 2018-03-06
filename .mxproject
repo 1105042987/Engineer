@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=E:/NT_Infantry/Inc
+HeaderPath=D:/lenovo/Documents/GitHub/Engineer/Inc
 HeaderFiles=gpio.h;can.h;dma.h;spi.h;usart.h;stm32f4xx_it.h;stm32f4xx_hal_conf.h;main.h;tim.h;
-SourcePath=E:/NT_Infantry/Src
+SourcePath=D:/lenovo/Documents/GitHub/Engineer/Src
 SourceFiles=gpio.c;can.c;dma.c;spi.c;usart.c;stm32f4xx_it.c;stm32f4xx_hal_msp.c;main.c;tim.c;
 
 [PreviousLibFiles]

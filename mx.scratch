@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project>
-<ProjectName>E:\NT_Infantry\\NT_Infantry</ProjectName>
+<ProjectName>D:\lenovo\Documents\GitHub\Engineer\\Engineer</ProjectName>
 <CMSIS>..\Drivers\CMSIS</CMSIS>
-<HAL_Driver>C:\Users\Allen\STM32Cube\Repository\STM32Cube_FW_F4_V1.17.0\Drivers\CMSIS</HAL_Driver>
+<HAL_Driver>E:\Cube STM32\update\STM32Cube_FW_F4_V1.17.0\Drivers\CMSIS</HAL_Driver>
 
 <Toolchain>MDK-ARM</Toolchain>
 	<Toolversion>5</Toolversion>
@@ -24,7 +24,7 @@
 
 <configs>
   <config>
-    <name>NT_Infantry</name>				
+    <name>Engineer</name>				
     <device>STM32F427IIHx</device>		 
     <heapSize>0x200</heapSize>
     <stackSize>0x400</stackSize>

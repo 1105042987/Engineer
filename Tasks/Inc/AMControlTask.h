@@ -20,8 +20,6 @@
 #define BYPASS_TIM htim12
 
 void vice_controlLoop(void);
-void ControlAMSIDE(void);
-void setSendBulletAMMotor(void);
 void AMControlInit(void);
 
 #endif //AM_CONTROL_TASK_H

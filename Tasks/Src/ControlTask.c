@@ -229,10 +229,6 @@ void controlLoop()
 		ControlCMBR();
 		
 		setCMMotor();
-		
-		ControlAMSIDE();
-		
-		setSendBulletAMMotor();
 	}
 }
 
@@ -242,16 +238,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if (htim->Instance == htim6.Instance)
 	{
 		HAL_NVIC_DisableIRQ(TIM6_DAC_IRQn);
+		
 		//主循环在时间中断中启动
-		switch(WorkState)
-		{
-			case GETBULLET_STATE:
-			case BYPASS_STATE:
-				vice_controlLoop();
-			default:
-				controlLoop();
-			break;
-		}
+		controlLoop();
+		vice_controlLoop();
+		
 		HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
 	}
 	else if (htim->Instance == htim7.Instance)
@@ -282,7 +273,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		
 		#ifdef DEBUG_MODE
 		//zykProcessData();
-		dataCallBack();
+		//dataCallBack();
 		#endif
 		
 		

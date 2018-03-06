@@ -13,17 +13,17 @@
 
 uint16_t AMUD1Intensity=0,AMUD2Intensity=0,AMFBIntensity=0,AMSIDEIntensity=0,WINDIntensity=0;
 
-fw_PID_Regulator_t AMUD1PositionPID = fw_PID_INIT(1.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
-fw_PID_Regulator_t AMUD2PositionPID = fw_PID_INIT(1.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
-fw_PID_Regulator_t AMFBPositionPID = fw_PID_INIT(1.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
-fw_PID_Regulator_t AMSIDEPositionPID = fw_PID_INIT(1.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
-fw_PID_Regulator_t WINDPositionPID = fw_PID_INIT(1.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
+fw_PID_Regulator_t AMUD1PositionPID = fw_PID_INIT(1200.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
+fw_PID_Regulator_t AMUD2PositionPID = fw_PID_INIT(1200.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
+fw_PID_Regulator_t AMFBPositionPID = fw_PID_INIT(500.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
+fw_PID_Regulator_t AMSIDEPositionPID = fw_PID_INIT(500.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
+fw_PID_Regulator_t WINDPositionPID = fw_PID_INIT(500.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
 
-fw_PID_Regulator_t AMUD1SpeedPID = fw_PID_INIT(10.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
-fw_PID_Regulator_t AMUD2SpeedPID = fw_PID_INIT(10.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
-fw_PID_Regulator_t AMFBSpeedPID = fw_PID_INIT(10.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
-fw_PID_Regulator_t AMSIDESpeedPID = fw_PID_INIT(10.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
-fw_PID_Regulator_t WINDSpeedPID = fw_PID_INIT(10.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
+fw_PID_Regulator_t AMUD1SpeedPID = fw_PID_INIT(0.7, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
+fw_PID_Regulator_t AMUD2SpeedPID = fw_PID_INIT(0.7, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
+fw_PID_Regulator_t AMFBSpeedPID = fw_PID_INIT(0.7, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
+fw_PID_Regulator_t AMSIDESpeedPID = fw_PID_INIT(0.7, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
+fw_PID_Regulator_t WINDSpeedPID = fw_PID_INIT(0.7, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
 
 
 
@@ -57,19 +57,19 @@ static uint8_t s_WINDCount = 0;
 
 
 //送弹机械臂电机CAN信号控制
-void setSendBulletAMMotor()
+void setSeldomAMMotor()
 {
 	CanTxMsgTypeDef pData;
 	AUXMOTOR_CAN.pTxMsg = &pData;
 	
-	AUXMOTOR_CAN.pTxMsg->StdId = AMSEND_TXID;
+	AUXMOTOR_CAN.pTxMsg->StdId = AMSELDOM_TXID;
 	AUXMOTOR_CAN.pTxMsg->ExtId = 0;
 	AUXMOTOR_CAN.pTxMsg->IDE = CAN_ID_STD;
 	AUXMOTOR_CAN.pTxMsg->RTR = CAN_RTR_DATA;
 	AUXMOTOR_CAN.pTxMsg->DLC = 0x08;
 	
-	AUXMOTOR_CAN.pTxMsg->Data[0] = (uint8_t)(AMSIDEIntensity >> 8);
-	AUXMOTOR_CAN.pTxMsg->Data[1] = (uint8_t)AMSIDEIntensity;
+	AUXMOTOR_CAN.pTxMsg->Data[0] = (uint8_t)(AMFBIntensity >> 8);
+	AUXMOTOR_CAN.pTxMsg->Data[1] = (uint8_t)AMFBIntensity;
 	AUXMOTOR_CAN.pTxMsg->Data[2] = 0;
 	AUXMOTOR_CAN.pTxMsg->Data[3] = 0;
 	AUXMOTOR_CAN.pTxMsg->Data[4] = 0;
@@ -77,7 +77,7 @@ void setSendBulletAMMotor()
 	AUXMOTOR_CAN.pTxMsg->Data[6] = 0;
 	AUXMOTOR_CAN.pTxMsg->Data[7] = 0;
 
-	if(can2_update == 1 && can_type == 1)
+	if(can2_update == 1 && can_type == 0)
 	{
 		//CAN通信前关中断
 		HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
@@ -94,7 +94,8 @@ void setSendBulletAMMotor()
 			Error_Handler();
 		}
 		can2_update = 0;
-		if(WorkState == GETBULLET_STATE || WorkState == BYPASS_STATE) can_type = 0;
+		can_type = 1;
+		
 		//CAN通信后开中断，防止中断影响CAN信号发送
 		HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
@@ -108,12 +109,12 @@ void setSendBulletAMMotor()
 }
 
 //取弹机械臂电机CAN信号控制
-void setGetBulletAMMotor(void)
+void setUsalAMMotor(void)
 {
 	CanTxMsgTypeDef pData;
 	AUXMOTOR_CAN.pTxMsg = &pData;
 	
-	AUXMOTOR_CAN.pTxMsg->StdId = AMGET_TXID;
+	AUXMOTOR_CAN.pTxMsg->StdId = AMUSAL_TXID;
 	AUXMOTOR_CAN.pTxMsg->ExtId = 0;
 	AUXMOTOR_CAN.pTxMsg->IDE = CAN_ID_STD;
 	AUXMOTOR_CAN.pTxMsg->RTR = CAN_RTR_DATA;
@@ -123,12 +124,12 @@ void setGetBulletAMMotor(void)
 	AUXMOTOR_CAN.pTxMsg->Data[1] = (uint8_t)AMUD1Intensity;
 	AUXMOTOR_CAN.pTxMsg->Data[2] = (uint8_t)(AMUD2Intensity >> 8);
 	AUXMOTOR_CAN.pTxMsg->Data[3] = (uint8_t)AMUD2Intensity;
-	AUXMOTOR_CAN.pTxMsg->Data[4] = (uint8_t)(AMFBIntensity >> 8);
-	AUXMOTOR_CAN.pTxMsg->Data[5] = (uint8_t)AMFBIntensity;
+	AUXMOTOR_CAN.pTxMsg->Data[4] = (uint8_t)(AMSIDEIntensity >> 8);
+	AUXMOTOR_CAN.pTxMsg->Data[5] = (uint8_t)AMSIDEIntensity;
 	AUXMOTOR_CAN.pTxMsg->Data[6] = (uint8_t)(WINDIntensity >> 8);
 	AUXMOTOR_CAN.pTxMsg->Data[7] = (uint8_t)WINDIntensity;
 
-	if(can2_update == 1 && can_type == 0)
+	if(can2_update == 1 && can_type == 1)
 	{
 		HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
 		HAL_NVIC_DisableIRQ(CAN2_RX0_IRQn);
@@ -143,7 +144,7 @@ void setGetBulletAMMotor(void)
 			Error_Handler();
 		}
 		can2_update = 0;
-		can_type = 1;
+		if(WorkState == GETBULLET_STATE || WorkState == BYPASS_STATE) can_type = 0;
 		HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(USART1_IRQn);
@@ -154,7 +155,7 @@ void setGetBulletAMMotor(void)
 		#endif
   }
 }
-//机械臂电机真实角度解算ATTENTION!!
+//机械臂电机真实角度解算
 void StandardlizeAMRealAngle(double* AMRealAngle,uint16_t AMThisAngle,uint16_t AMLastAngle)
 {
 	if(AMThisAngle<=AMLastAngle)
@@ -300,7 +301,7 @@ void ControlAMSIDE()
 		StandardlizeAMRealAngle(&AMSIDERealAngle,ThisAngle,AMSIDELastAngle);
 		ThisSpeed = AMSIDERx.RotateSpeed * 6;		//单位：度每秒
 		
-		AMSIDEIntensity = PID_PROCESS_Double(AMSIDEPositionPID,AMSIDESpeedPID,AMSIDEAngleTarget,AMSIDERealAngle,ThisSpeed);
+		AMSIDEIntensity = -PID_PROCESS_Double(AMSIDEPositionPID,AMSIDESpeedPID,AMSIDEAngleTarget,AMSIDERealAngle,ThisSpeed);
 		
 		s_AMSIDECount = 0;
 		AMSIDELastAngle = ThisAngle;
@@ -324,13 +325,20 @@ void vice_controlLoop()
 
 		ControlAMUD1();
 		ControlAMUD2();
-		ControlAMFB();
+		ControlAMSIDE();
 		ControlWIND();
 	
-		setGetBulletAMMotor();
+		setUsalAMMotor();
+	
+		if(WorkState == BYPASS_STATE||WorkState == GETBULLET_STATE)
+		{
+			ControlAMFB();
+			setSeldomAMMotor();
+		}
+	
 		if(WorkState == BYPASS_STATE)
 		{
-			__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1400);
+			__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1300);
 		}
 		else
 		{

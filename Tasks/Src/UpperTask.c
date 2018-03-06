@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+int16_t times=0;
 #ifdef DEBUG_MODE
 //--------------------底层接收驱动部分-------------------//
 uint8_t data;
@@ -104,10 +105,11 @@ uint8_t ComProtocal(char*rxbuf,char*head,char*end,char* separater,char dataout[]
 
 //--------------------任务循环部分-------------------//
 //debug监测变量
-extern int16_t channel3,AMSIDERealAngle;
+extern int16_t channel3;
 extern int16_t AMSIDEIntensity,AMFBIntensity,AMUD1Intensity,AMUD2Intensity;
 extern int16_t CMBRIntensity,CMBLIntensity,CMFRIntensity,CMFLIntensity;
-
+extern double AMSIDERealAngle,AMFBRealAngle;
+extern int16_t times;
 void dataCallBack()
 {
 	static uint16_t pcnt = 0;
@@ -115,15 +117,21 @@ void dataCallBack()
 		{
 			//printf("AMSIDEIntensity %d\r\t", AMSIDEIntensity);
 			//printf("AMFBIntensity %d\r\t", AMFBIntensity);
-			printf("AMUD1Intensity %d\r\t", AMUD1Intensity);
-			printf("AMUD2Intensity %d\r\t", AMUD2Intensity);
+			//printf("AMUD1Intensity %d\r\t", AMUD1Intensity);
+			//printf("AMUD2Intensity %d\r\t", AMUD2Intensity);
 			//printf("CMBRIntensity %d\r\t", CMBRIntensity);
 			//printf("CMBLIntensity %d\r\t", CMBLIntensity);
 			//printf("CMFRIntensity %d\r\t", CMFRIntensity);
 			//printf("CMFLIntensity %d\r\t", CMFLIntensity);
 			
+			//printf("CMrx angle %d %d %d %d",CMFRRx.angle,CMFLRx.angle,CMBRRx.angle,CMBLRx.angle);
+			//printf("AMrx angle SIDE%d UD%d %d FB%d ",AMSIDERx.angle,AMUD1Rx.angle,AMUD2Rx.angle,AMFBRx.angle);
+			//printf("AMFBtarget %f ",AMFBAngleTarget);
+			//printf("AMFBreal %f",AMFBRealAngle);
 			//printf("can2 update%d type%d\n",can2_update,can_type);
 			//printf("can1 update%d\t",can1_update);
+			
+			printf("times %d \t",times);
 			
 			printf("\n");
 			pcnt = 0;

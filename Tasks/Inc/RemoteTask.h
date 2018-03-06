@@ -19,8 +19,8 @@
 #define CTRL_UART huart3
 #define JUDGE_UART huart6
 
-#define EASY_CONTROL
-//#define EXACT_CONTROL
+//#define EASY_CONTROL
+#define EXACT_CONTROL
 
 
 #define STICK_TO_CHASSIS_SPEED_REF_FACT     0.45f
@@ -147,11 +147,11 @@ extern ChassisSpeed_Ref_t ChassisSpeedRef;
 extern InputMode_e inputmode;
 extern FunctionMode_e functionmode;
 extern float rotate_speed;
-extern int16_t AMUD1AngleTarget;
-extern int16_t AMUD2AngleTarget;
-extern int16_t AMFBAngleTarget;
-extern int16_t AMSIDEAngleTarget;
-extern int16_t WINDAngleTarget;
+extern double AMUD1AngleTarget;
+extern double AMUD2AngleTarget;
+extern double AMFBAngleTarget;
+extern double AMSIDEAngleTarget;
+extern double WINDAngleTarget;
 
 extern uint8_t rc_data[18];
 extern uint8_t rc_first_frame;

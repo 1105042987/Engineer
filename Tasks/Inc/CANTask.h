@@ -27,16 +27,17 @@
 //can2
 #define AMUD1_RXID 0x201u
 #define AMUD2_RXID 0x202u
-#define AMFB_RXID 0x203u
+#define AMSIDE_RXID 0x203u
 #define WIND_RXID 0x204u		//绕线电机
-#define AMSIDE_RXID 0x205u
+#define AMFB_RXID 0x205u
+
 
 //TxID
 //can1
 #define CM_TXID 0x200u
 //can2
-#define AMGET_TXID 0x200u	//取弹电机
-#define AMSEND_TXID 0x1FFu //送弹电机
+#define AMSELDOM_TXID 0x1FFu	//少用AM电机
+#define AMUSAL_TXID 0x200u //常用AM电机
 
 typedef struct{
 	uint16_t angle;

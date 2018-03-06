@@ -12,6 +12,8 @@
 #ifndef __INCLUDES_H
 #define __INCLUDES_H
 
+//#define DEBUG_MODE
+
 #include "main.h"
 #include "stm32f4xx_hal.h"
 #include "can.h"
@@ -33,7 +35,7 @@
 #include "UpperTask.h"
 
 
-
+extern int16_t times;
 //#include "visualscope.h"
 
 
