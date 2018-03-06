@@ -349,6 +349,22 @@ void vice_controlLoop()
 //机械臂控制初始化
 void AMControlInit()
 {
+	AMUD1FirstEnter = 1;
+	AMUD2FirstEnter = 1;
+	AMFBFirstEnter = 1;
+	AMSIDEFirstEnter = 1;
+	WINDFirstEnter = 1;
+	AMUD1RealAngle = 0.0;
+	AMUD2RealAngle = 0.0;
+	AMFBRealAngle = 0.0;
+	AMSIDERealAngle = 0.0;
+	WINDRealAngle = 0.0;
+	AMUD1LastAngle = 0.0;
+	AMUD2LastAngle = 0.0;
+	AMFBLastAngle = 0.0;
+	AMSIDELastAngle = 0.0;
+	WINDLastAngle = 0.0;
+	
 	ControlAMUD1();
 	ControlAMUD2();
 	ControlAMFB();

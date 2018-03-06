@@ -125,7 +125,7 @@ void dataCallBack()
 			//printf("CMFLIntensity %d\r\t", CMFLIntensity);
 			
 			//printf("CMrx angle %d %d %d %d",CMFRRx.angle,CMFLRx.angle,CMBRRx.angle,CMBLRx.angle);
-			//printf("AMrx angle SIDE%d UD%d %d FB%d ",AMSIDERx.angle,AMUD1Rx.angle,AMUD2Rx.angle,AMFBRx.angle);
+			printf("AMrx angle SIDE%d UD%d %d FB%d ",AMSIDERx.angle,AMUD1Rx.angle,AMUD2Rx.angle,AMFBRx.angle);
 			//printf("AMFBtarget %f ",AMFBAngleTarget);
 			//printf("AMFBreal %f",AMFBRealAngle);
 			//printf("can2 update%d type%d\n",can2_update,can_type);

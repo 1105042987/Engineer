@@ -12,7 +12,7 @@
 #ifndef __INCLUDES_H
 #define __INCLUDES_H
 
-//#define DEBUG_MODE
+#define DEBUG_MODE
 
 #include "main.h"
 #include "stm32f4xx_hal.h"
@@ -38,18 +38,5 @@
 extern int16_t times;
 //#include "visualscope.h"
 
-
-//所有待调整参数，可以用查找找到位置
-//AMUD1PositionPID =             			以及后跟随9项
-//ANGLE_STEP													机械臂电机转动速度或是步进长度
-//IGNORE_RANGE												摇杆在区间内不会触动2310电机，防止误触，摇到极限400多一些
-//ROTATE_FACTOR												底盘旋转速度控制系数
-
-
-
-//！！！！！！！！！强烈建议先在单个电机上调整好再烧入！！！！！！！！！！
-
-//所有标记delete的内容是为了适配步兵调试底盘运动的，可以删去
-//所有标记ATTENTION!!的内容是自己感觉可能有问题的
 
 #endif /* __INCLUDES_H */

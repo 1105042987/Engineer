@@ -220,7 +220,7 @@ void controlLoop()
 {
 	WorkStateFSM();
 	
-	if(WorkState != STOP_STATE)
+	if(WorkState != STOP_STATE && WorkState != PREPARE_STATE)
 	{
 		ControlRotate();
 		ControlCMFL();
@@ -229,6 +229,8 @@ void controlLoop()
 		ControlCMBR();
 		
 		setCMMotor();
+		
+		vice_controlLoop();
 	}
 }
 
@@ -241,7 +243,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		
 		//主循环在时间中断中启动
 		controlLoop();
-		vice_controlLoop();
 		
 		HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
 	}
@@ -273,7 +274,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		
 		#ifdef DEBUG_MODE
 		//zykProcessData();
-		//dataCallBack();
+		dataCallBack();
 		#endif
 		
 		
