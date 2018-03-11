@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\Engineer\Engineer.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Engineer\Engineer.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Tue Mar 06 22:11:01 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Sun Mar 11 13:43:10 2018
 <BR><P>
-<H3>Maximum Stack Usage =        368 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        360 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 TIM1_UP_TIM10_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; controlLoop &rArr; vice_controlLoop &rArr; ControlWIND &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 <P>
@@ -673,7 +673,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[89]"></a>ControlAMFB</STRONG> (Thumb, 166 bytes, Stack size 176 bytes, amcontroltask.o(i.ControlAMFB))
+<P><STRONG><a name="[89]"></a>ControlAMFB</STRONG> (Thumb, 168 bytes, Stack size 176 bytes, amcontroltask.o(i.ControlAMFB))
 <BR><BR>[Stack]<UL><LI>Max Depth = 304<LI>Call Chain = ControlAMFB &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_PROCESS_Double
@@ -783,7 +783,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;controlLoop
 </UL>
 
-<P><STRONG><a name="[8a]"></a>ControlWIND</STRONG> (Thumb, 164 bytes, Stack size 176 bytes, amcontroltask.o(i.ControlWIND))
+<P><STRONG><a name="[8a]"></a>ControlWIND</STRONG> (Thumb, 166 bytes, Stack size 176 bytes, amcontroltask.o(i.ControlWIND))
 <BR><BR>[Stack]<UL><LI>Max Depth = 304<LI>Call Chain = ControlWIND &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_PROCESS_Double
@@ -1222,7 +1222,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[c5]"></a>HAL_TIM_IRQHandler</STRONG> (Thumb, 358 bytes, Stack size 16 bytes, stm32f4xx_hal_tim.o(i.HAL_TIM_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 368<LI>Call Chain = HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; controlLoop &rArr; vice_controlLoop &rArr; ControlWIND &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
+<BR><BR>[Stack]<UL><LI>Max Depth = 360<LI>Call Chain = HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; controlLoop &rArr; vice_controlLoop &rArr; ControlWIND &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_CommutationCallback
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_BreakCallback
@@ -1287,7 +1287,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[c9]"></a>HAL_TIM_PeriodElapsedCallback</STRONG> (Thumb, 150 bytes, Stack size 24 bytes, controltask.o(i.HAL_TIM_PeriodElapsedCallback))
-<BR><BR>[Stack]<UL><LI>Max Depth = 352<LI>Call Chain = HAL_TIM_PeriodElapsedCallback &rArr; controlLoop &rArr; vice_controlLoop &rArr; ControlWIND &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
+<BR><BR>[Stack]<UL><LI>Max Depth = 344<LI>Call Chain = HAL_TIM_PeriodElapsedCallback &rArr; controlLoop &rArr; vice_controlLoop &rArr; ControlWIND &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Receive_DMA
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_AbortReceive
@@ -1622,8 +1622,8 @@ Global Symbols
 <P><STRONG><a name="[12]"></a>PendSV_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.PendSV_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f427xx.o(RESET)
 </UL>
-<P><STRONG><a name="[102]"></a>RemoteControlProcess</STRONG> (Thumb, 432 bytes, Stack size 40 bytes, remotetask.o(i.RemoteControlProcess))
-<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = RemoteControlProcess &rArr; __aeabi_dsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
+<P><STRONG><a name="[102]"></a>RemoteControlProcess</STRONG> (Thumb, 554 bytes, Stack size 32 bytes, remotetask.o(i.RemoteControlProcess))
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = RemoteControlProcess &rArr; __aeabi_dsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
@@ -1636,7 +1636,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[da]"></a>RemoteDataProcess</STRONG> (Thumb, 220 bytes, Stack size 16 bytes, remotetask.o(i.RemoteDataProcess))
-<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = RemoteDataProcess &rArr; RemoteControlProcess &rArr; __aeabi_dsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
+<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = RemoteDataProcess &rArr; RemoteControlProcess &rArr; __aeabi_dsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteControlProcess
 <LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MouseKeyControlProcess
@@ -1696,21 +1696,21 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f427xx.o(.text)
 </UL>
 <P><STRONG><a name="[2d]"></a>TIM1_UP_TIM10_IRQHandler</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.TIM1_UP_TIM10_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 368<LI>Call Chain = TIM1_UP_TIM10_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; controlLoop &rArr; vice_controlLoop &rArr; ControlWIND &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
+<BR><BR>[Stack]<UL><LI>Max Depth = 360<LI>Call Chain = TIM1_UP_TIM10_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; controlLoop &rArr; vice_controlLoop &rArr; ControlWIND &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IRQHandler
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f427xx.o(RESET)
 </UL>
 <P><STRONG><a name="[4a]"></a>TIM6_DAC_IRQHandler</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.TIM6_DAC_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 368<LI>Call Chain = TIM6_DAC_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; controlLoop &rArr; vice_controlLoop &rArr; ControlWIND &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
+<BR><BR>[Stack]<UL><LI>Max Depth = 360<LI>Call Chain = TIM6_DAC_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; controlLoop &rArr; vice_controlLoop &rArr; ControlWIND &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IRQHandler
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f427xx.o(RESET)
 </UL>
 <P><STRONG><a name="[4b]"></a>TIM7_IRQHandler</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.TIM7_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 368<LI>Call Chain = TIM7_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; controlLoop &rArr; vice_controlLoop &rArr; ControlWIND &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
+<BR><BR>[Stack]<UL><LI>Max Depth = 360<LI>Call Chain = TIM7_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_PeriodElapsedCallback &rArr; controlLoop &rArr; vice_controlLoop &rArr; ControlWIND &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IRQHandler
 </UL>
@@ -1770,7 +1770,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f427xx.o(RESET)
 </UL>
-<P><STRONG><a name="[10d]"></a>WorkStateFSM</STRONG> (Thumb, 158 bytes, Stack size 24 bytes, controltask.o(i.WorkStateFSM))
+<P><STRONG><a name="[10d]"></a>WorkStateFSM</STRONG> (Thumb, 160 bytes, Stack size 24 bytes, controltask.o(i.WorkStateFSM))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = WorkStateFSM &rArr; RemoteTaskInit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RemoteTaskInit
@@ -1826,7 +1826,7 @@ Global Symbols
 <P><STRONG><a name="[134]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
 <P><STRONG><a name="[d7]"></a>controlLoop</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, controltask.o(i.controlLoop))
-<BR><BR>[Stack]<UL><LI>Max Depth = 328<LI>Call Chain = controlLoop &rArr; vice_controlLoop &rArr; ControlWIND &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
+<BR><BR>[Stack]<UL><LI>Max Depth = 320<LI>Call Chain = controlLoop &rArr; vice_controlLoop &rArr; ControlWIND &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vice_controlLoop
 <LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setCMMotor
@@ -1862,7 +1862,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_RxCpltCallback
 </UL>
 
-<P><STRONG><a name="[db]"></a>dataCallBack</STRONG> (Thumb, 60 bytes, Stack size 16 bytes, uppertask.o(i.dataCallBack))
+<P><STRONG><a name="[db]"></a>dataCallBack</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, uppertask.o(i.dataCallBack))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = dataCallBack &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -1977,7 +1977,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vice_controlLoop
 </UL>
 
-<P><STRONG><a name="[11f]"></a>setUsalAMMotor</STRONG> (Thumb, 202 bytes, Stack size 48 bytes, amcontroltask.o(i.setUsalAMMotor))
+<P><STRONG><a name="[11f]"></a>setUsalAMMotor</STRONG> (Thumb, 198 bytes, Stack size 48 bytes, amcontroltask.o(i.setUsalAMMotor))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = setUsalAMMotor &rArr; HAL_CAN_Transmit_IT
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_Error_Handler
@@ -1988,8 +1988,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vice_controlLoop
 </UL>
 
-<P><STRONG><a name="[112]"></a>vice_controlLoop</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, amcontroltask.o(i.vice_controlLoop))
-<BR><BR>[Stack]<UL><LI>Max Depth = 320<LI>Call Chain = vice_controlLoop &rArr; ControlWIND &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
+<P><STRONG><a name="[112]"></a>vice_controlLoop</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, amcontroltask.o(i.vice_controlLoop))
+<BR><BR>[Stack]<UL><LI>Max Depth = 312<LI>Call Chain = vice_controlLoop &rArr; ControlWIND &rArr; StandardlizeAMRealAngle &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setUsalAMMotor
 <LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setSeldomAMMotor

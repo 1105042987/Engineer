@@ -19,9 +19,6 @@
 #define CTRL_UART huart3
 #define JUDGE_UART huart6
 
-//#define EASY_CONTROL
-#define EXACT_CONTROL
-
 
 #define STICK_TO_CHASSIS_SPEED_REF_FACT     0.45f
 #define STICK_TO_PITCH_ANGLE_INC_FACT       0.008f
@@ -119,8 +116,8 @@ typedef enum
 typedef enum
 {
 	NORMAL = 1,
-	GET = 3,
-	AUTO = 2,
+	HELP = 3,
+	GET = 2,
 }FunctionMode_e;
 
 typedef __packed struct

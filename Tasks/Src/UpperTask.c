@@ -106,34 +106,31 @@ uint8_t ComProtocal(char*rxbuf,char*head,char*end,char* separater,char dataout[]
 //--------------------任务循环部分-------------------//
 //debug监测变量
 extern int16_t channel3;
-extern int16_t AMSIDEIntensity,AMFBIntensity,AMUD1Intensity,AMUD2Intensity;
+extern int16_t AMSIDEIntensity,AMFBIntensity,AMUD1Intensity,AMUD2Intensity,WINDIntensity;
 extern int16_t CMBRIntensity,CMBLIntensity,CMFRIntensity,CMFLIntensity;
-extern double AMSIDERealAngle,AMFBRealAngle;
+extern double AMSIDERealAngle,AMFBRealAngle,AMUD1RealAngle,AMUD2RealAngle,WINDRealAngle;
 extern int16_t times;
 void dataCallBack()
 {
 	static uint16_t pcnt = 0;
 	if(pcnt>100)
 		{
-			//printf("AMSIDEIntensity %d\r\t", AMSIDEIntensity);
-			//printf("AMFBIntensity %d\r\t", AMFBIntensity);
-			//printf("AMUD1Intensity %d\r\t", AMUD1Intensity);
-			//printf("AMUD2Intensity %d\r\t", AMUD2Intensity);
-			//printf("CMBRIntensity %d\r\t", CMBRIntensity);
-			//printf("CMBLIntensity %d\r\t", CMBLIntensity);
-			//printf("CMFRIntensity %d\r\t", CMFRIntensity);
-			//printf("CMFLIntensity %d\r\t", CMFLIntensity);
+			//printf("AMSIDE:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", AMSIDEIntensity,AMSIDERealAngle,AMSIDEAngleTarget);
+			//printf("AMFB:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", AMFBIntensity,AMFBRealAngle,AMFBAngleTarget);
+			//printf("AMUD1:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", AMUD1Intensity,AMUD1RealAngle,AMUD1AngleTarget);
+			//printf("AMUD2:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", AMUD2Intensity,AMUD2RealAngle,AMUD2AngleTarget);
+			//printf("WIND:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", WINDIntensity,WINDRealAngle,WINDAngleTarget);
 			
-			//printf("CMrx angle %d %d %d %d",CMFRRx.angle,CMFLRx.angle,CMBRRx.angle,CMBLRx.angle);
-			printf("AMrx angle SIDE%d UD%d %d FB%d ",AMSIDERx.angle,AMUD1Rx.angle,AMUD2Rx.angle,AMFBRx.angle);
-			//printf("AMFBtarget %f ",AMFBAngleTarget);
-			//printf("AMFBreal %f",AMFBRealAngle);
-			//printf("can2 update%d type%d\n",can2_update,can_type);
-			//printf("can1 update%d\t",can1_update);
+			//printf("CMIntensity %d %d %d %d \n",CMBRIntensity,CMBLIntensity,CMFRIntensity,CMFLIntensity);
+			//printf("CMrx angle %d %d %d %d \n",CMFRRx.angle,CMFLRx.angle,CMBRRx.angle,CMBLRx.angle);
+			printf("CMrx speed %d %d %d %d \n",CMFRRx.RotateSpeed,CMFLRx.RotateSpeed,CMBRRx.RotateSpeed,CMBLRx.RotateSpeed);
+			//printf("AMrx angle SIDE%d UD%d %d FB%d WIND%d \n",AMSIDERx.angle,AMUD1Rx.angle,AMUD2Rx.angle,AMFBRx.angle,WINDRx.angle);
 			
-			printf("times %d \t",times);
+			//printf("can1 update%d can2 update%d type%d\n",can1_update,can2_update,can_type);
 			
-			printf("\n");
+			
+			//printf("times %d \n",times);
+			
 			pcnt = 0;
 		}
 		else pcnt++;

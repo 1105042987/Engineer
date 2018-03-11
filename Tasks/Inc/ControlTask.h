@@ -65,8 +65,8 @@ typedef enum
 {
 	PREPARE_STATE,     	
 	NORMAL_STATE,
-	GETBULLET_STATE,
-	BYPASS_STATE,//涵道电机
+	HELP_STATE,
+	GET_STATE,
 	STOP_STATE        
 }WorkState_e;
 

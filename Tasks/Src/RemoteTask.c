@@ -29,7 +29,7 @@ double AMSIDEAngleTarget = 0;
 
 #define ANGLE_STEP 3.5
 #define IGNORE_RANGE 50
-#define ROTATE_FACTOR 0.025
+#define ROTATE_FACTOR 0.04
 
 
 
@@ -73,44 +73,46 @@ void RemoteControlProcess(Remote *rc)
 		
 		rotate_speed = -channel2 * ROTATE_FACTOR;
 		
-		#ifdef EXACT_CONTROL
-			if(channel3 > IGNORE_RANGE)	AMSIDEAngleTarget = AMSIDEAngleTarget + ANGLE_STEP/4;
-			else if(channel3 < -IGNORE_RANGE) AMSIDEAngleTarget = AMSIDEAngleTarget - ANGLE_STEP/4;
-		#endif
+		if(channel3 > IGNORE_RANGE)	AMSIDEAngleTarget = AMSIDEAngleTarget + ANGLE_STEP/4;
+		else if(channel3 < -IGNORE_RANGE) AMSIDEAngleTarget = AMSIDEAngleTarget - ANGLE_STEP/4;
 		
-		#ifdef EASY_CONTROL
-			AMSIDEAngleTarget = channel3;
-		#endif
 	}
-	if(WorkState == GETBULLET_STATE || WorkState == BYPASS_STATE)
+	if(WorkState == HELP_STATE)
 	{
-		ChassisSpeedRef.forward_back_ref = 0;
+		ChassisSpeedRef.forward_back_ref = channel1;
 		ChassisSpeedRef.left_right_ref   = channel0;
 		
-		#ifdef EXACT_CONTROL
-			if(channel3 > IGNORE_RANGE) {
-				AMUD1AngleTarget=AMUD1AngleTarget-ANGLE_STEP;
-				AMUD2AngleTarget=AMUD2AngleTarget-ANGLE_STEP;
-			}
-			else if(channel3 < -IGNORE_RANGE) {
-				AMUD1AngleTarget=AMUD1AngleTarget+ANGLE_STEP;
-				AMUD2AngleTarget=AMUD2AngleTarget+ANGLE_STEP;
-			}
-			if(channel1 > IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget + ANGLE_STEP;
-			else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget - ANGLE_STEP;
-			//if(channel2 > IGNORE_RANGE) WINDAngleTarget += ANGLE_STEP;
-			//else if(channel2 < -IGNORE_RANGE) WINDAngleTarget -= ANGLE_STEP;
-		#endif
+		rotate_speed = -channel2 * ROTATE_FACTOR;
+		
+		if(channel3 > IGNORE_RANGE) HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_SET);
+		else if(channel3 < -IGNORE_RANGE) HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_RESET);
+	}
+	if(WorkState == GET_STATE)
+	{
+		ChassisSpeedRef.forward_back_ref = 0;
+		ChassisSpeedRef.left_right_ref   = 0;
+		rotate_speed = 0;
+		
+		if(channel0 > IGNORE_RANGE) WINDAngleTarget += ANGLE_STEP*0.6;
+		else if(channel0 < -IGNORE_RANGE) WINDAngleTarget -= ANGLE_STEP*0.6;
+		
+		if(channel1 > IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget + ANGLE_STEP;
+		else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget - ANGLE_STEP;
+		
+		if(channel2 > IGNORE_RANGE) __HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1300);
+		else if(channel2 < -IGNORE_RANGE) __HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1000);
+		
+		if(channel3 > IGNORE_RANGE) {
+			AMUD1AngleTarget=AMUD1AngleTarget-ANGLE_STEP*0.8;
+			AMUD2AngleTarget=AMUD2AngleTarget-ANGLE_STEP*0.8;
+		}
+		else if(channel3 < -IGNORE_RANGE) {
+			AMUD1AngleTarget=AMUD1AngleTarget+ANGLE_STEP*0.8;
+			AMUD2AngleTarget=AMUD2AngleTarget+ANGLE_STEP*0.8;
+		}
+		
 			
-		#ifdef EASY_CONTROL
-			AMUD1AngleTarget = -channel3;
-			AMUD2AngleTarget = -channel3;
-			AMFBAngleTarget = -channel1;
-			//WINDAngleTarget = channel2;
-		#endif
-			
-			if(channel2 > IGNORE_RANGE) HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_RESET);
-			else if(channel2 < -IGNORE_RANGE) HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_SET);
+
 	}
 }
 
@@ -299,8 +301,8 @@ void RemoteDataProcess(uint8_t *pData)
 	
 	//功能状态设置
 	if(RC_CtrlData.rc.s1 == 1) functionmode = NORMAL; 
-	else if(RC_CtrlData.rc.s1 == 3) functionmode = GET; 
-	else functionmode = AUTO; 
+	else if(RC_CtrlData.rc.s1 == 3) functionmode = HELP; 
+	else functionmode = GET; 
 	
 	/*左上角拨杆状态（RC_CtrlData.rc.s1）获取*/	//用于遥控器发射控制
 	GetRemoteSwitchAction(&g_switch1, RC_CtrlData.rc.s1);

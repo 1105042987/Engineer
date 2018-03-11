@@ -80,7 +80,7 @@ void ControlCMBL(void)
 	CM3SpeedPID.fdb = CMBLRx.RotateSpeed;
 
 	CM3SpeedPID.Calc(&CM3SpeedPID);
-	CMBLIntensity = CHASSIS_SPEED_ATTENUATION * CM3SpeedPID.output;
+	CMBLIntensity = -CHASSIS_SPEED_ATTENUATION * CM3SpeedPID.output;
 }
 
 void ControlCMBR(void)
@@ -94,7 +94,7 @@ void ControlCMBR(void)
 	CM4SpeedPID.fdb = CMBRRx.RotateSpeed;
 
 	CM4SpeedPID.Calc(&CM4SpeedPID);
-	CMBRIntensity = CHASSIS_SPEED_ATTENUATION * CM4SpeedPID.output;
+	CMBRIntensity = -1*CHASSIS_SPEED_ATTENUATION * CM4SpeedPID.output;
 }
 
 #define NORMALIZE_ANGLE180(angle) angle = ((angle) > 180) ? ((angle) - 360) : (((angle) < -180) ? (angle) + 360 : angle)
@@ -181,22 +181,22 @@ void WorkStateFSM(void)
 		case NORMAL_STATE:
 		{
 			if (inputmode == STOP) WorkState = STOP_STATE;
-			if (functionmode == GET) WorkState = GETBULLET_STATE;
-			if (functionmode == AUTO) WorkState = BYPASS_STATE;
+			if (functionmode == GET) WorkState = GET_STATE;
+			if (functionmode == HELP) WorkState = HELP_STATE;
 		}break;
-		case GETBULLET_STATE:		//取弹模式
+		case HELP_STATE:		//取弹模式
 		{
 			if (inputmode == STOP) WorkState = STOP_STATE;
 			if (functionmode == NORMAL) {
 				WorkState = NORMAL_STATE;
 				can_type=1;
 			}
-			if (functionmode == AUTO) WorkState = BYPASS_STATE;
+			if (functionmode == GET) WorkState = GET_STATE;
 		}break;
-		case BYPASS_STATE:	//涵道电机模式
+		case GET_STATE:	//涵道电机模式
 		{
 			if (inputmode == STOP) WorkState = STOP_STATE;
-			if (functionmode == GET) WorkState = GETBULLET_STATE;
+			if (functionmode == HELP) WorkState = HELP_STATE;
 			if (functionmode == NORMAL) {
 				WorkState = NORMAL_STATE;
 				can_type=1;

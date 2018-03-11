@@ -17,13 +17,13 @@ fw_PID_Regulator_t AMUD1PositionPID = fw_PID_INIT(1200.0, 0.0, 0.0, 10000.0, 100
 fw_PID_Regulator_t AMUD2PositionPID = fw_PID_INIT(1200.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
 fw_PID_Regulator_t AMFBPositionPID = fw_PID_INIT(500.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
 fw_PID_Regulator_t AMSIDEPositionPID = fw_PID_INIT(500.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
-fw_PID_Regulator_t WINDPositionPID = fw_PID_INIT(500.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
+fw_PID_Regulator_t WINDPositionPID = fw_PID_INIT(1000.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
 
 fw_PID_Regulator_t AMUD1SpeedPID = fw_PID_INIT(0.7, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
 fw_PID_Regulator_t AMUD2SpeedPID = fw_PID_INIT(0.7, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
 fw_PID_Regulator_t AMFBSpeedPID = fw_PID_INIT(0.7, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
 fw_PID_Regulator_t AMSIDESpeedPID = fw_PID_INIT(0.7, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
-fw_PID_Regulator_t WINDSpeedPID = fw_PID_INIT(0.7, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
+fw_PID_Regulator_t WINDSpeedPID = fw_PID_INIT(0.9, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
 
 
 
@@ -144,7 +144,7 @@ void setUsalAMMotor(void)
 			Error_Handler();
 		}
 		can2_update = 0;
-		if(WorkState == GETBULLET_STATE || WorkState == BYPASS_STATE) can_type = 0;
+		if(WorkState == GET_STATE) can_type = 0;
 		HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(USART1_IRQn);
@@ -179,7 +179,6 @@ void ControlAMFB()
 {
 		if(s_AMFBCount == 1)
 		{		
-		#ifdef EXACT_CONTROL
 			uint16_t 	ThisAngle;	//当前电机角度
 			double 		ThisSpeed;	//当前电机转速
 			ThisAngle = AMFBRx.angle;//未处理角度
@@ -192,14 +191,10 @@ void ControlAMFB()
 			StandardlizeAMRealAngle(&AMFBRealAngle,ThisAngle,AMFBLastAngle);//处理
 			ThisSpeed = AMFBRx.RotateSpeed * 6;		//单位：度每秒
 			
-			AMFBIntensity = PID_PROCESS_Double(AMFBPositionPID,AMFBSpeedPID,AMFBAngleTarget,AMFBRealAngle,ThisSpeed);
+			AMFBIntensity = -PID_PROCESS_Double(AMFBPositionPID,AMFBSpeedPID,AMFBAngleTarget,AMFBRealAngle,ThisSpeed);
 			
 			s_AMFBCount = 0;
 			AMFBLastAngle = ThisAngle;
-		#endif
-		#ifdef EASY_CONTROL
-			AMFBIntensity = AMFBAngleTarget * 12;
-		#endif
 		}
 		else
 		{
@@ -210,7 +205,6 @@ void ControlAMUD1()
 {
 		if(s_AMUD1Count == 1)
 		{	
-		#ifdef EXACT_CONTROL
 			uint16_t 	ThisAngle;	
 			double 		ThisSpeed;	
 			ThisAngle = AMUD1Rx.angle;							//未处理角度
@@ -222,10 +216,6 @@ void ControlAMUD1()
 			
 			s_AMUD1Count = 0;
 			AMUD1LastAngle = ThisAngle;
-		#endif
-		#ifdef EASY_CONTROL
-			AMUD1Intensity = -800 + AMUD1AngleTarget * 9;
-		#endif
 		}
 		else
 		{
@@ -236,7 +226,6 @@ void ControlAMUD2()
 {
 		if(s_AMUD2Count == 1)
 		{		
-		#ifdef EXACT_CONTROL
 			uint16_t 	ThisAngle;	
 			double 		ThisSpeed;	
 			ThisAngle = AMUD2Rx.angle;							//未处理角度
@@ -248,10 +237,6 @@ void ControlAMUD2()
 			
 			s_AMUD2Count = 0;
 			AMUD2LastAngle = ThisAngle;
-		#endif
-		#ifdef EASY_CONTROL
-			AMUD2Intensity = -800 + AMUD2AngleTarget * 9;
-		#endif
 		}
 		else
 		{
@@ -261,8 +246,7 @@ void ControlAMUD2()
 void ControlWIND()
 {
 		if(s_WINDCount == 1)
-		{	
-		#ifdef EXACT_CONTROL		
+		{			
 			uint16_t 	ThisAngle;	
 			double 		ThisSpeed;	
 			ThisAngle = WINDRx.angle;							//未处理角度
@@ -270,14 +254,10 @@ void ControlWIND()
 			StandardlizeAMRealAngle(&WINDRealAngle,ThisAngle,WINDLastAngle);//处理
 			ThisSpeed = WINDRx.RotateSpeed * 6;		//单位：度每秒
 			
-			WINDIntensity = PID_PROCESS_Double(WINDPositionPID,WINDSpeedPID,WINDAngleTarget,WINDRealAngle,ThisSpeed);
+			WINDIntensity = -PID_PROCESS_Double(WINDPositionPID,WINDSpeedPID,WINDAngleTarget,WINDRealAngle,ThisSpeed);
 			
 			s_WINDCount = 0;
 			WINDLastAngle = ThisAngle;
-		#endif
-		#ifdef EASY_CONTROL
-			WINDIntensity = 500 + WINDAngleTarget * 10;
-		#endif
 		}
 		else
 		{
@@ -288,7 +268,6 @@ void ControlAMSIDE()
 {
 	if(s_AMSIDECount == 1)
 	{		
-	#ifdef EXACT_CONTROL
 		uint16_t 	ThisAngle;	
 		double 		ThisSpeed;	
 			
@@ -305,10 +284,6 @@ void ControlAMSIDE()
 		
 		s_AMSIDECount = 0;
 		AMSIDELastAngle = ThisAngle;
-	#endif
-	#ifdef EASY_CONTROL
-		AMSIDEIntensity = 750 + AMSIDEAngleTarget * 6;
-	#endif
 	}
 	else
 	{
@@ -330,19 +305,10 @@ void vice_controlLoop()
 	
 		setUsalAMMotor();
 	
-		if(WorkState == BYPASS_STATE||WorkState == GETBULLET_STATE)
+		if(WorkState == GET_STATE)
 		{
 			ControlAMFB();
 			setSeldomAMMotor();
-		}
-	
-		if(WorkState == BYPASS_STATE)
-		{
-			__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1300);
-		}
-		else
-		{
-			__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1000);
 		}
 }
 
