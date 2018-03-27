@@ -16,20 +16,22 @@ InputMode_e inputmode = REMOTE_INPUT;
 FunctionMode_e functionmode = NORMAL;
 ChassisSpeed_Ref_t ChassisSpeedRef; 
 RemoteSwitch_t g_switch1;
-extern RampGen_t LRSpeedRamp ;   //键盘速度斜坡
-extern RampGen_t FBSpeedRamp  ;   
+RampGen_t LRSpeedRamp = RAMP_GEN_DAFAULT;   	//键盘速度斜坡
+RampGen_t FBSpeedRamp = RAMP_GEN_DAFAULT;
 
 float rotate_speed;
 
 double AMUD1AngleTarget = 0;
 double AMUD2AngleTarget = 0;
 double AMFBAngleTarget = 0;
-double WINDAngleTarget = 0;
-double AMSIDEAngleTarget = 0;
 
-#define ANGLE_STEP 3.5
-#define IGNORE_RANGE 50
-#define ROTATE_FACTOR 0.04
+double GMYAWAngleTarget = 0;
+double GMPITCHAngleTarget = 0;
+
+#define AMANGLE_STEP 3.5
+#define GMANGLE_STEP 1.5
+#define IGNORE_RANGE 70
+#define ROTATE_FACTOR 0.07
 
 
 
@@ -45,8 +47,8 @@ void RemoteTaskInit()
 	AMUD1AngleTarget = 0;
 	AMUD2AngleTarget = 0;
 	AMFBAngleTarget = 0;
-	AMSIDEAngleTarget = 0;
-	WINDAngleTarget = 0;
+	GMYAWAngleTarget = 0;
+	GMPITCHAngleTarget = 0;
 	/*底盘速度初始化*/
 	ChassisSpeedRef.forward_back_ref = 0.0f;
 	ChassisSpeedRef.left_right_ref = 0.0f;
@@ -68,21 +70,26 @@ void RemoteControlProcess(Remote *rc)
 	channel3 = (rc->ch3 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET) * STICK_TO_CHASSIS_SPEED_REF_FACT; //左纵
 	if(WorkState == NORMAL_STATE)
 	{
-		ChassisSpeedRef.forward_back_ref = channel1;
+		ChassisSpeedRef.forward_back_ref = -channel1;
 		ChassisSpeedRef.left_right_ref   = channel0;
 		
-		rotate_speed = -channel2 * ROTATE_FACTOR;
+		rotate_speed = channel2 * ROTATE_FACTOR;
 		
-		if(channel3 > IGNORE_RANGE)	AMSIDEAngleTarget = AMSIDEAngleTarget + ANGLE_STEP/4;
-		else if(channel3 < -IGNORE_RANGE) AMSIDEAngleTarget = AMSIDEAngleTarget - ANGLE_STEP/4;
+		if(channel3 > IGNORE_RANGE)	
+		{
+			//供弹舵机
+		}
+		else if(channel3 < -IGNORE_RANGE) 
+		{
+		}
 		
 	}
 	if(WorkState == HELP_STATE)
 	{
-		ChassisSpeedRef.forward_back_ref = channel1;
+		ChassisSpeedRef.forward_back_ref = -channel1;
 		ChassisSpeedRef.left_right_ref   = channel0;
 		
-		rotate_speed = -channel2 * ROTATE_FACTOR;
+		rotate_speed = channel2 * ROTATE_FACTOR;
 		
 		if(channel3 > IGNORE_RANGE) HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_SET);
 		else if(channel3 < -IGNORE_RANGE) HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_RESET);
@@ -93,26 +100,23 @@ void RemoteControlProcess(Remote *rc)
 		ChassisSpeedRef.left_right_ref   = 0;
 		rotate_speed = 0;
 		
-		if(channel0 > IGNORE_RANGE) WINDAngleTarget += ANGLE_STEP*0.6;
-		else if(channel0 < -IGNORE_RANGE) WINDAngleTarget -= ANGLE_STEP*0.6;
+		if(channel0 > IGNORE_RANGE) GMPITCHAngleTarget += GMANGLE_STEP*0.6;
+		else if(channel0 < -IGNORE_RANGE) GMPITCHAngleTarget -= GMANGLE_STEP*0.6;
 		
-		if(channel1 > IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget + ANGLE_STEP;
-		else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget - ANGLE_STEP;
+		if(channel1 > IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget + AMANGLE_STEP;
+		else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget - AMANGLE_STEP;
 		
 		if(channel2 > IGNORE_RANGE) __HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1300);
 		else if(channel2 < -IGNORE_RANGE) __HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1000);
 		
 		if(channel3 > IGNORE_RANGE) {
-			AMUD1AngleTarget=AMUD1AngleTarget-ANGLE_STEP*0.8;
-			AMUD2AngleTarget=AMUD2AngleTarget-ANGLE_STEP*0.8;
+			AMUD1AngleTarget=AMUD1AngleTarget-AMANGLE_STEP*0.8;
+			AMUD2AngleTarget=AMUD2AngleTarget-AMANGLE_STEP*0.8;
 		}
 		else if(channel3 < -IGNORE_RANGE) {
-			AMUD1AngleTarget=AMUD1AngleTarget+ANGLE_STEP*0.8;
-			AMUD2AngleTarget=AMUD2AngleTarget+ANGLE_STEP*0.8;
+			AMUD1AngleTarget=AMUD1AngleTarget+AMANGLE_STEP*0.8;
+			AMUD2AngleTarget=AMUD2AngleTarget+AMANGLE_STEP*0.8;
 		}
-		
-			
-
 	}
 }
 
@@ -126,13 +130,14 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 		VAL_LIMIT(mouse->x, -150, 150); 
 		VAL_LIMIT(mouse->y, -150, 150); 
 
-		//speed mode: normal speed/high speed 
+
+		//speed mode: shift high ;ctrl low ;others normal 
 		if(key->v & 0x10)//Shift
 		{
-			forward_back_speed =  LOW_FORWARD_BACK_SPEED;
-			left_right_speed = LOW_LEFT_RIGHT_SPEED;
+			forward_back_speed =  HIGH_FORWARD_BACK_SPEED;
+			left_right_speed = HIGH_LEFT_RIGHT_SPEED;
 		}
-		else if(key->v == 32)//Ctrl
+		else if(key->v & 0x20)//Ctrl
 		{
 			forward_back_speed =  MIDDLE_FORWARD_BACK_SPEED;
 			left_right_speed = MIDDLE_LEFT_RIGHT_SPEED;
@@ -141,6 +146,15 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 		{
 			forward_back_speed =  NORMAL_FORWARD_BACK_SPEED;
 			left_right_speed = NORMAL_LEFT_RIGHT_SPEED;
+		}
+		//rotate and GM process
+		if((key->v & 0x30) == 0x30)
+		{
+			
+		}
+		else
+		{
+			rotate_speed = 4 * mouse->x * ROTATE_FACTOR;
 		}
 		//movement process
 		if(key->v & 0x01)  // key: w
@@ -311,7 +325,6 @@ void RemoteDataProcess(uint8_t *pData)
 	{
 		case REMOTE_INPUT:               
 		{
-			//__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1300);//方便调试，暂时加入，值为1000时不转动
 			if(WorkState != STOP_STATE && WorkState != PREPARE_STATE)
 			{ 
 				RemoteControlProcess(&(RC_CtrlData.rc));
@@ -319,7 +332,6 @@ void RemoteDataProcess(uint8_t *pData)
 		}break;
 		case KEY_MOUSE_INPUT:              
 		{
-			//__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1000);//方便调试，暂时加入，值为1000时不转动
 			if(WorkState == NORMAL_STATE)
 			{ 
 				MouseKeyControlProcess(&RC_CtrlData.mouse,&RC_CtrlData.key);

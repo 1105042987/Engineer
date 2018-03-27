@@ -127,6 +127,7 @@ int main(void)
 	InitMPU6500();
 	CMControlInit();
 	AMControlInit();
+	GMControlInit();
 	InitCanReception();
 	#ifdef DEBUG_MODE
 	ctrlUartInit();

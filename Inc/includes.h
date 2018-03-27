@@ -27,6 +27,7 @@
 #include "pid_regulator.h"
 #include "ControlTask.h"
 #include "AMControlTask.h"
+#include "GMControlTask.h"
 #include "IMUTask.h"
 #include "CANTask.h"
 #include "drivers_ramp.h"

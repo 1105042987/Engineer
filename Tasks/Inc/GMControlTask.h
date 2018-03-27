@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
-  * File Name          : AMControlTask.h
-  * Description        : 机械臂电机控制任务
+  * File Name          : GMControlTask.h
+  * Description        : 云台电机控制任务
   ******************************************************************************
   *
   * Copyright (c) 2017 Team TPP-Shanghai Jiao Tong University
@@ -11,15 +11,17 @@
 	* 
   ******************************************************************************
   */
-#ifndef AM_CONTROL_TASK_H
-#define AM_CONTROL_TASK_H
+#ifndef GM_CONTROL_TASK_H
+#define GM_CONTROL_TASK_H
 
 #include "includes.h"
 
-#define AMReduction 36.0
-#define BYPASS_TIM htim12
+#define GMYAWReduction 96.0
+#define GMPITCHReduction 36.0
 
-void vice_controlLoop(void);
-void AMControlInit(void);
+void ControlGMYAW(void);
+void ControlGMPITCH(void);
+void setGMMotor(void);
+void GMControlInit(void);
 
-#endif //AM_CONTROL_TASK_H
+#endif //GM_CONTROL_TASK_H

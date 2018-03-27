@@ -44,6 +44,7 @@
 .\engineer\amcontroltask.o: ..\Tasks\Inc\pid_regulator.h
 .\engineer\amcontroltask.o: ..\Tasks\Inc\ControlTask.h
 .\engineer\amcontroltask.o: ..\Tasks\Inc\AMControlTask.h
+.\engineer\amcontroltask.o: ..\Tasks\Inc\GMControlTask.h
 .\engineer\amcontroltask.o: ..\Tasks\Inc\IMUTask.h
 .\engineer\amcontroltask.o: ..\Tasks\Inc\CANTask.h
 .\engineer\amcontroltask.o: ..\Tasks\Inc\drivers_ramp.h

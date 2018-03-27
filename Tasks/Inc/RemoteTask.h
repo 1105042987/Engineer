@@ -47,8 +47,22 @@
 #define REMOTE_SWITCH_VALUE_BUF_DEEP   16u
 
 //键鼠常量数据区
-#define MOUSE_TO_PITCH_ANGLE_INC_FACT 		0.025f * 3	//
-#define MOUSE_TO_YAW_ANGLE_INC_FACT 			0.025f * 3	//原代码中被注释掉了
+//Bit0-----W
+//Bit1-----S
+//Bit2-----A
+//Bit3-----D
+//Bit4-----Shift
+//Bit5-----Ctrl
+//Bit6-----Q
+//Bit7-----E
+//Bit8-----R
+//Bit9-----F
+//Bit10-----G
+//Bit11-----Z
+//Bit12-----X
+//Bit13-----C
+//Bit14-----V
+//Bit15-----B
 
 #define NORMAL_FORWARD_BACK_SPEED 			500
 #define NORMAL_LEFT_RIGHT_SPEED   			650
@@ -61,6 +75,8 @@
 
 #define MOUSE_LR_RAMP_TICK_COUNT			50
 #define MOUSR_FB_RAMP_TICK_COUNT			60
+
+
 
 
 #define VAL_LIMIT(val, min, max)\
@@ -147,8 +163,8 @@ extern float rotate_speed;
 extern double AMUD1AngleTarget;
 extern double AMUD2AngleTarget;
 extern double AMFBAngleTarget;
-extern double AMSIDEAngleTarget;
-extern double WINDAngleTarget;
+extern double GMYAWAngleTarget;
+extern double GMPITCHAngleTarget;
 
 extern uint8_t rc_data[18];
 extern uint8_t rc_first_frame;

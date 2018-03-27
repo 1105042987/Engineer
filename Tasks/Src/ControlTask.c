@@ -94,7 +94,7 @@ void ControlCMBR(void)
 	CM4SpeedPID.fdb = CMBRRx.RotateSpeed;
 
 	CM4SpeedPID.Calc(&CM4SpeedPID);
-	CMBRIntensity = -1*CHASSIS_SPEED_ATTENUATION * CM4SpeedPID.output;
+	CMBRIntensity = -CHASSIS_SPEED_ATTENUATION * CM4SpeedPID.output;
 }
 
 #define NORMALIZE_ANGLE180(angle) angle = ((angle) > 180) ? ((angle) - 360) : (((angle) < -180) ? (angle) + 360 : angle)
@@ -102,13 +102,10 @@ float gap_angle = 0.0;
 //底盘旋转控制
 void ControlRotate(void)
 {	
-	if(WorkState == NORMAL_STATE) 
-	{
 		CMRotatePID.ref = 0;
 		CMRotatePID.fdb = rotate_speed;
 		CMRotatePID.Calc(&CMRotatePID);   
 		ChassisSpeedRef.rotate_ref = CMRotatePID.output * 13 + ChassisSpeedRef.forward_back_ref * 0.01 + ChassisSpeedRef.left_right_ref * 0.01;
-	}
 }
 
 
@@ -276,7 +273,5 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		//zykProcessData();
 		dataCallBack();
 		#endif
-		
-		
 	}
 }

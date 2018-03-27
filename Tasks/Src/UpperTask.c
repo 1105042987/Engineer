@@ -105,29 +105,31 @@ uint8_t ComProtocal(char*rxbuf,char*head,char*end,char* separater,char dataout[]
 
 //--------------------任务循环部分-------------------//
 //debug监测变量
-extern int16_t channel3;
-extern int16_t AMSIDEIntensity,AMFBIntensity,AMUD1Intensity,AMUD2Intensity,WINDIntensity;
+extern int16_t channel0,channel1,channel2,channel3;
+extern int16_t GMYAWIntensity,GMPITCHIntensity,AMFBIntensity,AMUD1Intensity,AMUD2Intensity;
 extern int16_t CMBRIntensity,CMBLIntensity,CMFRIntensity,CMFLIntensity;
-extern double AMSIDERealAngle,AMFBRealAngle,AMUD1RealAngle,AMUD2RealAngle,WINDRealAngle;
+extern double GMYAWRealAngle,GMPITCHRealAngle,AMFBRealAngle,AMUD1RealAngle,AMUD2RealAngle;
 extern int16_t times;
 void dataCallBack()
 {
 	static uint16_t pcnt = 0;
 	if(pcnt>100)
 		{
-			//printf("AMSIDE:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", AMSIDEIntensity,AMSIDERealAngle,AMSIDEAngleTarget);
+			//printf("GMYAW:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", GMYAWIntensity,GMYAWRealAngle,GMYAWAngleTarget);
+			printf("GMPITCH:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", GMPITCHIntensity,GMPITCHRealAngle,GMPITCHAngleTarget);
+			
 			//printf("AMFB:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", AMFBIntensity,AMFBRealAngle,AMFBAngleTarget);
 			//printf("AMUD1:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", AMUD1Intensity,AMUD1RealAngle,AMUD1AngleTarget);
 			//printf("AMUD2:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", AMUD2Intensity,AMUD2RealAngle,AMUD2AngleTarget);
-			//printf("WIND:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", WINDIntensity,WINDRealAngle,WINDAngleTarget);
+			
 			
 			//printf("CMIntensity %d %d %d %d \n",CMBRIntensity,CMBLIntensity,CMFRIntensity,CMFLIntensity);
 			//printf("CMrx angle %d %d %d %d \n",CMFRRx.angle,CMFLRx.angle,CMBRRx.angle,CMBLRx.angle);
 			printf("CMrx speed %d %d %d %d \n",CMFRRx.RotateSpeed,CMFLRx.RotateSpeed,CMBRRx.RotateSpeed,CMBLRx.RotateSpeed);
-			//printf("AMrx angle SIDE%d UD%d %d FB%d WIND%d \n",AMSIDERx.angle,AMUD1Rx.angle,AMUD2Rx.angle,AMFBRx.angle,WINDRx.angle);
+			//printf("AMrx angle SIDE%d UD%d %d FB%d GMPITCH%d \n",GMYAWRx.angle,AMUD1Rx.angle,AMUD2Rx.angle,AMFBRx.angle,GMPITCHRx.angle);
 			
 			//printf("can1 update%d can2 update%d type%d\n",can1_update,can2_update,can_type);
-			
+			//printf("Channel %d %d %d %d \n",channel0,channel1,channel2,channel3);
 			
 			//printf("times %d \n",times);
 			
@@ -135,127 +137,4 @@ void dataCallBack()
 		}
 		else pcnt++;
 }
-
-/*void zykProcessData()
-{	
-	  //printf("ok");
-		if(RX_DONE)
-		{
-		char data[10][15];
-		//printf(buf);
-		/////////// GM CONTROL ////////////////
-		if(strcmp(buf,"U")==0)
-		{
-			printf("UP\r\n");
-			//pitchAngleTarget+=5;
-		}
-		else if(strcmp(buf,"D")==0)
-		{
-			printf("DOWN\r\n");
-			//pitchAngleTarget-=5;
-		}
-		else if(strcmp(buf,"OK")==0)
-		{
-	  	printf("OK\r\n");
-		}
-		if(strcmp(buf,"L")==0)
-		{
-			printf("LEFT\r\n");
-			yawAngleTarget+=5;
-		}
-		else if(strcmp(buf,"R")==0)
-		{
-			printf("RIGHT\r\n");
-			yawAngleTarget-=5;
-		}
-		/////////// GM PID
-		else if(ComProtocal(buf,"#GMYPP","$","@",data))
-		{
-			float p=atof(data[0]);
-			//yawPositionPID.kp=p;
-			//printf("Yaw position P change to %f\r\n",yawPositionPID.kp);
-		}
-		else if(ComProtocal(buf,"#GMYPI","$","@",data))
-		{
-			float p=atof(data[0]);
-			//yawPositionPID.ki=p;
-			//printf("Yaw position I change to %f\r\n",yawPositionPID.ki);
-		}
-		else if(ComProtocal(buf,"#GMYPD","$","@",data))
-		{
-			float p=atof(data[0]);
-			//yawPositionPID.kd=p;
-			//printf("Yaw position D change to %f\r\n",yawPositionPID.kd);
-		}
-		else if(ComProtocal(buf,"#GMYSP","$","@",data))
-		{
-			float p=atof(data[0]);
-			//yawSpeedPID.kp=p;
-			//printf("Yaw speed P change to %f\r\n",yawSpeedPID.kp);
-		}
-		else if(ComProtocal(buf,"#GMYSI","$","@",data))
-		{
-			float p=atof(data[0]);
-			//yawSpeedPID.ki=p;
-			//printf("Yaw speed I change to %f\r\n",yawSpeedPID.ki);
-		}
-		else if(ComProtocal(buf,"#GMYSD","$","@",data))
-		{
-			float p=atof(data[0]);
-			//yawSpeedPID.kd=p;
-			//printf("Yaw speed D change to %f\r\n",yawSpeedPID.kd);
-		}
-				/////////// GM PID ￡¨pitch￡?
-		else if(ComProtocal(buf,"#GMPPP","$","@",data))
-		{
-			float p=atof(data[0]);
-			//pitchPositionPID.kp=p;
-			//printf("Pitch position P change to %f\r\n",pitchPositionPID.kp);
-		}
-		else if(ComProtocal(buf,"#GMPPI","$","@",data))
-		{
-			float p=atof(data[0]);
-			//pitchPositionPID.ki=p;
-			//printf("Pitch position I change to %f\r\n",pitchPositionPID.ki);
-		}
-		else if(ComProtocal(buf,"#GMPPD","$","@",data))
-		{
-			float p=atof(data[0]);
-			//pitchPositionPID.kd=p;
-			//printf("Pitch position D change to %f\r\n",pitchPositionPID.kd);
-		}
-		else if(ComProtocal(buf,"#GMPSP","$","@",data))
-		{
-			float p=atof(data[0]);
-			//pitchSpeedPID.kp=p;
-			//printf("Pitch speed P change to %f\r\n",pitchSpeedPID.kp);
-		}
-		else if(ComProtocal(buf,"#GMPSI","$","@",data))
-		{
-			float p=atof(data[0]);
-			//pitchSpeedPID.ki=p;
-			//printf("Pitch speed I change to %f\r\n",pitchSpeedPID.ki);
-		}
-		else if(ComProtocal(buf,"#GMPSD","$","@",data))
-		{
-			float p=atof(data[0]);
-			//pitchSpeedPID.kd=p;
-			//printf("Pitch speed D change to %f\r\n",pitchSpeedPID.kd);
-		}
-		///////////////////UPPER
-		else if(strcmp(buf,"RD1")==0)
-		{
-			float realSpeed2=-gYroZs;
-			//printf("#DATA%.2f@%.2f@%.2f$",yawPositionPID.output,realSpeed2,yawRealAngle);
-		}
-		else if(strcmp(buf,"RD2")==0)
-		{
-			float realSpeed2=-gYroXs;
-			//printf("#DATA%.2f@%.2f@%.2f$",pitchPositionPID.output,realSpeed2,pitchRealAngle);
-		}
-		strcpy(buf,"\0");
-		RX_STA=0;
-	}
-}
-*/
 #endif

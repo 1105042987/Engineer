@@ -529,11 +529,6 @@
               <FilePath>..\Tasks\Src\RemoteTask.c</FilePath>
             </File>
             <File>
-              <FileName>ShootTask.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Tasks\Src\ShootTask.c</FilePath>
-            </File>
-            <File>
               <FileName>RMLib.lib</FileName>
               <FileType>4</FileType>
               <FilePath>..\Tasks\Src\RMLib.lib</FilePath>
@@ -552,6 +547,11 @@
               <FileName>UpperTask.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Tasks\Src\UpperTask.c</FilePath>
+            </File>
+            <File>
+              <FileName>GMControlTask.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Tasks\Src\GMControlTask.c</FilePath>
             </File>
           </Files>
         </Group>

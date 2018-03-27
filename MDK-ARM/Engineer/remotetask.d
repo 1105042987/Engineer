@@ -44,6 +44,7 @@
 .\engineer\remotetask.o: ..\Tasks\Inc\pid_regulator.h
 .\engineer\remotetask.o: ..\Tasks\Inc\ControlTask.h
 .\engineer\remotetask.o: ..\Tasks\Inc\AMControlTask.h
+.\engineer\remotetask.o: ..\Tasks\Inc\GMControlTask.h
 .\engineer\remotetask.o: ..\Tasks\Inc\IMUTask.h
 .\engineer\remotetask.o: ..\Tasks\Inc\CANTask.h
 .\engineer\remotetask.o: ..\Tasks\Inc\drivers_ramp.h
