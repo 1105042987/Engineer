@@ -12,11 +12,13 @@
 #include "includes.h"
 uint16_t GMYAWIntensity=0,GMPITCHIntensity=0;
 
-fw_PID_Regulator_t GMYAWPositionPID = fw_PID_INIT(1.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
-fw_PID_Regulator_t GMPITCHPositionPID = fw_PID_INIT(1.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
+fw_PID_Regulator_t GMYAWPositionPID = fw_PID_INIT(1.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);	//闲置
+fw_PID_Regulator_t GMPITCHPositionPID = fw_PID_INIT(200.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
 
-fw_PID_Regulator_t GMYAWSpeedPID = fw_PID_INIT(1, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
-fw_PID_Regulator_t GMPITCHSpeedPID = fw_PID_INIT(1, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
+fw_PID_Regulator_t GMYAWSpeedPID = fw_PID_INIT(1, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);				//闲置
+fw_PID_Regulator_t GMPITCHSpeedPID = fw_PID_INIT(0.7, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
+
+float GSYAW_ZERO = 174.0;
 
 //云台电机实际物理角度值
 double GMYAWRealAngle = 0.0;
@@ -51,7 +53,7 @@ void setGMMotor()
 	GMMOTOR_CAN.pTxMsg->Data[6] = 0;
 	GMMOTOR_CAN.pTxMsg->Data[7] = 0;
 
-	if(can2_update == 1 /*&& can_type == 0*/)
+	if(can2_update == 1 && can_type == 0)
 	{
 		HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
 		HAL_NVIC_DisableIRQ(CAN2_RX0_IRQn);
@@ -77,7 +79,6 @@ void setGMMotor()
 		#endif
   }
 }
-
 
 void ControlGMYAW()
 {
@@ -147,6 +148,30 @@ void ControlGMPITCH()
 	GMPITCHLastAngle = ThisAngle;
 }
 
+void Steering_Motor_Set_Angle(float angle)
+{
+	angle += GSYAW_ZERO;
+	if(angle<0)
+	{
+		angle=0;
+	}
+	if(angle>220)
+	{
+		angle=220;
+	}
+	
+	uint16_t x = angle / 180 * 1800 + 600;
+	
+	__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_3,x);
+}
+
+
+void ControlGSYAW()
+{
+	Steering_Motor_Set_Angle(GMYAWAngleTarget);
+}
+
+
 void GMControlInit()
 {
 	GMYAWFirstEnter = 1;
@@ -158,7 +183,11 @@ void GMControlInit()
 	
 	ControlGMYAW();
 	ControlGMPITCH();
-	HAL_TIM_PWM_Start(&BYPASS_TIM, TIM_CHANNEL_1);
+	Steering_Motor_Set_Angle(0);
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
+	__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_3,0);
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
+	__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_4,2500);
 }
 
 

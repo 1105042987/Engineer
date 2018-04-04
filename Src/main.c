@@ -39,6 +39,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_hal.h"
+#include "adc.h"
 #include "can.h"
 #include "dma.h"
 #include "spi.h"
@@ -53,6 +54,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+uint32_t ADC_Value[100];
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE END PV */
@@ -120,6 +122,8 @@ int main(void)
   MX_USART6_UART_Init();
   MX_TIM7_Init();
   MX_TIM10_Init();
+  MX_ADC1_Init();
+  MX_TIM2_Init();
 
   /* USER CODE BEGIN 2 */
 	//各模块初始化
@@ -129,15 +133,22 @@ int main(void)
 	AMControlInit();
 	GMControlInit();
 	InitCanReception();
+	
 	#ifdef DEBUG_MODE
 	ctrlUartInit();
+	//时间中断
 	HAL_TIM_Base_Start_IT(&htim10);
 	#endif
 	HAL_TIM_Base_Start_IT(&htim6);
 	HAL_TIM_Base_Start_IT(&htim7);
-	
 	HAL_TIM_PWM_Start(&htim12, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
 	
+	//ADC
+	HAL_ADC_Start_DMA(&hadc1,(uint32_t*)&ADC_Value,100);
+	
+	//其他中断
 	HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 	HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
 	HAL_NVIC_EnableIRQ(USART1_IRQn);
@@ -147,6 +158,7 @@ int main(void)
 		HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
 	#endif
 	HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
+	
   /* USER CODE END 2 */
 
   /* Infinite loop */

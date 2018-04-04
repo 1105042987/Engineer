@@ -23,6 +23,8 @@
 .\engineer\judgetask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h
 .\engineer\judgetask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h
 .\engineer\judgetask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h
+.\engineer\judgetask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h
+.\engineer\judgetask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h
 .\engineer\judgetask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h
 .\engineer\judgetask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 .\engineer\judgetask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
@@ -39,6 +41,7 @@
 .\engineer\judgetask.o: ../Inc/tim.h
 .\engineer\judgetask.o: ../Inc/usart.h
 .\engineer\judgetask.o: ../Inc/gpio.h
+.\engineer\judgetask.o: ../Inc/adc.h
 .\engineer\judgetask.o: ..\Tasks\Inc\RemoteTask.h
 .\engineer\judgetask.o: ../Inc/includes.h
 .\engineer\judgetask.o: ..\Tasks\Inc\pid_regulator.h
@@ -51,3 +54,4 @@
 .\engineer\judgetask.o: ..\Tasks\Inc\ManifoldTask.h
 .\engineer\judgetask.o: ..\Tasks\Inc\JudgeTask.h
 .\engineer\judgetask.o: ..\Tasks\Inc\UpperTask.h
+.\engineer\judgetask.o: ..\Tasks\Inc\AutoGetTask.h

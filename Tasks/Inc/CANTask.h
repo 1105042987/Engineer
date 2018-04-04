@@ -31,6 +31,7 @@
 #define AMFB_RXID 0x203u
 
 #define GMYAW_RXID 0x205u
+//			GSYAW 用PA2引脚
 #define GMPITCH_RXID 0x206u
 
 

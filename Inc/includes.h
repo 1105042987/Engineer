@@ -22,6 +22,7 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
+#include "adc.h"
 
 #include "RemoteTask.h"
 #include "pid_regulator.h"
@@ -34,6 +35,7 @@
 #include "ManifoldTask.h"
 #include "JudgeTask.h"
 #include "UpperTask.h"
+#include "AutoGetTask.h"
 
 
 extern int16_t times;

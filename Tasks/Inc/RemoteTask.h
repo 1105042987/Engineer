@@ -47,35 +47,38 @@
 #define REMOTE_SWITCH_VALUE_BUF_DEEP   16u
 
 //键鼠常量数据区
-//Bit0-----W
-//Bit1-----S
-//Bit2-----A
-//Bit3-----D
-//Bit4-----Shift
-//Bit5-----Ctrl
-//Bit6-----Q
-//Bit7-----E
-//Bit8-----R
-//Bit9-----F
-//Bit10-----G
-//Bit11-----Z
-//Bit12-----X
-//Bit13-----C
-//Bit14-----V
-//Bit15-----B
+//Bit0-----W			0x1
+//Bit1-----S			0x2
+//Bit2-----A			0x4
+//Bit3-----D			0x8
+//Bit4-----Shift	0x10
+//Bit5-----Ctrl		0x20
+//Bit6-----Q			0x40
+//Bit7-----E			0x80
+//Bit8-----R			0x100
+//Bit9-----F			0x200
+//Bit10-----G			0x400
+//Bit11-----Z			0x800
+//Bit12-----X			0x1000
+//Bit13-----C			0x2000
+//Bit14-----V			0x4000
+//Bit15-----B			0x8000
 
-#define NORMAL_FORWARD_BACK_SPEED 			500
-#define NORMAL_LEFT_RIGHT_SPEED   			650
-#define HIGH_FORWARD_BACK_SPEED 			660
-#define HIGH_LEFT_RIGHT_SPEED   			800
+#define NORMAL_FORWARD_BACK_SPEED 			200
+#define NORMAL_LEFT_RIGHT_SPEED   			250
+#define HIGH_FORWARD_BACK_SPEED 			400
+#define HIGH_LEFT_RIGHT_SPEED   			500
 #define LOW_FORWARD_BACK_SPEED 			100
 #define LOW_LEFT_RIGHT_SPEED   			130
-#define MIDDLE_FORWARD_BACK_SPEED 			200
-#define MIDDLE_LEFT_RIGHT_SPEED   			220
 
 #define MOUSE_LR_RAMP_TICK_COUNT			50
 #define MOUSR_FB_RAMP_TICK_COUNT			60
 
+
+#define AMANGLE_STEP 3.5
+#define GMANGLE_STEP 1.5
+#define IGNORE_RANGE 70
+#define ROTATE_FACTOR 0.07
 
 
 
@@ -154,6 +157,13 @@ typedef __packed struct
 	 uint8_t buf_last_index;
 	 uint8_t buf_end_index;
 }RemoteSwitch_t;
+
+typedef enum{
+	SHIFT,
+	CTRL,
+	SHIFT_CTRL,
+	NO_CHANGE,
+} KeyboardMode_e;
 
 
 extern ChassisSpeed_Ref_t ChassisSpeedRef; 

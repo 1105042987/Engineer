@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * File Name          : AMControlTask.c
-  * Description        : 取弹送弹机械臂控制任务
+  * Description        : 机械臂控制任务
   ******************************************************************************
   *
   * Copyright (c) 2018 Team TPP-Shanghai Jiao Tong University
@@ -127,7 +127,7 @@ void ControlAMFB()
 			StandardlizeAMRealAngle(&AMFBRealAngle,ThisAngle,AMFBLastAngle);//处理
 			ThisSpeed = AMFBRx.RotateSpeed * 6;		//单位：度每秒
 			
-			AMFBIntensity = -PID_PROCESS_Double(AMFBPositionPID,AMFBSpeedPID,AMFBAngleTarget,AMFBRealAngle,ThisSpeed);
+			AMFBIntensity = PID_PROCESS_Double(AMFBPositionPID,AMFBSpeedPID,AMFBAngleTarget,AMFBRealAngle,ThisSpeed);
 			
 			s_AMFBCount = 0;
 			AMFBLastAngle = ThisAngle;
@@ -190,9 +190,10 @@ void vice_controlLoop()
 		ControlAMUD2();
 		ControlAMFB();
 
-		//setAMMotor();
+		setAMMotor();
 	
-		ControlGMYAW();
+		//ControlGMYAW();
+		ControlGSYAW();
 		ControlGMPITCH();
 		
 		setGMMotor();

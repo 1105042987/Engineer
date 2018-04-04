@@ -23,6 +23,8 @@
 .\engineer\gmcontroltask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h
 .\engineer\gmcontroltask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h
 .\engineer\gmcontroltask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h
+.\engineer\gmcontroltask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h
+.\engineer\gmcontroltask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h
 .\engineer\gmcontroltask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h
 .\engineer\gmcontroltask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 .\engineer\gmcontroltask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
@@ -39,6 +41,7 @@
 .\engineer\gmcontroltask.o: ../Inc/tim.h
 .\engineer\gmcontroltask.o: ../Inc/usart.h
 .\engineer\gmcontroltask.o: ../Inc/gpio.h
+.\engineer\gmcontroltask.o: ../Inc/adc.h
 .\engineer\gmcontroltask.o: ..\Tasks\Inc\RemoteTask.h
 .\engineer\gmcontroltask.o: ../Inc/includes.h
 .\engineer\gmcontroltask.o: ..\Tasks\Inc\pid_regulator.h
@@ -51,3 +54,4 @@
 .\engineer\gmcontroltask.o: ..\Tasks\Inc\ManifoldTask.h
 .\engineer\gmcontroltask.o: ..\Tasks\Inc\JudgeTask.h
 .\engineer\gmcontroltask.o: ..\Tasks\Inc\UpperTask.h
+.\engineer\gmcontroltask.o: ..\Tasks\Inc\AutoGetTask.h

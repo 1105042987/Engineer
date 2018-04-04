@@ -22,6 +22,8 @@
 .\engineer\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h
 .\engineer\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h
 .\engineer\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h
+.\engineer\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h
+.\engineer\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h
 .\engineer\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h
 .\engineer\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 .\engineer\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
@@ -32,6 +34,7 @@
 .\engineer\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 .\engineer\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 .\engineer\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+.\engineer\main.o: ../Inc/adc.h
 .\engineer\main.o: ../Inc/can.h
 .\engineer\main.o: ../Inc/dma.h
 .\engineer\main.o: ../Inc/spi.h
@@ -51,3 +54,4 @@
 .\engineer\main.o: ..\Tasks\Inc\ManifoldTask.h
 .\engineer\main.o: ..\Tasks\Inc\JudgeTask.h
 .\engineer\main.o: ..\Tasks\Inc\UpperTask.h
+.\engineer\main.o: ..\Tasks\Inc\AutoGetTask.h

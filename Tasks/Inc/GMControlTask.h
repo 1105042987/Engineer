@@ -19,6 +19,9 @@
 #define GMYAWReduction 96.0
 #define GMPITCHReduction 36.0
 
+extern float GSYAW_ZERO;
+
+void ControlGSYAW(void);
 void ControlGMYAW(void);
 void ControlGMPITCH(void);
 void setGMMotor(void);

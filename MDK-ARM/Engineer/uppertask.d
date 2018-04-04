@@ -23,6 +23,8 @@
 .\engineer\uppertask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h
 .\engineer\uppertask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h
 .\engineer\uppertask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h
+.\engineer\uppertask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h
+.\engineer\uppertask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h
 .\engineer\uppertask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h
 .\engineer\uppertask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 .\engineer\uppertask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
@@ -39,6 +41,7 @@
 .\engineer\uppertask.o: ../Inc/tim.h
 .\engineer\uppertask.o: ../Inc/usart.h
 .\engineer\uppertask.o: ../Inc/gpio.h
+.\engineer\uppertask.o: ../Inc/adc.h
 .\engineer\uppertask.o: ..\Tasks\Inc\RemoteTask.h
 .\engineer\uppertask.o: ../Inc/includes.h
 .\engineer\uppertask.o: ..\Tasks\Inc\pid_regulator.h
@@ -51,5 +54,6 @@
 .\engineer\uppertask.o: ..\Tasks\Inc\ManifoldTask.h
 .\engineer\uppertask.o: ..\Tasks\Inc\JudgeTask.h
 .\engineer\uppertask.o: ..\Tasks\Inc\UpperTask.h
+.\engineer\uppertask.o: ..\Tasks\Inc\AutoGetTask.h
 .\engineer\uppertask.o: E:\Keil\main\ARM\ARMCC\Bin\..\include\string.h
 .\engineer\uppertask.o: E:\Keil\main\ARM\ARMCC\Bin\..\include\stdlib.h

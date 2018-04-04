@@ -165,7 +165,7 @@ void WorkStateFSM(void)
 {
 	switch (WorkState)
 	{
-		case PREPARE_STATE:
+		case PREPARE_STATE:			//准备模式
 		{
 			if (inputmode == STOP) WorkState = STOP_STATE;
 			if(prepare_time < 3000) prepare_time++;
@@ -175,36 +175,40 @@ void WorkStateFSM(void)
 				prepare_time = 0;
 			}
 		}break;
-		case NORMAL_STATE:
+		case NORMAL_STATE:			//正常模式
 		{
 			if (inputmode == STOP) WorkState = STOP_STATE;
-			if (functionmode == GET) WorkState = GET_STATE;
-			if (functionmode == HELP) WorkState = HELP_STATE;
-		}break;
-		case HELP_STATE:		//取弹模式
-		{
-			if (inputmode == STOP) WorkState = STOP_STATE;
-			if (functionmode == NORMAL) {
-				WorkState = NORMAL_STATE;
-				can_type=1;
-			}
-			if (functionmode == GET) WorkState = GET_STATE;
-		}break;
-		case GET_STATE:	//涵道电机模式
-		{
-			if (inputmode == STOP) WorkState = STOP_STATE;
-			if (functionmode == HELP) WorkState = HELP_STATE;
-			if (functionmode == NORMAL) {
-				WorkState = NORMAL_STATE;
-				can_type=1;
-			}
-		}break;
-		case STOP_STATE://紧急停止
-		{
 			if (inputmode == REMOTE_INPUT)
 			{
+				if (functionmode == GET) WorkState = GET_STATE;
+				if (functionmode == HELP) WorkState = HELP_STATE;
+			}
+		}break;
+		case HELP_STATE:				//遥控救援模式
+		{
+			if (inputmode == STOP) WorkState = STOP_STATE;
+			if (inputmode == KEY_MOUSE_INPUT) WorkState = PREPARE_STATE;
+			if (inputmode == REMOTE_INPUT)
+			{
+				if (functionmode == NORMAL) WorkState = NORMAL_STATE;
+				if (functionmode == GET) WorkState = GET_STATE;
+			}
+		}break;
+		case GET_STATE:					//遥控取弹模式
+		{
+			if (inputmode == STOP) WorkState = STOP_STATE;
+			if (inputmode == KEY_MOUSE_INPUT) WorkState = PREPARE_STATE;
+			if (inputmode == REMOTE_INPUT)
+			{
+				if (functionmode == HELP) 	WorkState = HELP_STATE;
+				if (functionmode == NORMAL)	WorkState = NORMAL_STATE;
+			}
+		}break;
+		case STOP_STATE:				//紧急停止
+		{
+			if (inputmode == REMOTE_INPUT || inputmode == KEY_MOUSE_INPUT)
+			{
 				WorkState = PREPARE_STATE;
-				can_type=1;
 				RemoteTaskInit();
 			}
 		}break;
@@ -231,10 +235,16 @@ void controlLoop()
 	}
 }
 
+extern int8_t state1_enable;
+extern int8_t state2_enable;
+extern int8_t state3_enable;
+extern int8_t state4_enable;
+extern int8_t state5_enable;
+
 //时间中断入口函数
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	if (htim->Instance == htim6.Instance)
+	if (htim->Instance == htim6.Instance)//2ms时钟
 	{
 		HAL_NVIC_DisableIRQ(TIM6_DAC_IRQn);
 		
@@ -242,8 +252,21 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		controlLoop();
 		
 		HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
+		
+		static uint8_t dithering_elimination_counter =0;
+		if(dithering_elimination_counter<100)
+			dithering_elimination_counter++;
+		else 
+		{
+			dithering_elimination_counter=0;
+			state1_enable = 1;
+			state2_enable = 1;
+			state3_enable = 1;
+			state4_enable = 1;
+			state5_enable = 1;
+		}
 	}
-	else if (htim->Instance == htim7.Instance)
+	else if (htim->Instance == htim7.Instance)//ims时钟
 	{
 		rc_cnt++;
 		if (rc_update)

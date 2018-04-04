@@ -1,8 +1,8 @@
 Dependencies for Project 'Engineer', Target 'Engineer': (DO NOT MODIFY !)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_rcc_ex.o --omf_browse .\engineer\stm32f4xx_hal_rcc_ex.crf --depend .\engineer\stm32f4xx_hal_rcc_ex.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -22,6 +22,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -34,8 +36,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_tim_ex.o --omf_browse .\engineer\stm32f4xx_hal_tim_ex.crf --depend .\engineer\stm32f4xx_hal_tim_ex.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -55,6 +57,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -67,8 +71,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_uart.o --omf_browse .\engineer\stm32f4xx_hal_uart.crf --depend .\engineer\stm32f4xx_hal_uart.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -88,6 +92,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -100,8 +106,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_flash.o --omf_browse .\engineer\stm32f4xx_hal_flash.crf --depend .\engineer\stm32f4xx_hal_flash.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -121,6 +127,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -133,8 +141,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal.o --omf_browse .\engineer\stm32f4xx_hal.crf --depend .\engineer\stm32f4xx_hal.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -154,6 +162,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -166,8 +176,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_can.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_can.o --omf_browse .\engineer\stm32f4xx_hal_can.crf --depend .\engineer\stm32f4xx_hal_can.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -187,6 +197,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -199,8 +211,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_spi.o --omf_browse .\engineer\stm32f4xx_hal_spi.crf --depend .\engineer\stm32f4xx_hal_spi.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -220,6 +232,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -232,8 +246,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_dma_ex.o --omf_browse .\engineer\stm32f4xx_hal_dma_ex.crf --depend .\engineer\stm32f4xx_hal_dma_ex.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -253,6 +267,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -265,8 +281,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_pwr_ex.o --omf_browse .\engineer\stm32f4xx_hal_pwr_ex.crf --depend .\engineer\stm32f4xx_hal_pwr_ex.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -286,6 +302,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -298,8 +316,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_rcc.o --omf_browse .\engineer\stm32f4xx_hal_rcc.crf --depend .\engineer\stm32f4xx_hal_rcc.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -319,6 +337,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -331,8 +351,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_cortex.o --omf_browse .\engineer\stm32f4xx_hal_cortex.crf --depend .\engineer\stm32f4xx_hal_cortex.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -352,6 +372,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -364,8 +386,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_flash_ex.o --omf_browse .\engineer\stm32f4xx_hal_flash_ex.crf --depend .\engineer\stm32f4xx_hal_flash_ex.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -385,6 +407,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -397,8 +421,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_flash_ramfunc.o --omf_browse .\engineer\stm32f4xx_hal_flash_ramfunc.crf --depend .\engineer\stm32f4xx_hal_flash_ramfunc.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -418,6 +442,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -430,8 +456,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_tim.o --omf_browse .\engineer\stm32f4xx_hal_tim.crf --depend .\engineer\stm32f4xx_hal_tim.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -451,6 +477,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -463,8 +491,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_gpio.o --omf_browse .\engineer\stm32f4xx_hal_gpio.crf --depend .\engineer\stm32f4xx_hal_gpio.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -484,6 +512,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -496,8 +526,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_dma.o --omf_browse .\engineer\stm32f4xx_hal_dma.crf --depend .\engineer\stm32f4xx_hal_dma.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -517,6 +547,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -529,8 +561,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_pwr.o --omf_browse .\engineer\stm32f4xx_hal_pwr.crf --depend .\engineer\stm32f4xx_hal_pwr.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -550,6 +582,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -560,11 +594,10 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-F (..\Tasks\Src\CANTask.c)(0x5ABA4232)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\cantask.o --omf_browse .\engineer\cantask.crf --depend .\engineer\cantask.d)
-I (../Inc/includes.h)(0x5ABA5607)
-I (../Inc/main.h)(0x5A9E71B7)
+F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_adc_ex.o --omf_browse .\engineer\stm32f4xx_hal_adc_ex.crf --depend .\engineer\stm32f4xx_hal_adc_ex.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -584,6 +617,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -594,28 +629,101 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-I (../Inc/can.h)(0x5A9E71B6)
-I (../Inc/dma.h)(0x5A9E71B6)
-I (../Inc/spi.h)(0x5A9E71B6)
-I (../Inc/tim.h)(0x5A9E71B7)
-I (../Inc/usart.h)(0x5A9E71B7)
-I (../Inc/gpio.h)(0x5A9E71B5)
-I (..\Tasks\Inc\RemoteTask.h)(0x5ABA3D14)
+F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c)(0x5A294906)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_adc.o --omf_browse .\engineer\stm32f4xx_hal_adc.crf --depend .\engineer\stm32f4xx_hal_adc.d)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f427xx.h)(0x5A294904)
+I (../Drivers/CMSIS/Include/core_cm4.h)(0x5A294905)
+I (E:\Keil\main\ARM\ARMCC\include\stdint.h)(0x5475F300)
+I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5A294905)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5A294905)
+I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5A294905)
+I (../Drivers/CMSIS/Include/core_cmSimd.h)(0x5A294905)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x5A294904)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x5A294906)
+I (E:\Keil\main\ARM\ARMCC\include\stdio.h)(0x5475F300)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
+F (..\Tasks\Src\CANTask.c)(0x5AC21C43)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\cantask.o --omf_browse .\engineer\cantask.crf --depend .\engineer\cantask.d)
+I (../Inc/includes.h)(0x5AC21533)
+I (../Inc/main.h)(0x5AC3F396)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f427xx.h)(0x5A294904)
+I (../Drivers/CMSIS/Include/core_cm4.h)(0x5A294905)
+I (E:\Keil\main\ARM\ARMCC\include\stdint.h)(0x5475F300)
+I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5A294905)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5A294905)
+I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5A294905)
+I (../Drivers/CMSIS/Include/core_cmSimd.h)(0x5A294905)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x5A294904)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x5A294906)
+I (E:\Keil\main\ARM\ARMCC\include\stdio.h)(0x5475F300)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
+I (../Inc/can.h)(0x5AC3F395)
+I (../Inc/dma.h)(0x5AC3F395)
+I (../Inc/spi.h)(0x5AC3F395)
+I (../Inc/tim.h)(0x5AC3F395)
+I (../Inc/usart.h)(0x5AC3F396)
+I (../Inc/gpio.h)(0x5AC3F393)
+I (../Inc/adc.h)(0x5AC3F395)
+I (..\Tasks\Inc\RemoteTask.h)(0x5AC45CB0)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
-I (..\Tasks\Inc\ControlTask.h)(0x5AA3DB64)
+I (..\Tasks\Inc\ControlTask.h)(0x5AC23975)
 I (..\Tasks\Inc\AMControlTask.h)(0x5ABA3246)
-I (..\Tasks\Inc\GMControlTask.h)(0x5ABA3F2E)
+I (..\Tasks\Inc\GMControlTask.h)(0x5AC33E3B)
 I (..\Tasks\Inc\IMUTask.h)(0x5A61E6BB)
-I (..\Tasks\Inc\CANTask.h)(0x5ABA333D)
+I (..\Tasks\Inc\CANTask.h)(0x5AC36137)
 I (..\Tasks\Inc\drivers_ramp.h)(0x5A5C8764)
 I (..\Tasks\Inc\ManifoldTask.h)(0x5A5F9106)
 I (..\Tasks\Inc\JudgeTask.h)(0x5A59FC94)
 I (..\Tasks\Inc\UpperTask.h)(0x5A9E992F)
-F (..\Tasks\Src\ControlTask.c)(0x5AAFA1F2)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\controltask.o --omf_browse .\engineer\controltask.crf --depend .\engineer\controltask.d)
-I (../Inc/includes.h)(0x5ABA5607)
-I (../Inc/main.h)(0x5A9E71B7)
+I (..\Tasks\Inc\AutoGetTask.h)(0x5AC35D59)
+F (..\Tasks\Src\ControlTask.c)(0x5AC44866)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\controltask.o --omf_browse .\engineer\controltask.crf --depend .\engineer\controltask.d)
+I (../Inc/includes.h)(0x5AC21533)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -635,6 +743,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -645,28 +755,30 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-I (../Inc/can.h)(0x5A9E71B6)
-I (../Inc/dma.h)(0x5A9E71B6)
-I (../Inc/spi.h)(0x5A9E71B6)
-I (../Inc/tim.h)(0x5A9E71B7)
-I (../Inc/usart.h)(0x5A9E71B7)
-I (../Inc/gpio.h)(0x5A9E71B5)
-I (..\Tasks\Inc\RemoteTask.h)(0x5ABA3D14)
+I (../Inc/can.h)(0x5AC3F395)
+I (../Inc/dma.h)(0x5AC3F395)
+I (../Inc/spi.h)(0x5AC3F395)
+I (../Inc/tim.h)(0x5AC3F395)
+I (../Inc/usart.h)(0x5AC3F396)
+I (../Inc/gpio.h)(0x5AC3F393)
+I (../Inc/adc.h)(0x5AC3F395)
+I (..\Tasks\Inc\RemoteTask.h)(0x5AC45CB0)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
-I (..\Tasks\Inc\ControlTask.h)(0x5AA3DB64)
+I (..\Tasks\Inc\ControlTask.h)(0x5AC23975)
 I (..\Tasks\Inc\AMControlTask.h)(0x5ABA3246)
-I (..\Tasks\Inc\GMControlTask.h)(0x5ABA3F2E)
+I (..\Tasks\Inc\GMControlTask.h)(0x5AC33E3B)
 I (..\Tasks\Inc\IMUTask.h)(0x5A61E6BB)
-I (..\Tasks\Inc\CANTask.h)(0x5ABA333D)
+I (..\Tasks\Inc\CANTask.h)(0x5AC36137)
 I (..\Tasks\Inc\drivers_ramp.h)(0x5A5C8764)
 I (..\Tasks\Inc\ManifoldTask.h)(0x5A5F9106)
 I (..\Tasks\Inc\JudgeTask.h)(0x5A59FC94)
 I (..\Tasks\Inc\UpperTask.h)(0x5A9E992F)
-F (..\Tasks\Src\AMControlTask.c)(0x5ABA5C53)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\amcontroltask.o --omf_browse .\engineer\amcontroltask.crf --depend .\engineer\amcontroltask.d)
-I (../Inc/includes.h)(0x5ABA5607)
-I (../Inc/main.h)(0x5A9E71B7)
+I (..\Tasks\Inc\AutoGetTask.h)(0x5AC35D59)
+F (..\Tasks\Src\GMControlTask.c)(0x5AC40F62)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\gmcontroltask.o --omf_browse .\engineer\gmcontroltask.crf --depend .\engineer\gmcontroltask.d)
+I (../Inc/includes.h)(0x5AC21533)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -686,6 +798,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -696,28 +810,85 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-I (../Inc/can.h)(0x5A9E71B6)
-I (../Inc/dma.h)(0x5A9E71B6)
-I (../Inc/spi.h)(0x5A9E71B6)
-I (../Inc/tim.h)(0x5A9E71B7)
-I (../Inc/usart.h)(0x5A9E71B7)
-I (../Inc/gpio.h)(0x5A9E71B5)
-I (..\Tasks\Inc\RemoteTask.h)(0x5ABA3D14)
+I (../Inc/can.h)(0x5AC3F395)
+I (../Inc/dma.h)(0x5AC3F395)
+I (../Inc/spi.h)(0x5AC3F395)
+I (../Inc/tim.h)(0x5AC3F395)
+I (../Inc/usart.h)(0x5AC3F396)
+I (../Inc/gpio.h)(0x5AC3F393)
+I (../Inc/adc.h)(0x5AC3F395)
+I (..\Tasks\Inc\RemoteTask.h)(0x5AC45CB0)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
-I (..\Tasks\Inc\ControlTask.h)(0x5AA3DB64)
+I (..\Tasks\Inc\ControlTask.h)(0x5AC23975)
 I (..\Tasks\Inc\AMControlTask.h)(0x5ABA3246)
-I (..\Tasks\Inc\GMControlTask.h)(0x5ABA3F2E)
+I (..\Tasks\Inc\GMControlTask.h)(0x5AC33E3B)
 I (..\Tasks\Inc\IMUTask.h)(0x5A61E6BB)
-I (..\Tasks\Inc\CANTask.h)(0x5ABA333D)
+I (..\Tasks\Inc\CANTask.h)(0x5AC36137)
 I (..\Tasks\Inc\drivers_ramp.h)(0x5A5C8764)
 I (..\Tasks\Inc\ManifoldTask.h)(0x5A5F9106)
 I (..\Tasks\Inc\JudgeTask.h)(0x5A59FC94)
 I (..\Tasks\Inc\UpperTask.h)(0x5A9E992F)
+I (..\Tasks\Inc\AutoGetTask.h)(0x5AC35D59)
+F (..\Tasks\Src\AMControlTask.c)(0x5AC3D57A)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\amcontroltask.o --omf_browse .\engineer\amcontroltask.crf --depend .\engineer\amcontroltask.d)
+I (../Inc/includes.h)(0x5AC21533)
+I (../Inc/main.h)(0x5AC3F396)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f427xx.h)(0x5A294904)
+I (../Drivers/CMSIS/Include/core_cm4.h)(0x5A294905)
+I (E:\Keil\main\ARM\ARMCC\include\stdint.h)(0x5475F300)
+I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5A294905)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5A294905)
+I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5A294905)
+I (../Drivers/CMSIS/Include/core_cmSimd.h)(0x5A294905)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x5A294904)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x5A294906)
+I (E:\Keil\main\ARM\ARMCC\include\stdio.h)(0x5475F300)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
+I (../Inc/can.h)(0x5AC3F395)
+I (../Inc/dma.h)(0x5AC3F395)
+I (../Inc/spi.h)(0x5AC3F395)
+I (../Inc/tim.h)(0x5AC3F395)
+I (../Inc/usart.h)(0x5AC3F396)
+I (../Inc/gpio.h)(0x5AC3F393)
+I (../Inc/adc.h)(0x5AC3F395)
+I (..\Tasks\Inc\RemoteTask.h)(0x5AC45CB0)
+I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
+I (..\Tasks\Inc\ControlTask.h)(0x5AC23975)
+I (..\Tasks\Inc\AMControlTask.h)(0x5ABA3246)
+I (..\Tasks\Inc\GMControlTask.h)(0x5AC33E3B)
+I (..\Tasks\Inc\IMUTask.h)(0x5A61E6BB)
+I (..\Tasks\Inc\CANTask.h)(0x5AC36137)
+I (..\Tasks\Inc\drivers_ramp.h)(0x5A5C8764)
+I (..\Tasks\Inc\ManifoldTask.h)(0x5A5F9106)
+I (..\Tasks\Inc\JudgeTask.h)(0x5A59FC94)
+I (..\Tasks\Inc\UpperTask.h)(0x5A9E992F)
+I (..\Tasks\Inc\AutoGetTask.h)(0x5AC35D59)
 F (..\Tasks\Src\IMUTask.c)(0x5A92701B)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\imutask.o --omf_browse .\engineer\imutask.crf --depend .\engineer\imutask.d)
-I (../Inc/includes.h)(0x5ABA5607)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/includes.h)(0x5AC21533)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -737,6 +908,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -747,28 +920,30 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-I (../Inc/can.h)(0x5A9E71B6)
-I (../Inc/dma.h)(0x5A9E71B6)
-I (../Inc/spi.h)(0x5A9E71B6)
-I (../Inc/tim.h)(0x5A9E71B7)
-I (../Inc/usart.h)(0x5A9E71B7)
-I (../Inc/gpio.h)(0x5A9E71B5)
-I (..\Tasks\Inc\RemoteTask.h)(0x5ABA3D14)
+I (../Inc/can.h)(0x5AC3F395)
+I (../Inc/dma.h)(0x5AC3F395)
+I (../Inc/spi.h)(0x5AC3F395)
+I (../Inc/tim.h)(0x5AC3F395)
+I (../Inc/usart.h)(0x5AC3F396)
+I (../Inc/gpio.h)(0x5AC3F393)
+I (../Inc/adc.h)(0x5AC3F395)
+I (..\Tasks\Inc\RemoteTask.h)(0x5AC45CB0)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
-I (..\Tasks\Inc\ControlTask.h)(0x5AA3DB64)
+I (..\Tasks\Inc\ControlTask.h)(0x5AC23975)
 I (..\Tasks\Inc\AMControlTask.h)(0x5ABA3246)
-I (..\Tasks\Inc\GMControlTask.h)(0x5ABA3F2E)
+I (..\Tasks\Inc\GMControlTask.h)(0x5AC33E3B)
 I (..\Tasks\Inc\IMUTask.h)(0x5A61E6BB)
-I (..\Tasks\Inc\CANTask.h)(0x5ABA333D)
+I (..\Tasks\Inc\CANTask.h)(0x5AC36137)
 I (..\Tasks\Inc\drivers_ramp.h)(0x5A5C8764)
 I (..\Tasks\Inc\ManifoldTask.h)(0x5A5F9106)
 I (..\Tasks\Inc\JudgeTask.h)(0x5A59FC94)
 I (..\Tasks\Inc\UpperTask.h)(0x5A9E992F)
+I (..\Tasks\Inc\AutoGetTask.h)(0x5AC35D59)
 F (..\Tasks\Src\pid_regulator.c)(0x5A5CD2E5)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\pid_regulator.o --omf_browse .\engineer\pid_regulator.crf --depend .\engineer\pid_regulator.d)
-I (../Inc/includes.h)(0x5ABA5607)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/includes.h)(0x5AC21533)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -788,6 +963,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -798,28 +975,30 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-I (../Inc/can.h)(0x5A9E71B6)
-I (../Inc/dma.h)(0x5A9E71B6)
-I (../Inc/spi.h)(0x5A9E71B6)
-I (../Inc/tim.h)(0x5A9E71B7)
-I (../Inc/usart.h)(0x5A9E71B7)
-I (../Inc/gpio.h)(0x5A9E71B5)
-I (..\Tasks\Inc\RemoteTask.h)(0x5ABA3D14)
+I (../Inc/can.h)(0x5AC3F395)
+I (../Inc/dma.h)(0x5AC3F395)
+I (../Inc/spi.h)(0x5AC3F395)
+I (../Inc/tim.h)(0x5AC3F395)
+I (../Inc/usart.h)(0x5AC3F396)
+I (../Inc/gpio.h)(0x5AC3F393)
+I (../Inc/adc.h)(0x5AC3F395)
+I (..\Tasks\Inc\RemoteTask.h)(0x5AC45CB0)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
-I (..\Tasks\Inc\ControlTask.h)(0x5AA3DB64)
+I (..\Tasks\Inc\ControlTask.h)(0x5AC23975)
 I (..\Tasks\Inc\AMControlTask.h)(0x5ABA3246)
-I (..\Tasks\Inc\GMControlTask.h)(0x5ABA3F2E)
+I (..\Tasks\Inc\GMControlTask.h)(0x5AC33E3B)
 I (..\Tasks\Inc\IMUTask.h)(0x5A61E6BB)
-I (..\Tasks\Inc\CANTask.h)(0x5ABA333D)
+I (..\Tasks\Inc\CANTask.h)(0x5AC36137)
 I (..\Tasks\Inc\drivers_ramp.h)(0x5A5C8764)
 I (..\Tasks\Inc\ManifoldTask.h)(0x5A5F9106)
 I (..\Tasks\Inc\JudgeTask.h)(0x5A59FC94)
 I (..\Tasks\Inc\UpperTask.h)(0x5A9E992F)
-F (..\Tasks\Src\RemoteTask.c)(0x5ABA435B)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\remotetask.o --omf_browse .\engineer\remotetask.crf --depend .\engineer\remotetask.d)
-I (../Inc/includes.h)(0x5ABA5607)
-I (../Inc/main.h)(0x5A9E71B7)
+I (..\Tasks\Inc\AutoGetTask.h)(0x5AC35D59)
+F (..\Tasks\Src\RemoteTask.c)(0x5AC45D29)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\remotetask.o --omf_browse .\engineer\remotetask.crf --depend .\engineer\remotetask.d)
+I (../Inc/includes.h)(0x5AC21533)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -839,6 +1018,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -849,29 +1030,31 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-I (../Inc/can.h)(0x5A9E71B6)
-I (../Inc/dma.h)(0x5A9E71B6)
-I (../Inc/spi.h)(0x5A9E71B6)
-I (../Inc/tim.h)(0x5A9E71B7)
-I (../Inc/usart.h)(0x5A9E71B7)
-I (../Inc/gpio.h)(0x5A9E71B5)
-I (..\Tasks\Inc\RemoteTask.h)(0x5ABA3D14)
+I (../Inc/can.h)(0x5AC3F395)
+I (../Inc/dma.h)(0x5AC3F395)
+I (../Inc/spi.h)(0x5AC3F395)
+I (../Inc/tim.h)(0x5AC3F395)
+I (../Inc/usart.h)(0x5AC3F396)
+I (../Inc/gpio.h)(0x5AC3F393)
+I (../Inc/adc.h)(0x5AC3F395)
+I (..\Tasks\Inc\RemoteTask.h)(0x5AC45CB0)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
-I (..\Tasks\Inc\ControlTask.h)(0x5AA3DB64)
+I (..\Tasks\Inc\ControlTask.h)(0x5AC23975)
 I (..\Tasks\Inc\AMControlTask.h)(0x5ABA3246)
-I (..\Tasks\Inc\GMControlTask.h)(0x5ABA3F2E)
+I (..\Tasks\Inc\GMControlTask.h)(0x5AC33E3B)
 I (..\Tasks\Inc\IMUTask.h)(0x5A61E6BB)
-I (..\Tasks\Inc\CANTask.h)(0x5ABA333D)
+I (..\Tasks\Inc\CANTask.h)(0x5AC36137)
 I (..\Tasks\Inc\drivers_ramp.h)(0x5A5C8764)
 I (..\Tasks\Inc\ManifoldTask.h)(0x5A5F9106)
 I (..\Tasks\Inc\JudgeTask.h)(0x5A59FC94)
 I (..\Tasks\Inc\UpperTask.h)(0x5A9E992F)
+I (..\Tasks\Inc\AutoGetTask.h)(0x5AC35D59)
 F (..\Tasks\Src\RMLib.lib)(0x5A59FC94)()
 F (..\Tasks\Src\JudgeTask.c)(0x5A59FC94)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\judgetask.o --omf_browse .\engineer\judgetask.crf --depend .\engineer\judgetask.d)
-I (../Inc/includes.h)(0x5ABA5607)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/includes.h)(0x5AC21533)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -891,6 +1074,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -901,28 +1086,30 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-I (../Inc/can.h)(0x5A9E71B6)
-I (../Inc/dma.h)(0x5A9E71B6)
-I (../Inc/spi.h)(0x5A9E71B6)
-I (../Inc/tim.h)(0x5A9E71B7)
-I (../Inc/usart.h)(0x5A9E71B7)
-I (../Inc/gpio.h)(0x5A9E71B5)
-I (..\Tasks\Inc\RemoteTask.h)(0x5ABA3D14)
+I (../Inc/can.h)(0x5AC3F395)
+I (../Inc/dma.h)(0x5AC3F395)
+I (../Inc/spi.h)(0x5AC3F395)
+I (../Inc/tim.h)(0x5AC3F395)
+I (../Inc/usart.h)(0x5AC3F396)
+I (../Inc/gpio.h)(0x5AC3F393)
+I (../Inc/adc.h)(0x5AC3F395)
+I (..\Tasks\Inc\RemoteTask.h)(0x5AC45CB0)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
-I (..\Tasks\Inc\ControlTask.h)(0x5AA3DB64)
+I (..\Tasks\Inc\ControlTask.h)(0x5AC23975)
 I (..\Tasks\Inc\AMControlTask.h)(0x5ABA3246)
-I (..\Tasks\Inc\GMControlTask.h)(0x5ABA3F2E)
+I (..\Tasks\Inc\GMControlTask.h)(0x5AC33E3B)
 I (..\Tasks\Inc\IMUTask.h)(0x5A61E6BB)
-I (..\Tasks\Inc\CANTask.h)(0x5ABA333D)
+I (..\Tasks\Inc\CANTask.h)(0x5AC36137)
 I (..\Tasks\Inc\drivers_ramp.h)(0x5A5C8764)
 I (..\Tasks\Inc\ManifoldTask.h)(0x5A5F9106)
 I (..\Tasks\Inc\JudgeTask.h)(0x5A59FC94)
 I (..\Tasks\Inc\UpperTask.h)(0x5A9E992F)
+I (..\Tasks\Inc\AutoGetTask.h)(0x5AC35D59)
 F (..\Tasks\Src\ManifoldTask.c)(0x5A5F9291)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\manifoldtask.o --omf_browse .\engineer\manifoldtask.crf --depend .\engineer\manifoldtask.d)
-I (../Inc/includes.h)(0x5ABA5607)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/includes.h)(0x5AC21533)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -942,6 +1129,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -952,28 +1141,30 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-I (../Inc/can.h)(0x5A9E71B6)
-I (../Inc/dma.h)(0x5A9E71B6)
-I (../Inc/spi.h)(0x5A9E71B6)
-I (../Inc/tim.h)(0x5A9E71B7)
-I (../Inc/usart.h)(0x5A9E71B7)
-I (../Inc/gpio.h)(0x5A9E71B5)
-I (..\Tasks\Inc\RemoteTask.h)(0x5ABA3D14)
+I (../Inc/can.h)(0x5AC3F395)
+I (../Inc/dma.h)(0x5AC3F395)
+I (../Inc/spi.h)(0x5AC3F395)
+I (../Inc/tim.h)(0x5AC3F395)
+I (../Inc/usart.h)(0x5AC3F396)
+I (../Inc/gpio.h)(0x5AC3F393)
+I (../Inc/adc.h)(0x5AC3F395)
+I (..\Tasks\Inc\RemoteTask.h)(0x5AC45CB0)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
-I (..\Tasks\Inc\ControlTask.h)(0x5AA3DB64)
+I (..\Tasks\Inc\ControlTask.h)(0x5AC23975)
 I (..\Tasks\Inc\AMControlTask.h)(0x5ABA3246)
-I (..\Tasks\Inc\GMControlTask.h)(0x5ABA3F2E)
+I (..\Tasks\Inc\GMControlTask.h)(0x5AC33E3B)
 I (..\Tasks\Inc\IMUTask.h)(0x5A61E6BB)
-I (..\Tasks\Inc\CANTask.h)(0x5ABA333D)
+I (..\Tasks\Inc\CANTask.h)(0x5AC36137)
 I (..\Tasks\Inc\drivers_ramp.h)(0x5A5C8764)
 I (..\Tasks\Inc\ManifoldTask.h)(0x5A5F9106)
 I (..\Tasks\Inc\JudgeTask.h)(0x5A59FC94)
 I (..\Tasks\Inc\UpperTask.h)(0x5A9E992F)
-F (..\Tasks\Src\UpperTask.c)(0x5ABA560B)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\uppertask.o --omf_browse .\engineer\uppertask.crf --depend .\engineer\uppertask.d)
-I (../Inc/includes.h)(0x5ABA5607)
-I (../Inc/main.h)(0x5A9E71B7)
+I (..\Tasks\Inc\AutoGetTask.h)(0x5AC35D59)
+F (..\Tasks\Src\UpperTask.c)(0x5AC452B1)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\uppertask.o --omf_browse .\engineer\uppertask.crf --depend .\engineer\uppertask.d)
+I (../Inc/includes.h)(0x5AC21533)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -993,6 +1184,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -1003,30 +1196,32 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-I (../Inc/can.h)(0x5A9E71B6)
-I (../Inc/dma.h)(0x5A9E71B6)
-I (../Inc/spi.h)(0x5A9E71B6)
-I (../Inc/tim.h)(0x5A9E71B7)
-I (../Inc/usart.h)(0x5A9E71B7)
-I (../Inc/gpio.h)(0x5A9E71B5)
-I (..\Tasks\Inc\RemoteTask.h)(0x5ABA3D14)
+I (../Inc/can.h)(0x5AC3F395)
+I (../Inc/dma.h)(0x5AC3F395)
+I (../Inc/spi.h)(0x5AC3F395)
+I (../Inc/tim.h)(0x5AC3F395)
+I (../Inc/usart.h)(0x5AC3F396)
+I (../Inc/gpio.h)(0x5AC3F393)
+I (../Inc/adc.h)(0x5AC3F395)
+I (..\Tasks\Inc\RemoteTask.h)(0x5AC45CB0)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
-I (..\Tasks\Inc\ControlTask.h)(0x5AA3DB64)
+I (..\Tasks\Inc\ControlTask.h)(0x5AC23975)
 I (..\Tasks\Inc\AMControlTask.h)(0x5ABA3246)
-I (..\Tasks\Inc\GMControlTask.h)(0x5ABA3F2E)
+I (..\Tasks\Inc\GMControlTask.h)(0x5AC33E3B)
 I (..\Tasks\Inc\IMUTask.h)(0x5A61E6BB)
-I (..\Tasks\Inc\CANTask.h)(0x5ABA333D)
+I (..\Tasks\Inc\CANTask.h)(0x5AC36137)
 I (..\Tasks\Inc\drivers_ramp.h)(0x5A5C8764)
 I (..\Tasks\Inc\ManifoldTask.h)(0x5A5F9106)
 I (..\Tasks\Inc\JudgeTask.h)(0x5A59FC94)
 I (..\Tasks\Inc\UpperTask.h)(0x5A9E992F)
+I (..\Tasks\Inc\AutoGetTask.h)(0x5AC35D59)
 I (E:\Keil\main\ARM\ARMCC\include\string.h)(0x5475F300)
 I (E:\Keil\main\ARM\ARMCC\include\stdlib.h)(0x5475F300)
-F (..\Tasks\Src\GMControlTask.c)(0x5ABA5C34)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\gmcontroltask.o --omf_browse .\engineer\gmcontroltask.crf --depend .\engineer\gmcontroltask.d)
-I (../Inc/includes.h)(0x5ABA5607)
-I (../Inc/main.h)(0x5A9E71B7)
+F (..\Tasks\Src\AutoGetTask.c)(0x5AC4025B)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\autogettask.o --omf_browse .\engineer\autogettask.crf --depend .\engineer\autogettask.d)
+I (../Inc/includes.h)(0x5AC21533)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -1046,6 +1241,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -1056,23 +1253,25 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-I (../Inc/can.h)(0x5A9E71B6)
-I (../Inc/dma.h)(0x5A9E71B6)
-I (../Inc/spi.h)(0x5A9E71B6)
-I (../Inc/tim.h)(0x5A9E71B7)
-I (../Inc/usart.h)(0x5A9E71B7)
-I (../Inc/gpio.h)(0x5A9E71B5)
-I (..\Tasks\Inc\RemoteTask.h)(0x5ABA3D14)
+I (../Inc/can.h)(0x5AC3F395)
+I (../Inc/dma.h)(0x5AC3F395)
+I (../Inc/spi.h)(0x5AC3F395)
+I (../Inc/tim.h)(0x5AC3F395)
+I (../Inc/usart.h)(0x5AC3F396)
+I (../Inc/gpio.h)(0x5AC3F393)
+I (../Inc/adc.h)(0x5AC3F395)
+I (..\Tasks\Inc\RemoteTask.h)(0x5AC45CB0)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
-I (..\Tasks\Inc\ControlTask.h)(0x5AA3DB64)
+I (..\Tasks\Inc\ControlTask.h)(0x5AC23975)
 I (..\Tasks\Inc\AMControlTask.h)(0x5ABA3246)
-I (..\Tasks\Inc\GMControlTask.h)(0x5ABA3F2E)
+I (..\Tasks\Inc\GMControlTask.h)(0x5AC33E3B)
 I (..\Tasks\Inc\IMUTask.h)(0x5A61E6BB)
-I (..\Tasks\Inc\CANTask.h)(0x5ABA333D)
+I (..\Tasks\Inc\CANTask.h)(0x5AC36137)
 I (..\Tasks\Inc\drivers_ramp.h)(0x5A5C8764)
 I (..\Tasks\Inc\ManifoldTask.h)(0x5A5F9106)
 I (..\Tasks\Inc\JudgeTask.h)(0x5A59FC94)
 I (..\Tasks\Inc\UpperTask.h)(0x5A9E992F)
+I (..\Tasks\Inc\AutoGetTask.h)(0x5AC35D59)
 F (../Src/system_stm32f4xx.c)(0x5A59FC94)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\system_stm32f4xx.o --omf_browse .\engineer\system_stm32f4xx.crf --depend .\engineer\system_stm32f4xx.d)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f427xx.h)(0x5A294904)
@@ -1084,8 +1283,8 @@ I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5A294905)
 I (../Drivers/CMSIS/Include/core_cmSimd.h)(0x5A294905)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x5A294904)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x5A294906)
@@ -1096,6 +1295,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -1106,10 +1307,10 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-F (../Src/main.c)(0x5ABA3F57)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\main.o --omf_browse .\engineer\main.crf --depend .\engineer\main.d)
-I (../Inc/main.h)(0x5A9E71B7)
+F (../Src/main.c)(0x5AC3F396)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\main.o --omf_browse .\engineer\main.crf --depend .\engineer\main.d)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -1129,6 +1330,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -1139,29 +1342,31 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-I (../Inc/can.h)(0x5A9E71B6)
-I (../Inc/dma.h)(0x5A9E71B6)
-I (../Inc/spi.h)(0x5A9E71B6)
-I (../Inc/tim.h)(0x5A9E71B7)
-I (../Inc/usart.h)(0x5A9E71B7)
-I (../Inc/gpio.h)(0x5A9E71B5)
-I (../Inc/includes.h)(0x5ABA5607)
-I (..\Tasks\Inc\RemoteTask.h)(0x5ABA3D14)
+I (../Inc/adc.h)(0x5AC3F395)
+I (../Inc/can.h)(0x5AC3F395)
+I (../Inc/dma.h)(0x5AC3F395)
+I (../Inc/spi.h)(0x5AC3F395)
+I (../Inc/tim.h)(0x5AC3F395)
+I (../Inc/usart.h)(0x5AC3F396)
+I (../Inc/gpio.h)(0x5AC3F393)
+I (../Inc/includes.h)(0x5AC21533)
+I (..\Tasks\Inc\RemoteTask.h)(0x5AC45CB0)
 I (..\Tasks\Inc\pid_regulator.h)(0x5A5CD24E)
-I (..\Tasks\Inc\ControlTask.h)(0x5AA3DB64)
+I (..\Tasks\Inc\ControlTask.h)(0x5AC23975)
 I (..\Tasks\Inc\AMControlTask.h)(0x5ABA3246)
-I (..\Tasks\Inc\GMControlTask.h)(0x5ABA3F2E)
+I (..\Tasks\Inc\GMControlTask.h)(0x5AC33E3B)
 I (..\Tasks\Inc\IMUTask.h)(0x5A61E6BB)
-I (..\Tasks\Inc\CANTask.h)(0x5ABA333D)
+I (..\Tasks\Inc\CANTask.h)(0x5AC36137)
 I (..\Tasks\Inc\drivers_ramp.h)(0x5A5C8764)
 I (..\Tasks\Inc\ManifoldTask.h)(0x5A5F9106)
 I (..\Tasks\Inc\JudgeTask.h)(0x5A59FC94)
 I (..\Tasks\Inc\UpperTask.h)(0x5A9E992F)
-F (../Src/gpio.c)(0x5A9E71B5)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\gpio.o --omf_browse .\engineer\gpio.crf --depend .\engineer\gpio.d)
-I (../Inc/gpio.h)(0x5A9E71B5)
+I (..\Tasks\Inc\AutoGetTask.h)(0x5AC35D59)
+F (../Src/gpio.c)(0x5AC3F393)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\gpio.o --omf_browse .\engineer\gpio.crf --depend .\engineer\gpio.d)
+I (../Inc/gpio.h)(0x5AC3F393)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -1181,6 +1386,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -1191,11 +1398,11 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-F (../Src/usart.c)(0x5A9E71B7)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\usart.o --omf_browse .\engineer\usart.crf --depend .\engineer\usart.d)
-I (../Inc/usart.h)(0x5A9E71B7)
+F (../Src/usart.c)(0x5AC3F396)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\usart.o --omf_browse .\engineer\usart.crf --depend .\engineer\usart.d)
+I (../Inc/usart.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -1215,6 +1422,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -1225,12 +1434,12 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-I (../Inc/gpio.h)(0x5A9E71B5)
-I (../Inc/dma.h)(0x5A9E71B6)
-F (../Src/stm32f4xx_it.c)(0x5A9E71B7)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_it.o --omf_browse .\engineer\stm32f4xx_it.crf --depend .\engineer\stm32f4xx_it.d)
+I (../Inc/gpio.h)(0x5AC3F393)
+I (../Inc/dma.h)(0x5AC3F395)
+F (../Src/stm32f4xx_it.c)(0x5AC3F396)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_it.o --omf_browse .\engineer\stm32f4xx_it.crf --depend .\engineer\stm32f4xx_it.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -1250,6 +1459,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -1260,11 +1471,11 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-I (../Inc/stm32f4xx_it.h)(0x5A9E71B7)
-F (../Src/stm32f4xx_hal_msp.c)(0x5A9E71B7)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_msp.o --omf_browse .\engineer\stm32f4xx_hal_msp.crf --depend .\engineer\stm32f4xx_hal_msp.d)
+I (../Inc/stm32f4xx_it.h)(0x5AC3F396)
+F (../Src/stm32f4xx_hal_msp.c)(0x5AC3F396)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\stm32f4xx_hal_msp.o --omf_browse .\engineer\stm32f4xx_hal_msp.crf --depend .\engineer\stm32f4xx_hal_msp.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -1284,6 +1495,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -1294,11 +1507,11 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-F (../Src/dma.c)(0x5A9E71B6)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\dma.o --omf_browse .\engineer\dma.crf --depend .\engineer\dma.d)
-I (../Inc/dma.h)(0x5A9E71B6)
+F (../Src/dma.c)(0x5AC3F395)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\dma.o --omf_browse .\engineer\dma.crf --depend .\engineer\dma.d)
+I (../Inc/dma.h)(0x5AC3F395)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -1318,6 +1531,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -1328,11 +1543,11 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-F (../Src/tim.c)(0x5A9E71B6)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\tim.o --omf_browse .\engineer\tim.crf --depend .\engineer\tim.d)
-I (../Inc/tim.h)(0x5A9E71B7)
+F (../Src/tim.c)(0x5AC3F395)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\tim.o --omf_browse .\engineer\tim.crf --depend .\engineer\tim.d)
+I (../Inc/tim.h)(0x5AC3F395)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -1352,6 +1567,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -1362,11 +1579,11 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-F (../Src/can.c)(0x5A9E71B6)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\can.o --omf_browse .\engineer\can.crf --depend .\engineer\can.d)
-I (../Inc/can.h)(0x5A9E71B6)
+F (../Src/can.c)(0x5AC3F395)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\can.o --omf_browse .\engineer\can.crf --depend .\engineer\can.d)
+I (../Inc/can.h)(0x5AC3F395)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -1386,6 +1603,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -1396,12 +1615,12 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-I (../Inc/gpio.h)(0x5A9E71B5)
-F (../Src/spi.c)(0x5A9E71B6)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\spi.o --omf_browse .\engineer\spi.crf --depend .\engineer\spi.d)
-I (../Inc/spi.h)(0x5A9E71B6)
+I (../Inc/gpio.h)(0x5AC3F393)
+F (../Src/spi.c)(0x5AC3F395)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\spi.o --omf_browse .\engineer\spi.crf --depend .\engineer\spi.d)
+I (../Inc/spi.h)(0x5AC3F395)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
-I (../Inc/stm32f4xx_hal_conf.h)(0x5A9E71B7)
-I (../Inc/main.h)(0x5A9E71B7)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
@@ -1421,6 +1640,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
@@ -1431,5 +1652,42 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
-I (../Inc/gpio.h)(0x5A9E71B5)
-F (startup_stm32f427xx.s)(0x5A9E71BA)(--cpu Cortex-M4.fp -g --apcs=interwork --pd "__MICROLIB SETA 1"-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0--pd "__UVISION_VERSION SETA 514" --pd "_RTE_ SETA 1" --pd "STM32F427xx SETA 1"--list startup_stm32f427xx.lst --xref -o .\engineer\startup_stm32f427xx.o --depend .\engineer\startup_stm32f427xx.d)
+I (../Inc/gpio.h)(0x5AC3F393)
+F (../Src/adc.c)(0x5AC3F395)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I..\Tasks\Inc --C99-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx --C99-o .\engineer\adc.o --omf_browse .\engineer\adc.crf --depend .\engineer\adc.d)
+I (../Inc/adc.h)(0x5AC3F395)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5A294906)
+I (../Inc/stm32f4xx_hal_conf.h)(0x5AC3F396)
+I (../Inc/main.h)(0x5AC3F396)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x5A294906)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x5A294904)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f427xx.h)(0x5A294904)
+I (../Drivers/CMSIS/Include/core_cm4.h)(0x5A294905)
+I (E:\Keil\main\ARM\ARMCC\include\stdint.h)(0x5475F300)
+I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5A294905)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5A294905)
+I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5A294905)
+I (../Drivers/CMSIS/Include/core_cmSimd.h)(0x5A294905)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x5A294904)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x5A294906)
+I (E:\Keil\main\ARM\ARMCC\include\stdio.h)(0x5475F300)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x5A294906)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x5A294906)
+I (../Inc/gpio.h)(0x5AC3F393)
+F (startup_stm32f427xx.s)(0x5AC3F399)(--cpu Cortex-M4.fp -g --apcs=interwork --pd "__MICROLIB SETA 1"-I D:\lenovo\Documents\GitHub\Engineer\MDK-ARM\RTE-I E:\Keil\main\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include-I E:\Keil\main\ARM\PACK\Keil\STM32F4xx_DFP\2.11.0--pd "__UVISION_VERSION SETA 514" --pd "_RTE_ SETA 1" --pd "STM32F427xx SETA 1"--list startup_stm32f427xx.lst --xref -o .\engineer\startup_stm32f427xx.o --depend .\engineer\startup_stm32f427xx.d)

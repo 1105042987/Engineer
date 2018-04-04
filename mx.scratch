@@ -78,6 +78,12 @@
 		   <group>
 		 		<name>STM32F4xx_HAL_Driver</name>
 						<file>
+							<name>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c</name>
+						</file>
+						<file>
+							<name>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c</name>
+						</file>
+						<file>
 							<name>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_can.c</name>
 						</file>
 						<file>
@@ -146,6 +152,10 @@
 
                                 <file>
                                  <name>..\Src\gpio.c</name>
+                                </file>
+
+                                <file>
+                                 <name>..\Src\adc.c</name>
                                 </file>
 
                                 <file>

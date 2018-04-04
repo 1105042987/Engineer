@@ -23,6 +23,8 @@
 .\engineer\cantask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h
 .\engineer\cantask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h
 .\engineer\cantask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h
+.\engineer\cantask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h
+.\engineer\cantask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h
 .\engineer\cantask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h
 .\engineer\cantask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 .\engineer\cantask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
@@ -39,6 +41,7 @@
 .\engineer\cantask.o: ../Inc/tim.h
 .\engineer\cantask.o: ../Inc/usart.h
 .\engineer\cantask.o: ../Inc/gpio.h
+.\engineer\cantask.o: ../Inc/adc.h
 .\engineer\cantask.o: ..\Tasks\Inc\RemoteTask.h
 .\engineer\cantask.o: ../Inc/includes.h
 .\engineer\cantask.o: ..\Tasks\Inc\pid_regulator.h
@@ -51,3 +54,4 @@
 .\engineer\cantask.o: ..\Tasks\Inc\ManifoldTask.h
 .\engineer\cantask.o: ..\Tasks\Inc\JudgeTask.h
 .\engineer\cantask.o: ..\Tasks\Inc\UpperTask.h
+.\engineer\cantask.o: ..\Tasks\Inc\AutoGetTask.h

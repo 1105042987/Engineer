@@ -110,13 +110,15 @@ extern int16_t GMYAWIntensity,GMPITCHIntensity,AMFBIntensity,AMUD1Intensity,AMUD
 extern int16_t CMBRIntensity,CMBLIntensity,CMFRIntensity,CMFLIntensity;
 extern double GMYAWRealAngle,GMPITCHRealAngle,AMFBRealAngle,AMUD1RealAngle,AMUD2RealAngle;
 extern int16_t times;
+extern int32_t ad0,ad1,ad2,ad3,ad4;
 void dataCallBack()
 {
 	static uint16_t pcnt = 0;
 	if(pcnt>100)
 		{
 			//printf("GMYAW:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", GMYAWIntensity,GMYAWRealAngle,GMYAWAngleTarget);
-			printf("GMPITCH:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", GMPITCHIntensity,GMPITCHRealAngle,GMPITCHAngleTarget);
+			//printf("GSYAW:\t GMYAWAngleTarget: %f\r\n",GMYAWAngleTarget);
+			//printf("GMPITCH:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", GMPITCHIntensity,GMPITCHRealAngle,GMPITCHAngleTarget);
 			
 			//printf("AMFB:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", AMFBIntensity,AMFBRealAngle,AMFBAngleTarget);
 			//printf("AMUD1:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", AMUD1Intensity,AMUD1RealAngle,AMUD1AngleTarget);
@@ -125,14 +127,14 @@ void dataCallBack()
 			
 			//printf("CMIntensity %d %d %d %d \n",CMBRIntensity,CMBLIntensity,CMFRIntensity,CMFLIntensity);
 			//printf("CMrx angle %d %d %d %d \n",CMFRRx.angle,CMFLRx.angle,CMBRRx.angle,CMBLRx.angle);
-			printf("CMrx speed %d %d %d %d \n",CMFRRx.RotateSpeed,CMFLRx.RotateSpeed,CMBRRx.RotateSpeed,CMBLRx.RotateSpeed);
+			//printf("CMrx speed %d %d %d %d \n",CMFRRx.RotateSpeed,CMFLRx.RotateSpeed,CMBRRx.RotateSpeed,CMBLRx.RotateSpeed);
 			//printf("AMrx angle SIDE%d UD%d %d FB%d GMPITCH%d \n",GMYAWRx.angle,AMUD1Rx.angle,AMUD2Rx.angle,AMFBRx.angle,GMPITCHRx.angle);
 			
 			//printf("can1 update%d can2 update%d type%d\n",can1_update,can2_update,can_type);
 			//printf("Channel %d %d %d %d \n",channel0,channel1,channel2,channel3);
 			
-			//printf("times %d \n",times);
-			
+			printf("times %d \n",times);
+			//printf("ad %d %d %d %d %d \n",ad0,ad1,ad2,ad3,ad4);
 			pcnt = 0;
 		}
 		else pcnt++;
