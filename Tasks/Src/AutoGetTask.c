@@ -159,6 +159,10 @@ void AutoGet(char signal)
 		}	
 		case BULLET_GET:
 		{
+			
+			
+			
+			
 			break;
 		}
 		case NOAUTO_STATE:
