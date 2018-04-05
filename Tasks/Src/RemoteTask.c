@@ -89,9 +89,9 @@ void RemoteControlProcess(Remote *rc)
 		}
 		
 		ChassisSpeedRef.forward_back_ref = -help_direction*channel1;
-		ChassisSpeedRef.left_right_ref   = help_direction*channel0;
+		ChassisSpeedRef.left_right_ref   = -help_direction*channel0;
 		
-		rotate_speed = help_direction*channel2 * ROTATE_FACTOR;
+		rotate_speed = help_direction * channel2 * ROTATE_FACTOR - 0.3;
 		
 		if(channel3 > IGNORE_RANGE)	
 		{
@@ -106,11 +106,11 @@ void RemoteControlProcess(Remote *rc)
 	if(WorkState == HELP_STATE)
 	{
 		ChassisSpeedRef.forward_back_ref = -help_direction*channel1;
-		ChassisSpeedRef.left_right_ref   = help_direction*channel0;
+		ChassisSpeedRef.left_right_ref   = -help_direction*channel0;
 		
-		rotate_speed = help_direction*channel2 * ROTATE_FACTOR;
+		rotate_speed = help_direction*channel2 * ROTATE_FACTOR - 0.3;
 		
-		if(channel3 > IGNORE_RANGE) {
+		if(channel3 > IGNORE_RANGE*4) {
 			if(state1_enable)
 			{
 				state1_enable=0;
@@ -127,7 +127,7 @@ void RemoteControlProcess(Remote *rc)
 				}
 			}
 		}
-		else if(channel3 < -IGNORE_RANGE) {
+		else if(channel3 < -4*IGNORE_RANGE) {
 			HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_RESET);
 		}
 	}
@@ -180,27 +180,27 @@ void KeyboardModeFSM(Key *key)
 			}
 			else if(key->v & 0x10)//Shift
 			{
-				forward_back_speed =  -HIGH_FORWARD_BACK_SPEED;
-				left_right_speed = -HIGH_LEFT_RIGHT_SPEED;
+				forward_back_speed =  HIGH_FORWARD_BACK_SPEED;
+				left_right_speed = HIGH_LEFT_RIGHT_SPEED;
 				KeyboardMode=SHIFT;
 			}
 			else if(key->v & 0x20)//Ctrl
 			{
-				forward_back_speed =  -LOW_FORWARD_BACK_SPEED;
-				left_right_speed = -LOW_LEFT_RIGHT_SPEED;
+				forward_back_speed =  LOW_FORWARD_BACK_SPEED;
+				left_right_speed = LOW_LEFT_RIGHT_SPEED;
 				KeyboardMode=CTRL;
 			}
 			else
 			{
-				forward_back_speed =  -NORMAL_FORWARD_BACK_SPEED;
-				left_right_speed = -NORMAL_LEFT_RIGHT_SPEED;
+				forward_back_speed =  NORMAL_FORWARD_BACK_SPEED;
+				left_right_speed = NORMAL_LEFT_RIGHT_SPEED;
 				KeyboardMode=NO_CHANGE;
 			}
 			
 			if(EngineerState != NOAUTO_STATE) 
 			{
-				forward_back_speed =  -LOW_FORWARD_BACK_SPEED;
-				left_right_speed = -LOW_LEFT_RIGHT_SPEED;
+				forward_back_speed =  LOW_FORWARD_BACK_SPEED;
+				left_right_speed = LOW_LEFT_RIGHT_SPEED;
 			}
 }
 
@@ -304,9 +304,9 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 			case NO_CHANGE:					//正常底盘
 			{//CM Movement Process
 				if(key->v & 0x01)  // key: w
-					ChassisSpeedRef.forward_back_ref = move_direction  * forward_back_speed* FBSpeedRamp.Calc(&FBSpeedRamp);
+					ChassisSpeedRef.forward_back_ref = -move_direction  * forward_back_speed* FBSpeedRamp.Calc(&FBSpeedRamp);
 				else if(key->v & 0x02) //key: s
-					ChassisSpeedRef.forward_back_ref = -move_direction * forward_back_speed* FBSpeedRamp.Calc(&FBSpeedRamp);
+					ChassisSpeedRef.forward_back_ref = move_direction * forward_back_speed* FBSpeedRamp.Calc(&FBSpeedRamp);
 				else
 				{
 					ChassisSpeedRef.forward_back_ref = 0;

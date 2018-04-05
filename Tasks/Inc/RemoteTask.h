@@ -78,7 +78,7 @@
 #define AMANGLE_STEP 3.5
 #define GMANGLE_STEP 1.5
 #define IGNORE_RANGE 70
-#define ROTATE_FACTOR 0.07
+#define ROTATE_FACTOR 0.10
 
 
 
