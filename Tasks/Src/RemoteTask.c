@@ -27,8 +27,8 @@ uint16_t left_right_speed = 0;
 float rotate_speed;
 
 double AMUD1AngleTarget = 0;
-double AMUD2AngleTarget = 0; //0 -> -400
-double AMFBAngleTarget = 0;//0 -> -300
+double AMUD2AngleTarget = 0; 	//0 -> -400
+double AMFBAngleTarget = 0;		//0 -> -300
 
 double GMYAWAngleTarget = 0;
 double GMPITCHAngleTarget = 0;
@@ -146,8 +146,8 @@ void RemoteControlProcess(Remote *rc)
 		else if(channel0 < -IGNORE_RANGE) GMPITCHAngleTarget -= GMANGLE_STEP*0.6;
 		
 		
-		if(channel1 > IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget - AMANGLE_STEP;
-		else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget + AMANGLE_STEP;
+		if(channel1 > IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget + AMANGLE_STEP;
+		else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget - AMANGLE_STEP;
 		
 		VAL_LIMIT(AMFBAngleTarget,-300,-5);
 		
@@ -155,12 +155,12 @@ void RemoteControlProcess(Remote *rc)
 		else if(channel2 < -IGNORE_RANGE) __HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1000);
 		
 		if(channel3 > IGNORE_RANGE) {
-			AMUD1AngleTarget=AMUD1AngleTarget-AMANGLE_STEP*0.8;
-			AMUD2AngleTarget=AMUD2AngleTarget-AMANGLE_STEP*0.8;
-		}
-		else if(channel3 < -IGNORE_RANGE) {
 			AMUD1AngleTarget=AMUD1AngleTarget+AMANGLE_STEP*0.8;
 			AMUD2AngleTarget=AMUD2AngleTarget+AMANGLE_STEP*0.8;
+		}
+		else if(channel3 < -IGNORE_RANGE) {
+			AMUD1AngleTarget=AMUD1AngleTarget-AMANGLE_STEP*0.8;
+			AMUD2AngleTarget=AMUD2AngleTarget-AMANGLE_STEP*0.8;
 		}
 		VAL_LIMIT(AMUD1AngleTarget,-400,-5);
 		VAL_LIMIT(AMUD2AngleTarget,-400,-5);
@@ -210,8 +210,8 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 	static uint8_t Electromagnet_State = 0;
 	static uint8_t GiveBullet_State = 0;
 	static uint8_t GiveBullet_Counter = 0;
-	static int8_t move_direction = 1;
-	static char auto_direction='l';
+	static int8_t  move_direction = 1;
+	static char 	 auto_direction='l';
 	
 	if(WorkState != STOP_STATE && WorkState != PREPARE_STATE)
 	{
@@ -280,13 +280,13 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 			{//AM Movement Process
 				if(key->v & 0x2000)//c 上升
 				{
-					AMUD1AngleTarget=AMUD1AngleTarget-AMANGLE_STEP*0.8;
-					AMUD2AngleTarget=AMUD2AngleTarget-AMANGLE_STEP*0.8;
+					AMUD1AngleTarget=AMUD1AngleTarget+AMANGLE_STEP*0.8;
+					AMUD2AngleTarget=AMUD2AngleTarget+AMANGLE_STEP*0.8;
 				}
 				else if(key->v & 0x4000)//v 下降
 				{
-					AMUD1AngleTarget=AMUD1AngleTarget+AMANGLE_STEP*0.8;
-					AMUD2AngleTarget=AMUD2AngleTarget+AMANGLE_STEP*0.8;
+					AMUD1AngleTarget=AMUD1AngleTarget-AMANGLE_STEP*0.8;
+					AMUD2AngleTarget=AMUD2AngleTarget-AMANGLE_STEP*0.8;
 				}
 				
 				if(key->v & 0x400)//g 前伸

@@ -85,7 +85,7 @@ void AutoGet(char signal)
 	{
 		case START_TEST:
 		{
-			AMFBAngleTarget = 10;
+			AMFBAngleTarget = -10;
 			if(Auto_StartTest(signal)) EngineerState = LEVEL_SHIFT;
 			else EngineerState = NOAUTO_STATE;
 			break;
@@ -117,11 +117,16 @@ void AutoGet(char signal)
 			{
 				if(auto_flag == 0)
 				{
-					AMUD1AngleTarget += 20;
-					AMUD2AngleTarget += 20;
+					AMUD1AngleTarget -= 20;
+					AMUD2AngleTarget -= 20;
+					VAL_LIMIT(AMUD1AngleTarget,-400,-5);
+					VAL_LIMIT(AMUD2AngleTarget,-400,-5);
 				}
 				if(auto_flag > 50)
+				{
 					EngineerState = ARM_STRETCH;
+					auto_flag = 0;
+				}
 				else auto_flag++;
 			}
 			else {
@@ -130,10 +135,10 @@ void AutoGet(char signal)
 				auto_flag = 0;
 			}
 			
-			if(AMUD1AngleTarget > 300) //越界
+			if(AMUD1AngleTarget < -400) //越界 AMANGLE_STEP是负值
 			{
-				AMUD1AngleTarget = 10;
-				AMUD2AngleTarget = 10;
+				AMUD1AngleTarget = -10;
+				AMUD2AngleTarget = -10;
 				EngineerState = NOAUTO_STATE;
 			}
 			
@@ -145,9 +150,9 @@ void AutoGet(char signal)
 			if(distance_couple.front.flag) EngineerState = BULLET_GET;
 			else AMFBAngleTarget += AMANGLE_STEP;
 			
-			if(AMFBAngleTarget > 500) //越界
+			if(AMFBAngleTarget < -300) //越界
 			{
-				AMFBAngleTarget = 10;
+				AMFBAngleTarget = -10;
 				EngineerState = NOAUTO_STATE;
 			}
 			break;
