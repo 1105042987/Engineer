@@ -88,10 +88,10 @@ void RemoteControlProcess(Remote *rc)
 			help_direction=1;
 		}
 		
-		ChassisSpeedRef.forward_back_ref = -help_direction*channel1;
-		ChassisSpeedRef.left_right_ref   = -help_direction*channel0;
+		ChassisSpeedRef.forward_back_ref = -help_direction*channel1*1.5;
+		ChassisSpeedRef.left_right_ref   = -help_direction*channel0*1.5;
 		
-		rotate_speed = help_direction * channel2 * ROTATE_FACTOR - 0.3;
+		rotate_speed = channel2 * ROTATE_FACTOR - 0.3;
 		
 		if(channel3 > IGNORE_RANGE)	
 		{
@@ -105,10 +105,10 @@ void RemoteControlProcess(Remote *rc)
 	}
 	if(WorkState == HELP_STATE)
 	{
-		ChassisSpeedRef.forward_back_ref = -help_direction*channel1;
-		ChassisSpeedRef.left_right_ref   = -help_direction*channel0;
+		ChassisSpeedRef.forward_back_ref = -help_direction*channel1*1.5;
+		ChassisSpeedRef.left_right_ref   = -help_direction*channel0*1.5;
 		
-		rotate_speed = help_direction*channel2 * ROTATE_FACTOR - 0.3;
+		rotate_speed = channel2 * ROTATE_FACTOR - 0.3;
 		
 		if(channel3 > IGNORE_RANGE*4) {
 			if(state1_enable)
@@ -149,7 +149,7 @@ void RemoteControlProcess(Remote *rc)
 		if(channel1 > IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget + AMANGLE_STEP;
 		else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget - AMANGLE_STEP;
 		
-		VAL_LIMIT(AMFBAngleTarget,-300,-5);
+		VAL_LIMIT(AMFBAngleTarget,-400,-5);
 		
 		if(channel2 > IGNORE_RANGE) __HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1300);
 		else if(channel2 < -IGNORE_RANGE) __HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1000);
@@ -321,11 +321,14 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 					AMUD1AngleTarget=AMUD1AngleTarget-AMANGLE_STEP*0.8;
 					AMUD2AngleTarget=AMUD2AngleTarget-AMANGLE_STEP*0.8;
 				}
+				VAL_LIMIT(AMUD1AngleTarget,-400,-5);
+				VAL_LIMIT(AMUD2AngleTarget,-400,-5);
 				
 				if(key->v & 0x400)//g 前伸
 					AMFBAngleTarget = AMFBAngleTarget + AMANGLE_STEP;
 				else if(key->v & 0x8000)//b 回缩
 					AMFBAngleTarget = AMFBAngleTarget - AMANGLE_STEP;
+				VAL_LIMIT(AMFBAngleTarget,-400,-5);
 				
 				//Bypass Motor
 				if (key->v & 0x200)//f
