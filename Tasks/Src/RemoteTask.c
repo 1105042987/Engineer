@@ -37,7 +37,7 @@ int8_t state1_enable = 1;
 int8_t state2_enable = 1;
 int8_t state3_enable = 1;
 int8_t state4_enable = 1;
-int8_t state5_enable = 1;
+int8_t state5_enable = 1;//闲置
 
 
 //遥控器控制量初始化
@@ -207,7 +207,6 @@ void KeyboardModeFSM(Key *key)
 void MouseKeyControlProcess(Mouse *mouse, Key *key)
 {
 	static uint8_t Bypass_State = 0;
-	static uint8_t Electromagnet_State = 0;
 	static uint8_t GiveBullet_State = 0;
 	static uint8_t GiveBullet_Counter = 0;
 	static int8_t  move_direction = 1;
@@ -249,13 +248,25 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 				{
 					if(EngineerState == NOAUTO_STATE) EngineerState = START_TEST;
 					auto_direction = 'l';
-					Electromagnet_State = 0;
+					
+					HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_RESET);
+					if(GSYAW_ZERO < 40) 
+					{
+						GSYAW_ZERO += TURN_BACK;
+						move_direction = 1;
+					}
 				}
 				else if(key->v & 0x1000)//x
 				{
 					if(EngineerState == NOAUTO_STATE) EngineerState = START_TEST;
 					auto_direction = 'r';
-					Electromagnet_State = 0;
+					
+					HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_RESET);
+					if(GSYAW_ZERO < 40) 
+					{
+						GSYAW_ZERO += TURN_BACK;
+						move_direction = 1;
+					}
 				}
 				else if(key->v & 0x2000)//c
 					EngineerState = NOAUTO_STATE;
@@ -263,8 +274,30 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 				//Electromagnet 
 				if (key->v & 0x40)//q
 				{
-					if(state2_enable) {Electromagnet_State = Electromagnet_State ^ 0x1;state2_enable=0;}
-					if(EngineerState != NOAUTO_STATE) Electromagnet_State = 0;
+					if(state2_enable && EngineerState == NOAUTO_STATE) 
+					{
+							state2_enable = 0;
+							HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_SET);
+							if(GSYAW_ZERO > 140) 
+							{
+								GSYAW_ZERO -= TURN_BACK;
+								move_direction = -1;
+							}
+							if(GSYAW_ZERO < 40) 
+							{
+								GSYAW_ZERO += TURN_BACK;
+								move_direction = 1;
+							}
+					}
+				}
+				if(key->v & 0x1)//w
+				{
+						HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_RESET);
+						if(GSYAW_ZERO < 40) 
+						{
+							GSYAW_ZERO += TURN_BACK;
+							move_direction = 1;
+						}
 				}
 				
 				//Give Bullet
@@ -296,8 +329,17 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 				
 				//Bypass Motor
 				if (key->v & 0x200)//f
-					if(state4_enable) {Bypass_State = Bypass_State ^ 0x1;state4_enable=0;}
-				
+				{	
+					if(state4_enable) 
+					{
+						Bypass_State = Bypass_State ^ 0x1;
+						state4_enable=0;
+						if(Bypass_State) 
+							__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1300);
+						else 
+							__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1000);
+					}
+				}
 				//注意这里不用break！
 			}
 			case SHIFT:							//高速底盘
@@ -326,20 +368,11 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 			}
 		}
 		
-		if(Bypass_State) 
-		{
-			__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1300);
-		}
-		else 
-		{
-			__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1000);
-		}
-		
 		if(GiveBullet_State)//2s自动关
 		{
 			GiveBullet_Counter+=state3_enable;
 			state3_enable = 0;
-			if(GiveBullet_Counter <= 10)
+			if(GiveBullet_Counter <= 5)
 				__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4,1500);
 			else {
 				__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4,2500);
@@ -347,18 +380,7 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 			}
 		}
 		
-		if(Electromagnet_State) 
-		{
-			HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_SET);
-			if(GSYAW_ZERO > 140) GSYAW_ZERO -= TURN_BACK;
-			move_direction = -1;
-		}
-		else 
-		{
-			HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_RESET);
-			if(GSYAW_ZERO < 40) GSYAW_ZERO += TURN_BACK;
-			move_direction = 1;
-		}
+
 		
 		AutoGet(auto_direction);
 

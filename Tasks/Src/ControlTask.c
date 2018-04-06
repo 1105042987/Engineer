@@ -254,7 +254,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
 		
 		static uint8_t dithering_elimination_counter =0;
-		if(dithering_elimination_counter<100)
+		if(dithering_elimination_counter<200)	//0.4s定时器，消抖
 			dithering_elimination_counter++;
 		else 
 		{
