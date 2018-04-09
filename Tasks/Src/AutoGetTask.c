@@ -32,16 +32,16 @@ void RefreshAnologRead()
 		ad3 = ad3 / 20 - 0;
 		ad4 = ad4 / 20 - 0;
 		
-		distance_couple.front.vol_ref  =	ad0;
-		distance_couple.leftin.vol_ref = ad1;
-		distance_couple.leftout.vol_ref  =	ad2;
-		distance_couple.rightin.vol_ref = ad3;
+		distance_couple.front.vol_ref    = ad0;
+		distance_couple.leftin.vol_ref   = ad1;
+		distance_couple.leftout.vol_ref  = ad2;
+		distance_couple.rightin.vol_ref  = ad3;
 		distance_couple.rightout.vol_ref = ad4;
 		
-		FLAG_SET(distance_couple.front.vol_ref,distance_couple.front.flag);
-		FLAG_SET(distance_couple.leftin.vol_ref,distance_couple.leftin.flag);
-		FLAG_SET(distance_couple.leftout.vol_ref,distance_couple.leftout.flag);
-		FLAG_SET(distance_couple.rightin.vol_ref,distance_couple.rightin.flag);
+		FLAG_SET(distance_couple.front.vol_ref,		distance_couple.front.flag	 );
+		FLAG_SET(distance_couple.leftin.vol_ref,	distance_couple.leftin.flag	 );
+		FLAG_SET(distance_couple.leftout.vol_ref,	distance_couple.leftout.flag );
+		FLAG_SET(distance_couple.rightin.vol_ref,	distance_couple.rightin.flag );
 		FLAG_SET(distance_couple.rightout.vol_ref,distance_couple.rightout.flag);
 		
 		distance_couple.move_flags = distance_couple.leftout.flag  * 8 +
@@ -85,9 +85,8 @@ void AutoGet(char signal)
 	{
 		case START_TEST:
 		{
-			AMFBAngleTarget = -10;
 			if(Auto_StartTest(signal)) EngineerState = LEVEL_SHIFT;
-			else EngineerState = NOAUTO_STATE;
+			else EngineerState = ERROR_HANDLE;
 			break;
 		}
 		case LEVEL_SHIFT:
@@ -113,48 +112,41 @@ void AutoGet(char signal)
 		case HEIGHT_ADJUST:
 		{
 			ChassisSpeedRef.forward_back_ref += 30;
+			
 			if(distance_couple.move_flags == 0x0)
 			{
-				if(auto_flag == 0)
-				{
-					AMUD1AngleTarget -= 20;
-					AMUD2AngleTarget -= 20;
-					VAL_LIMIT(AMUD1AngleTarget,-400,-5);
-					VAL_LIMIT(AMUD2AngleTarget,-400,-5);
-				}
 				if(auto_flag > 50)
 				{
 					EngineerState = ARM_STRETCH;
 					auto_flag = 0;
 				}
-				else auto_flag++;
+				else {
+					auto_flag++;
+					AMUD1AngleTarget += AMUD_ANGLE_STEP;
+					AMUD2AngleTarget += AMUD_ANGLE_STEP;
+				}
 			}
 			else {
-				AMUD1AngleTarget += AMANGLE_STEP * 0.6;
-				AMUD2AngleTarget += AMANGLE_STEP * 0.6;
+				AMUD1AngleTarget += AMUD_ANGLE_STEP;
+				AMUD2AngleTarget += AMUD_ANGLE_STEP;
 				auto_flag = 0;
 			}
 			
 			if(AMUD1AngleTarget < -400) //越界 AMANGLE_STEP是负值
-			{
-				AMUD1AngleTarget = -10;
-				AMUD2AngleTarget = -10;
-				EngineerState = NOAUTO_STATE;
-			}
+				EngineerState = ERROR_HANDLE;
 			
 			break;
 		}
 		case ARM_STRETCH:
 		{
 			ChassisSpeedRef.forward_back_ref += 30;
-			if(distance_couple.front.flag) EngineerState = BULLET_GET;
-			else AMFBAngleTarget += AMANGLE_STEP;
 			
-			if(AMFBAngleTarget < -300) //越界
-			{
-				AMFBAngleTarget = -10;
-				EngineerState = NOAUTO_STATE;
-			}
+			if(distance_couple.front.flag) EngineerState = BULLET_GET;
+			else AMFBAngleTarget += AMFB_ANGLE_STEP;
+			
+			if(AMFBAngleTarget < -400) //越界
+				EngineerState = ERROR_HANDLE;
+			
 			break;
 		}	
 		case BULLET_GET:
@@ -165,7 +157,21 @@ void AutoGet(char signal)
 			
 			break;
 		}
+		case ERROR_HANDLE:
+		{
+			if(AMFBAngleTarget < -10 || AMUD1AngleTarget < -10) 
+			{
+				AMFBAngleTarget -= AMFB_ANGLE_STEP;
+				AMUD1AngleTarget -= AMUD_ANGLE_STEP;
+				AMUD2AngleTarget -= AMUD_ANGLE_STEP;
+			}
+			else{
+				
+			}
+			break;
+		}
 		case NOAUTO_STATE:
 			break;
 	}
+	Limit_Position();
 }

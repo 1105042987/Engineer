@@ -57,6 +57,7 @@ typedef enum
 	HEIGHT_ADJUST,
 	ARM_STRETCH,
 	BULLET_GET,
+	ERROR_HANDLE
 }Engineer_State_e;
 
 void AutoGet(char signal);

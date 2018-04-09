@@ -19,7 +19,43 @@
 #define GMYAWReduction 96.0
 #define GMPITCHReduction 36.0
 
+#define TURN_BACK 156
+
 extern float GSYAW_ZERO;
+
+#define GS_SET(DIR)\
+{\
+	if(GSYAW_ZERO < 40) \
+		{\
+			GSYAW_ZERO += TURN_BACK;\
+			DIR=1;\
+		}\
+}\
+
+#define GS_RESET(DIR)\
+{\
+	if(GSYAW_ZERO > 140) \
+		{\
+			GSYAW_ZERO -= TURN_BACK;\
+			DIR=-1;\
+		}\
+}\
+
+#define GS_REVERSAL(DIR)\
+{\
+	if(GSYAW_ZERO < 40) \
+		{\
+			GSYAW_ZERO += TURN_BACK;\
+			DIR=1;\
+		}\
+	else if(GSYAW_ZERO > 140) \
+		{\
+			GSYAW_ZERO -= TURN_BACK;\
+			DIR=-1;\
+		}\
+}\
+
+#define GMANGLE_STEP 1.5
 
 void ControlGSYAW(void);
 void ControlGMYAW(void);

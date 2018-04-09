@@ -105,7 +105,7 @@ void ControlRotate(void)
 		CMRotatePID.ref = 0;
 		CMRotatePID.fdb = rotate_speed;
 		CMRotatePID.Calc(&CMRotatePID);   
-		ChassisSpeedRef.rotate_ref = CMRotatePID.output * 13 + ChassisSpeedRef.forward_back_ref * 0.01 + ChassisSpeedRef.left_right_ref * 0.01;
+		ChassisSpeedRef.rotate_ref = CMRotatePID.output * 13 + ChassisSpeedRef.forward_back_ref * 0.02 + ChassisSpeedRef.left_right_ref * 0.01;
 }
 
 

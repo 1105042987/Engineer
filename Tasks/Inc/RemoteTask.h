@@ -20,31 +20,21 @@
 #define JUDGE_UART huart6
 
 
-#define STICK_TO_CHASSIS_SPEED_REF_FACT     0.45f
-#define STICK_TO_PITCH_ANGLE_INC_FACT       0.008f
-#define STICK_TO_YAW_ANGLE_INC_FACT         0.005f
 
-//遥感常量数据区
-#define REMOTE_CONTROLLER_STICK_OFFSET  1024u  
+//解算数据区
+#define REMOTE_CONTROLLER_STICK_OFFSET  1024u
 
 #define REMOTE_SWITCH_VALUE_UP         	0x01u  
 #define REMOTE_SWITCH_VALUE_DOWN				0x02u
 #define REMOTE_SWITCH_VALUE_CENTRAL			0x03u
 
-#define REMOTE_SWITCH_CHANGE_1TO3      (uint8_t)((REMOTE_SWITCH_VALUE_UP << 2) | REMOTE_SWITCH_VALUE_CENTRAL)   
-#define REMOTE_SWITCH_CHANGE_2TO3      (uint8_t)((REMOTE_SWITCH_VALUE_DOWN << 2) | REMOTE_SWITCH_VALUE_CENTRAL)  
-#define REMOTE_SWITCH_CHANGE_3TO1      (uint8_t)((REMOTE_SWITCH_VALUE_CENTRAL << 2) | REMOTE_SWITCH_VALUE_UP)
-#define REMOTE_SWITCH_CHANGE_3TO2      (uint8_t)((REMOTE_SWITCH_VALUE_CENTRAL << 2) | REMOTE_SWITCH_VALUE_DOWN)
-
-#define REMOTE_SWITCH_CHANGE_1TO3TO2   (uint8_t)((REMOTE_SWITCH_VALUE_UP << 4) |\
-                                                 (REMOTE_SWITCH_VALUE_CENTRAL << 2) |\
-                                                 (REMOTE_SWITCH_VALUE_DOWN))   
-
-#define REMOTE_SWITCH_CHANGE_2TO3TO1   (uint8_t)((REMOTE_SWITCH_VALUE_DOWN << 4) |\
-                                                 (REMOTE_SWITCH_VALUE_CENTRAL << 2) |\
-                                                 (REMOTE_SWITCH_VALUE_UP)) 
-
 #define REMOTE_SWITCH_VALUE_BUF_DEEP   16u
+
+//遥控常量数据区
+#define RC_CHASSIS_SPEED_REF    0.60f
+#define RC_ROTATE_SPEED_REF 		0.05f
+
+#define IGNORE_RANGE 200
 
 //键鼠常量数据区
 //Bit0-----W			0x1
@@ -63,22 +53,18 @@
 //Bit13-----C			0x2000
 //Bit14-----V			0x4000
 //Bit15-----B			0x8000
-
-#define NORMAL_FORWARD_BACK_SPEED 			400
-#define NORMAL_LEFT_RIGHT_SPEED   			450
-#define HIGH_FORWARD_BACK_SPEED 			600
-#define HIGH_LEFT_RIGHT_SPEED   			675
+#define NORMAL_FORWARD_BACK_SPEED 	400
+#define NORMAL_LEFT_RIGHT_SPEED  		400
+#define HIGH_FORWARD_BACK_SPEED 		600
+#define HIGH_LEFT_RIGHT_SPEED   		600
 #define LOW_FORWARD_BACK_SPEED 			200
-#define LOW_LEFT_RIGHT_SPEED   			225
+#define LOW_LEFT_RIGHT_SPEED   			200
 
-#define MOUSE_LR_RAMP_TICK_COUNT			50
-#define MOUSR_FB_RAMP_TICK_COUNT			60
+#define MOUSE_LR_RAMP_TICK_COUNT		50
+#define MOUSR_FB_RAMP_TICK_COUNT		60
 
+#define MK_ROTATE_SPEED_REF 				0.20f
 
-#define AMANGLE_STEP -3.5
-#define GMANGLE_STEP 1.5
-#define IGNORE_RANGE 70
-#define ROTATE_FACTOR 0.10
 
 
 
@@ -184,5 +170,6 @@ extern uint8_t rc_cnt;
 void RemoteDataProcess(uint8_t *pData);
 void InitRemoteControl(void);
 void RemoteTaskInit(void);
+void Limit_Position(void);
 
 #endif /*__ REMOTETASK_H */
