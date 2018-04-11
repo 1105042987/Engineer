@@ -18,7 +18,7 @@ fw_PID_Regulator_t GMPITCHPositionPID = fw_PID_INIT(200.0, 0.0, 0.0, 10000.0, 10
 fw_PID_Regulator_t GMYAWSpeedPID = fw_PID_INIT(1, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);				//闲置
 fw_PID_Regulator_t GMPITCHSpeedPID = fw_PID_INIT(0.7, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
 
-float GSYAW_ZERO = 174.0;
+float GSYAW_ZERO = 172.0;
 
 //云台电机实际物理角度值
 double GMYAWRealAngle = 0.0;

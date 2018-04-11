@@ -63,7 +63,7 @@
 #define MOUSE_LR_RAMP_TICK_COUNT		50
 #define MOUSR_FB_RAMP_TICK_COUNT		60
 
-#define MK_ROTATE_SPEED_REF 				0.20f
+#define MK_ROTATE_SPEED_REF 				0.80f
 
 
 

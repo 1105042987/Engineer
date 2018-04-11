@@ -202,8 +202,8 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 		VAL_LIMIT(mouse->x, -150, 150); 
 		VAL_LIMIT(mouse->y, -150, 150); 
 
-		GMPITCHAngleTarget += mouse->y* 0.06;
-		VAL_LIMIT(GMPITCHAngleTarget,-180,180);
+		GMPITCHAngleTarget += move_direction * mouse->y* 0.12;
+		VAL_LIMIT(GMPITCHAngleTarget,-60,60);
 		
 		if(EngineerState == NOAUTO_STATE)
 		{
@@ -224,9 +224,9 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 			case SHIFT_CTRL:	//细节微调与自动控制按钮
 			{//GM Yaw Adjust
 				if(key->v & 0x4000)//v
-					GSYAW_ZERO -= GMANGLE_STEP * 0.6;
-				if(key->v & 0x8000)//b
 					GSYAW_ZERO += GMANGLE_STEP * 0.6;
+				if(key->v & 0x8000)//b
+					GSYAW_ZERO -= GMANGLE_STEP * 0.6;
 				
 				//Auto Bullet Get
 				if(key->v & 0x800)//z左寻
@@ -322,9 +322,9 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 					FBSpeedRamp.ResetCounter(&FBSpeedRamp);
 				}
 				if(key->v & 0x04)  // key: d
-					ChassisSpeedRef.left_right_ref = -move_direction * MK_LEFT_RIGHT_SPEED * LRSpeedRamp.Calc(&LRSpeedRamp);
-				else if(key->v & 0x08) //key: a
 					ChassisSpeedRef.left_right_ref =  move_direction * MK_LEFT_RIGHT_SPEED * LRSpeedRamp.Calc(&LRSpeedRamp);
+				else if(key->v & 0x08) //key: a
+					ChassisSpeedRef.left_right_ref = -move_direction * MK_LEFT_RIGHT_SPEED * LRSpeedRamp.Calc(&LRSpeedRamp);
 				else
 				{
 					ChassisSpeedRef.left_right_ref = 0;
