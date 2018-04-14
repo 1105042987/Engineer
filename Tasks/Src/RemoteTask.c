@@ -467,7 +467,6 @@ void RemoteDataProcess(uint8_t *pData)
 	
 	//键盘需要 2 Bytes = 16 bits ，每一位对应一个键
 	RC_CtrlData.key.v = ((int16_t)pData[14]) | ((int16_t)pData[15] << 8);
-	times = RC_CtrlData.key.v;
 
 	//输入状态设置
 	if(RC_CtrlData.rc.s2 == 1) inputmode = REMOTE_INPUT;

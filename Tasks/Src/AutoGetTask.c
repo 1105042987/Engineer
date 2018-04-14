@@ -17,6 +17,7 @@ extern uint32_t ADC_Value[];
 
 void RefreshAnologRead()
 {
+	global_catch++;
 		for(uint16_t i=0;i<100;i++)
 		{
 			if(i%5==0)ad0+=ADC_Value[i];
@@ -26,17 +27,17 @@ void RefreshAnologRead()
 			if(i%5==4)ad4+=ADC_Value[i];
 		}
 		//     average  bias
-		ad0 = ad0 / 20 - 0;
-		ad1 = ad1 / 20 - 0;
-		ad2 = ad2 / 20 - 0;
-		ad3 = ad3 / 20 - 0;
-		ad4 = ad4 / 20 - 0;
+		ad0 = ad0 / 20 - 0;	//front
+		ad1 = ad1 / 20 - 0;	//rightout
+		ad2 = ad2 / 20 - 0;	//rightin
+		ad3 = ad3 / 20 - 0;	//leftout
+		ad4 = ad4 / 20 - 0;	//leftin
 		
 		distance_couple.front.vol_ref    = ad0;
-		distance_couple.leftin.vol_ref   = ad1;
-		distance_couple.leftout.vol_ref  = ad2;
-		distance_couple.rightin.vol_ref  = ad3;
-		distance_couple.rightout.vol_ref = ad4;
+		distance_couple.leftin.vol_ref   = ad4;
+		distance_couple.leftout.vol_ref  = ad3;
+		distance_couple.rightin.vol_ref  = ad2;
+		distance_couple.rightout.vol_ref = ad1;
 		
 		FLAG_SET(distance_couple.front.vol_ref,		distance_couple.front.flag	 );
 		FLAG_SET(distance_couple.leftin.vol_ref,	distance_couple.leftin.flag	 );

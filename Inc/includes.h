@@ -38,7 +38,7 @@
 #include "AutoGetTask.h"
 
 
-extern int16_t times;
+extern int16_t global_catch;		//用于检测一个其他文档里，不值得设置全局变量，但是临时需要读取的数据
 //#include "visualscope.h"
 
 

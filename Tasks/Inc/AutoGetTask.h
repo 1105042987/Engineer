@@ -14,7 +14,7 @@
 
 #include "includes.h"
 
-#define CHANGE_POINT 820
+#define CHANGE_POINT 1100
 //1v/5v 	27cm
 
 #define FLAG_SET(val, flag)\

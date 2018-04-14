@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int16_t times=0;
+int16_t global_catch = 0;
 #ifdef DEBUG_MODE
 //--------------------底层接收驱动部分-------------------//
 uint8_t data;
@@ -109,7 +109,7 @@ extern int16_t channel0,channel1,channel2,channel3;
 extern int16_t GMYAWIntensity,GMPITCHIntensity,AMFBIntensity,AMUD1Intensity,AMUD2Intensity;
 extern int16_t CMBRIntensity,CMBLIntensity,CMFRIntensity,CMFLIntensity;
 extern double GMYAWRealAngle,GMPITCHRealAngle,AMFBRealAngle,AMUD1RealAngle,AMUD2RealAngle;
-extern int16_t times;
+extern int16_t global_catch;
 extern int32_t ad0,ad1,ad2,ad3,ad4;
 void dataCallBack()
 {
@@ -133,8 +133,8 @@ void dataCallBack()
 			//printf("can1 update%d can2 update%d type%d\n",can1_update,can2_update,can_type);
 			//printf("Channel %d %d %d %d \n",channel0,channel1,channel2,channel3);
 			
-			printf("times %d \n",times);
-			//printf("ad %d %d %d %d %d \n",ad0,ad1,ad2,ad3,ad4);
+			printf("global_catch %d \n",global_catch);
+			printf("ad %d %d %d %d %d \n",ad0,ad1,ad2,ad3,ad4);
 			pcnt = 0;
 		}
 		else pcnt++;

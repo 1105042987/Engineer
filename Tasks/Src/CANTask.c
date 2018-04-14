@@ -118,7 +118,6 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan){
 				AMUD2Rx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
 				break;
 			case AMFB_RXID:
-				//times++;
 				AMFBRx.angle = CanRxGetU16(AUXCanRxMsg, 0);
 				AMFBRx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
 				break;
