@@ -162,7 +162,7 @@ void Steering_Motor_Set_Angle(float angle)
 	
 	uint16_t x = angle / 180 * 1800 + 600;
 	
-	__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_3,x);
+	__HAL_TIM_SET_COMPARE(STEER_TIM,PITCH_CHANNEL,x);
 }
 
 
@@ -184,10 +184,10 @@ void GMControlInit()
 	ControlGMYAW();
 	ControlGMPITCH();
 	Steering_Motor_Set_Angle(0);
-	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
-	__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_3,0);
-	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
-	__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_4,2500);
+	HAL_TIM_PWM_Start(STEER_TIM, PITCH_CHANNEL);
+	__HAL_TIM_SET_COMPARE(STEER_TIM, PITCH_CHANNEL,0);
+	HAL_TIM_PWM_Start(STEER_TIM, GIVE_CHANNEL);
+	__HAL_TIM_SET_COMPARE(STEER_TIM, GIVE_CHANNEL, 2500);
 }
 
 

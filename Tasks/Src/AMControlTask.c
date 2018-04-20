@@ -188,7 +188,7 @@ void vice_controlLoop()
 
 		ControlAMUD1();
 		ControlAMUD2();
-		ControlAMFB();
+		//ControlAMFB();
 
 		setAMMotor();
 	

@@ -19,6 +19,15 @@
 #define CTRL_UART huart3
 #define JUDGE_UART huart6
 
+//IO重命名
+#define STEER_TIM 		&htim2
+#define GIVE_CHANNEL	TIM_CHANNEL_4
+#define PITCH_CHANNEL	TIM_CHANNEL_3
+#define DOOR_OPEN 		1500
+#define DOOR_CLOSE 		2500
+#define E_MAGNET_IO 	GPIOI, GPIO_PIN_2
+#define M_VAVLE_FB_IO	GPIOI, GPIO_PIN_0
+#define M_VAVLE_OC_IO	GPIOH, GPIO_PIN_12
 
 
 //解算数据区

@@ -35,7 +35,7 @@ double GMPITCHAngleTarget = 0;
 int8_t state1_enable = 1;
 int8_t state2_enable = 1;
 int8_t state3_enable = 1;
-int8_t state4_enable = 1;
+int8_t state4_enable = 1;//闲置
 int8_t state5_enable = 1;//闲置
 
 
@@ -94,11 +94,11 @@ void RemoteControlProcess(Remote *rc)
 		
 		if(channel3 > IGNORE_RANGE)	
 		{
-			__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4,2500);
+			__HAL_TIM_SET_COMPARE(STEER_TIM, GIVE_CHANNEL,DOOR_CLOSE);
 		}
 		else if(channel3 < -IGNORE_RANGE) 
 		{
-			__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4,1500);
+			__HAL_TIM_SET_COMPARE(STEER_TIM, GIVE_CHANNEL,DOOR_OPEN);
 		}
 		
 	}
@@ -111,12 +111,12 @@ void RemoteControlProcess(Remote *rc)
 		if(channel3 > IGNORE_RANGE) {
 			if(state1_enable){
 				state1_enable=0;
-				HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_SET);
+				HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_SET);
 				GS_REVERSAL(help_direction);
 			}
 		}
 		else if(channel3 < -4*IGNORE_RANGE) {
-			HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
 		}
 	}
 	if(WorkState == GET_STATE)
@@ -130,11 +130,23 @@ void RemoteControlProcess(Remote *rc)
 		//if(channel0 > IGNORE_RANGE) GMPITCHAngleTarget += GMANGLE_STEP*0.6;
 		//else if(channel0 < -IGNORE_RANGE) GMPITCHAngleTarget -= GMANGLE_STEP*0.6;
 		
-		if(channel1 > IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget + AMFB_ANGLE_STEP;
-		else if(channel1 < -IGNORE_RANGE) AMFBAngleTarget = AMFBAngleTarget - AMFB_ANGLE_STEP;
+		if(channel1 > IGNORE_RANGE) {
+			//AMFBAngleTarget = AMFBAngleTarget + AMFB_ANGLE_STEP;
+			HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_SET);
+		}
+		else if(channel1 < -IGNORE_RANGE) {
+			//AMFBAngleTarget = AMFBAngleTarget - AMFB_ANGLE_STEP;
+			HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_RESET);
+		}
 		
-		if(channel2 > IGNORE_RANGE) __HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1300);
-		else if(channel2 < -IGNORE_RANGE) __HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1000);
+		if(channel2 > IGNORE_RANGE) {
+			//__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1300);
+			HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_SET);
+		}
+		else if(channel2 < -IGNORE_RANGE) {
+			//__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1000);
+			HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_RESET);
+		}
 		
 		if(channel3 > IGNORE_RANGE) {
 			AMUD1AngleTarget=AMUD1AngleTarget+AMUD_ANGLE_STEP;
@@ -191,7 +203,6 @@ void KeyboardModeFSM(Key *key)
 
 void MouseKeyControlProcess(Mouse *mouse, Key *key)
 {
-	static uint8_t Bypass_State = 0;
 	static uint8_t GiveBullet_State = 0;
 	static uint8_t GiveBullet_Counter = 0;
 	static int8_t  move_direction = 1;
@@ -234,7 +245,7 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 					if(EngineerState == NOAUTO_STATE) EngineerState = START_TEST;
 					auto_direction = 'l';
 					
-					HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_RESET);
+					HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
 					GS_SET(move_direction);
 				}
 				else if(key->v & 0x1000)//x右寻
@@ -242,7 +253,7 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 					if(EngineerState == NOAUTO_STATE) EngineerState = START_TEST;
 					auto_direction = 'r';
 					
-					HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_RESET);
+					HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
 					GS_SET(move_direction);
 				}
 				else if(key->v & 0x2000)//c取消
@@ -254,13 +265,13 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 					if(state2_enable && EngineerState == NOAUTO_STATE) 
 					{
 							state2_enable = 0;
-							HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_SET);
+							HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_SET);
 							GS_REVERSAL(move_direction);
 					}
 				}
 				if(key->v & 0x1)//w取消救援，锁定正向
 				{
-						HAL_GPIO_WritePin(GPIOI, GPIO_PIN_2, GPIO_PIN_RESET);
+						HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
 						GS_SET(move_direction);
 				}
 				
@@ -287,25 +298,27 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 				}
 				
 				if(key->v & 0x400)//g 前伸
-					AMFBAngleTarget = AMFBAngleTarget + AMFB_ANGLE_STEP;
+				{
+					//AMFBAngleTarget = AMFBAngleTarget + AMFB_ANGLE_STEP;
+					HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_SET);
+				}
 				else if(key->v & 0x8000)//b 回缩
-					AMFBAngleTarget = AMFBAngleTarget - AMFB_ANGLE_STEP;
-
+				{
+					//AMFBAngleTarget = AMFBAngleTarget - AMFB_ANGLE_STEP;
+					HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_RESET);
+				}
 				Limit_Position();
 				
-				//Bypass Motor
-				if (key->v & 0x200)//f
+				//Bypass Motor or Magnet value claw catch/release
+				if (key->v & 0x200)//f	catch
 				{	
-					if(state4_enable) 
-					{
-						Bypass_State = Bypass_State ^ 0x1;
-						if(Bypass_State) 
-							__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1300);
-						else 
-							__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1000);
-						
-						state4_enable=0;
-					}
+					//__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1300);
+					HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_SET);
+				}
+				else if (key->v & 0x100)//r 	release
+				{
+					//__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1000);
+					HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_RESET);
 				}
 				//注意这里不用break！
 			}
@@ -339,9 +352,9 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 			GiveBullet_Counter+=state3_enable;
 			state3_enable = 0;
 			if(GiveBullet_Counter <= 5)
-				__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4,1500);
+				__HAL_TIM_SET_COMPARE(STEER_TIM, GIVE_CHANNEL, DOOR_OPEN);
 			else {
-				__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4,2500);
+				__HAL_TIM_SET_COMPARE(STEER_TIM, GIVE_CHANNEL, DOOR_CLOSE);
 				GiveBullet_State = 0;
 			}
 		}
