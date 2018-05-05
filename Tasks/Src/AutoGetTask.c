@@ -17,7 +17,6 @@ extern uint32_t ADC_Value[];
 
 void RefreshAnologRead()
 {
-	global_catch++;
 		for(uint16_t i=0;i<100;i++)
 		{
 			if(i%5==0)ad0+=ADC_Value[i];
@@ -55,12 +54,12 @@ void RefreshAnologRead()
 uint8_t Auto_StartTest(char signal)
 {
 	if(distance_couple.move_flags == 0x0) return 0;
-	switch(signal)
-	{
-		case 'l':if(distance_couple.move_flags == 0x1) return 0;break;
-		case 'r':if(distance_couple.move_flags == 0x8) return 0;break;
-		default:break;
-	}
+	//switch(signal)
+	//{
+		//case 'l':if(distance_couple.move_flags == 0x1) return 0;break;
+		//case 'r':if(distance_couple.move_flags == 0x8) return 0;break;
+		//default:break;
+	//}
 	return 1;
 }
 
@@ -68,9 +67,9 @@ int8_t Auto_ShiftTest(char signal)
 {
 	if(Auto_StartTest(signal))
 	{
-		if(distance_couple.move_flags == 0x3 ||
-				distance_couple.move_flags == 0x4 ||
-				distance_couple.move_flags == 0x6)
+		if(distance_couple.move_flags == 0x6) //||
+				//distance_couple.move_flags == 0x4 ||
+				//distance_couple.move_flags == 0x6)
 		return 1;
 		else return 0;
 	}
@@ -92,17 +91,18 @@ void AutoGet(char signal)
 		}
 		case LEVEL_SHIFT:
 		{
-			ChassisSpeedRef.forward_back_ref += 30;
+			ChassisSpeedRef.forward_back_ref = -10;
 			auto_flag = Auto_ShiftTest(signal);
+			global_catch = auto_flag;
 			switch(auto_flag)
 			{
 				case 1: 
-					EngineerState = HEIGHT_ADJUST;
+					EngineerState = LEVEL_SHIFT;
 					break;
 				case 0:
 					if(signal == 'l')
-						ChassisSpeedRef.left_right_ref -= 30;
-					else ChassisSpeedRef.left_right_ref += 30;
+						ChassisSpeedRef.left_right_ref = 25;
+					else ChassisSpeedRef.left_right_ref = -25;
 					break;
 				case -1:
 					EngineerState = NOAUTO_STATE;
@@ -112,8 +112,6 @@ void AutoGet(char signal)
 		}
 		case HEIGHT_ADJUST:
 		{
-			ChassisSpeedRef.forward_back_ref += 30;
-			
 			if(distance_couple.move_flags == 0x0)
 			{
 				if(auto_flag > 50)
@@ -123,30 +121,21 @@ void AutoGet(char signal)
 				}
 				else {
 					auto_flag++;
-					AMUD1AngleTarget += AMUD_ANGLE_STEP;
-					AMUD2AngleTarget += AMUD_ANGLE_STEP;
+					AMUDAngleTarget += AMUD_ANGLE_STEP;
 				}
 			}
 			else {
-				AMUD1AngleTarget += AMUD_ANGLE_STEP;
-				AMUD2AngleTarget += AMUD_ANGLE_STEP;
+				AMUDAngleTarget += AMUD_ANGLE_STEP;
 				auto_flag = 0;
 			}
 			
-			if(AMUD1AngleTarget < -400) //越界 AMANGLE_STEP是负值
+			if(AMUDAngleTarget < -400) //越界 AMANGLE_STEP是负值
 				EngineerState = ERROR_HANDLE;
 			
 			break;
 		}
 		case ARM_STRETCH:
 		{
-			ChassisSpeedRef.forward_back_ref += 30;
-			
-			if(distance_couple.front.flag) EngineerState = BULLET_GET;
-			else AMFBAngleTarget += AMFB_ANGLE_STEP;
-			
-			if(AMFBAngleTarget < -400) //越界
-				EngineerState = ERROR_HANDLE;
 			
 			break;
 		}	
@@ -160,11 +149,9 @@ void AutoGet(char signal)
 		}
 		case ERROR_HANDLE:
 		{
-			if(AMFBAngleTarget < -10 || AMUD1AngleTarget < -10) 
+			if(AMUDAngleTarget < -10) 
 			{
-				AMFBAngleTarget -= AMFB_ANGLE_STEP;
-				AMUD1AngleTarget -= AMUD_ANGLE_STEP;
-				AMUD2AngleTarget -= AMUD_ANGLE_STEP;
+				AMUDAngleTarget -= AMUD_ANGLE_STEP;
 			}
 			else{
 				

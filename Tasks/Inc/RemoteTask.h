@@ -165,9 +165,7 @@ extern ChassisSpeed_Ref_t ChassisSpeedRef;
 extern InputMode_e inputmode;
 extern FunctionMode_e functionmode;
 extern float rotate_speed;
-extern double AMUD1AngleTarget;
-extern double AMUD2AngleTarget;
-extern double AMFBAngleTarget;
+extern double AMUDAngleTarget;
 extern double GMYAWAngleTarget;
 extern double GMPITCHAngleTarget;
 

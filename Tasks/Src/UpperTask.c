@@ -106,11 +106,12 @@ uint8_t ComProtocal(char*rxbuf,char*head,char*end,char* separater,char dataout[]
 //--------------------任务循环部分-------------------//
 //debug监测变量
 extern int16_t channel0,channel1,channel2,channel3;
-extern int16_t GMYAWIntensity,GMPITCHIntensity,AMFBIntensity,AMUD1Intensity,AMUD2Intensity;
+extern int16_t GMYAWIntensity,GMPITCHIntensity,AMUDIntensity;
 extern int16_t CMBRIntensity,CMBLIntensity,CMFRIntensity,CMFLIntensity;
-extern double GMYAWRealAngle,GMPITCHRealAngle,AMFBRealAngle,AMUD1RealAngle,AMUD2RealAngle;
+extern double GMYAWRealAngle,GMPITCHRealAngle,AMUDRealAngle;
 extern int16_t global_catch;
 extern int32_t ad0,ad1,ad2,ad3,ad4;
+extern Distance_Couple_t distance_couple;
 void dataCallBack()
 {
 	static uint16_t pcnt = 0;
@@ -120,9 +121,7 @@ void dataCallBack()
 			//printf("GSYAW:\t GMYAWAngleTarget: %f\r\n",GMYAWAngleTarget);
 			//printf("GMPITCH:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", GMPITCHIntensity,GMPITCHRealAngle,GMPITCHAngleTarget);
 			
-			//printf("AMFB:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", AMFBIntensity,AMFBRealAngle,AMFBAngleTarget);
-			//printf("AMUD1:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", AMUD1Intensity,AMUD1RealAngle,AMUD1AngleTarget);
-			//printf("AMUD2:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", AMUD2Intensity,AMUD2RealAngle,AMUD2AngleTarget);
+			printf("AMUD:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", AMUDIntensity,AMUDRealAngle,AMUDAngleTarget);
 			
 			
 			//printf("CMIntensity %d %d %d %d \n",CMBRIntensity,CMBLIntensity,CMFRIntensity,CMFLIntensity);
@@ -131,10 +130,11 @@ void dataCallBack()
 			//printf("AMrx angle SIDE%d UD%d %d FB%d GMPITCH%d \n",GMYAWRx.angle,AMUD1Rx.angle,AMUD2Rx.angle,AMFBRx.angle,GMPITCHRx.angle);
 			
 			//printf("can1 update%d can2 update%d type%d\n",can1_update,can2_update,can_type);
-			//printf("Channel %d %d %d %d \n",channel0,channel1,channel2,channel3);
+			//printf("Channel %d %d %d %d \r\n",channel0,channel1,channel2,channel3);
 			
-			printf("global_catch %d \n",global_catch);
-			printf("ad %d %d %d %d %d \n",ad0,ad1,ad2,ad3,ad4);
+			//printf("global_catch %d \r\n",global_catch);
+			//printf("flags %d\r\n",distance_couple.move_flags);
+			//printf("ad %d %d %d %d %d \n",ad0,ad1,ad2,ad3,ad4);
 			pcnt = 0;
 		}
 		else pcnt++;

@@ -25,9 +25,7 @@ KeyboardMode_e KeyboardMode=NO_CHANGE;
 
 float rotate_speed;
 
-double AMUD1AngleTarget = 0;
-double AMUD2AngleTarget = 0; 	//0 -> -400
-double AMFBAngleTarget = 0;		//0 -> -400
+double AMUDAngleTarget = 0;//0 -> -400
 
 double GMYAWAngleTarget = 0;
 double GMPITCHAngleTarget = 0;
@@ -48,9 +46,7 @@ void RemoteTaskInit()
 	FBSpeedRamp.ResetCounter(&FBSpeedRamp);
 	
 	//机械臂电机目标物理角度值
-	AMUD1AngleTarget = 0;
-	AMUD2AngleTarget = 0;
-	AMFBAngleTarget = 0;
+	AMUDAngleTarget = 0;
 	GMYAWAngleTarget = 0;
 	GMPITCHAngleTarget = 0;
 	/*底盘速度初始化*/
@@ -71,9 +67,7 @@ int16_t channel3 = 0;
 
 void Limit_Position()
 {
-	VAL_LIMIT(AMFBAngleTarget, -400,-5);
-	VAL_LIMIT(AMUD1AngleTarget,-400,-5);
-	VAL_LIMIT(AMUD2AngleTarget,-400,-5);
+	//VAL_LIMIT(AMUDAngleTarget, -400,-5);
 }
 
 void RemoteControlProcess(Remote *rc)
@@ -149,12 +143,10 @@ void RemoteControlProcess(Remote *rc)
 		}
 		
 		if(channel3 > IGNORE_RANGE) {
-			AMUD1AngleTarget=AMUD1AngleTarget+AMUD_ANGLE_STEP;
-			AMUD2AngleTarget=AMUD2AngleTarget+AMUD_ANGLE_STEP;
+			AMUDAngleTarget=AMUDAngleTarget+AMUD_ANGLE_STEP;
 		}
 		else if(channel3 < -IGNORE_RANGE) {
-			AMUD1AngleTarget=AMUD1AngleTarget-AMUD_ANGLE_STEP;
-			AMUD2AngleTarget=AMUD2AngleTarget-AMUD_ANGLE_STEP;
+			AMUDAngleTarget=AMUDAngleTarget-AMUD_ANGLE_STEP;
 		}
 		
 		Limit_Position();
@@ -288,13 +280,11 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 			{//AM Movement Process
 				if(key->v & 0x2000)//c 上升
 				{
-					AMUD1AngleTarget=AMUD1AngleTarget+AMUD_ANGLE_STEP;
-					AMUD2AngleTarget=AMUD2AngleTarget+AMUD_ANGLE_STEP;
+					AMUDAngleTarget=AMUDAngleTarget+AMUD_ANGLE_STEP;
 				}
 				else if(key->v & 0x4000)//v 下降
 				{
-					AMUD1AngleTarget=AMUD1AngleTarget-AMUD_ANGLE_STEP;
-					AMUD2AngleTarget=AMUD2AngleTarget-AMUD_ANGLE_STEP;
+					AMUDAngleTarget=AMUDAngleTarget-AMUD_ANGLE_STEP;
 				}
 				
 				if(key->v & 0x400)//g 前伸

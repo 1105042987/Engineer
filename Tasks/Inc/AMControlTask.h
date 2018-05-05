@@ -16,11 +16,11 @@
 
 #include "includes.h"
 
-#define AMReduction 36.0
+#define AMReduction 19.0
 #define BYPASS_TIM htim12
 
 #define AMFB_ANGLE_STEP -3.5
-#define AMUD_ANGLE_STEP -2.8
+#define AMUD_ANGLE_STEP 2.8
 
 void vice_controlLoop(void);
 void AMControlInit(void);

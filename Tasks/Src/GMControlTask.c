@@ -33,7 +33,7 @@ static uint8_t GMYAWFirstEnter = 1;
 static uint8_t GMPITCHFirstEnter = 1;
 
 //云台电机CAN信号控制
-void setGMMotor()
+/*void setGMMotor()
 {
 	CanTxMsgTypeDef pData;
 	GMMOTOR_CAN.pTxMsg = &pData;
@@ -78,7 +78,7 @@ void setGMMotor()
 			HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
 		#endif
   }
-}
+}*/
 
 void ControlGMYAW()
 {
