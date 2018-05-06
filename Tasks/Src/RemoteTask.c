@@ -109,7 +109,7 @@ void RemoteControlProcess(Remote *rc)
 				GS_REVERSAL(help_direction);
 			}
 		}
-		else if(channel3 < -4*IGNORE_RANGE) {
+		else if(channel3 < IGNORE_RANGE) {
 			HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
 		}
 	}

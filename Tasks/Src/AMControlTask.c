@@ -109,7 +109,7 @@ void ControlAMUD()
 			StandardlizeAMRealAngle(&AMUDRealAngle,ThisAngle,AMUDLastAngle);//处理
 			ThisSpeed = AMUDRx.RotateSpeed * 6;		//单位：度每秒
 			
-			AMUDIntensity = -PID_PROCESS_Double(AMUDPositionPID,AMUDSpeedPID,AMUDAngleTarget,AMUDRealAngle,ThisSpeed);
+			AMUDIntensity = PID_PROCESS_Double(AMUDPositionPID,AMUDSpeedPID,AMUDAngleTarget,AMUDRealAngle,ThisSpeed);
 			
 			s_AMUDCount = 0;
 			AMUDLastAngle = ThisAngle;

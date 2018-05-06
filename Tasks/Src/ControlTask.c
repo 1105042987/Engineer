@@ -58,7 +58,7 @@ void ControlCMFL(void)
 void ControlCMFR(void)
 {			
 	CM2SpeedPID.ref = - ChassisSpeedRef.forward_back_ref*0.075 
-										 + ChassisSpeedRef.left_right_ref*0.075 
+										 - ChassisSpeedRef.left_right_ref*0.075 
 										 + ChassisSpeedRef.rotate_ref*0.075;
 	CM2SpeedPID.ref = 160 * CM2SpeedPID.ref;
 			
@@ -86,7 +86,7 @@ void ControlCMBL(void)
 void ControlCMBR(void)
 {		
 	CM4SpeedPID.ref = - ChassisSpeedRef.forward_back_ref*0.075 
-											 - ChassisSpeedRef.left_right_ref*0.075 
+											 + ChassisSpeedRef.left_right_ref*0.075 
 											 + ChassisSpeedRef.rotate_ref*0.075;
 	CM4SpeedPID.ref = 160 * CM4SpeedPID.ref;
 			
@@ -295,7 +295,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		
 		#ifdef DEBUG_MODE
 		//zykProcessData();
-		dataCallBack();
+		//dataCallBack();
 		#endif
 	}
 }

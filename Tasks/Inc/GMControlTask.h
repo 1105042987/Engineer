@@ -23,7 +23,7 @@
 
 extern float GSYAW_ZERO;
 
-#define GS_SET(DIR)\
+#define GS_RESET(DIR)\
 {\
 	if(GSYAW_ZERO < 40) \
 		{\
@@ -32,7 +32,7 @@ extern float GSYAW_ZERO;
 		}\
 }\
 
-#define GS_RESET(DIR)\
+#define GS_SET(DIR)\
 {\
 	if(GSYAW_ZERO > 140) \
 		{\

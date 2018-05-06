@@ -179,7 +179,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>(106=-1,-1,-1,-1,0)(107=-1,-1,-1,-1,0)</Name>
+          <Name>(105=-1,-1,-1,-1,0)</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -212,27 +212,17 @@
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>AMFBAngleTarget</ItemText>
+          <ItemText>AMUDIntensity</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>AMFBRealAngle</ItemText>
+          <ItemText>AMUDRealAngle</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>can_type</ItemText>
-        </Ww>
-        <Ww>
-          <count>6</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>can2_update</ItemText>
-        </Ww>
-        <Ww>
-          <count>7</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>rc_update</ItemText>
+          <ItemText>AMUDAngleTarget</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
