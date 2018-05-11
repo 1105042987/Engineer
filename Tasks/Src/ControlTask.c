@@ -58,7 +58,7 @@ void ControlCMFL(void)
 void ControlCMFR(void)
 {			
 	CM2SpeedPID.ref = - ChassisSpeedRef.forward_back_ref*0.075 
-										 - ChassisSpeedRef.left_right_ref*0.075 
+										 + ChassisSpeedRef.left_right_ref*0.075 
 										 + ChassisSpeedRef.rotate_ref*0.075;
 	CM2SpeedPID.ref = 160 * CM2SpeedPID.ref;
 			
@@ -86,7 +86,7 @@ void ControlCMBL(void)
 void ControlCMBR(void)
 {		
 	CM4SpeedPID.ref = - ChassisSpeedRef.forward_back_ref*0.075 
-											 + ChassisSpeedRef.left_right_ref*0.075 
+											- ChassisSpeedRef.left_right_ref*0.075 
 											 + ChassisSpeedRef.rotate_ref*0.075;
 	CM4SpeedPID.ref = 160 * CM4SpeedPID.ref;
 			
@@ -169,7 +169,12 @@ void WorkStateFSM(void)
 		case PREPARE_STATE:			//准备模式
 		{
 			if (inputmode == STOP) WorkState = STOP_STATE;
-			if(prepare_time < 3000) prepare_time++;
+			if(prepare_time < 3000) 
+			{
+				prepare_time++;
+				AMUDAngleTarget = 0;
+				AMControlInit();
+			}
 			if(prepare_time == 3000)//开机三秒进入正常模式
 			{
 				WorkState = NORMAL_STATE;
@@ -236,11 +241,7 @@ void controlLoop()
 	}
 }
 
-extern int8_t state1_enable;
-extern int8_t state2_enable;
-extern int8_t state3_enable;
-extern int8_t state4_enable;
-extern int8_t state5_enable;
+extern int32_t auto_counter;
 
 //时间中断入口函数
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
@@ -253,23 +254,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		controlLoop();
 		
 		HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
-		
-		static uint8_t dithering_elimination_counter =0;
-		if(dithering_elimination_counter<200)	//0.4s定时器，消抖
-			dithering_elimination_counter++;
-		else 
-		{
-			dithering_elimination_counter=0;
-			state1_enable = 1;
-			state2_enable = 1;
-			state3_enable = 1;
-			state4_enable = 1;
-			state5_enable = 1;
-		}
 	}
 	else if (htim->Instance == htim7.Instance)//ims时钟
 	{
 		rc_cnt++;
+		if(auto_counter > 0) auto_counter--;
 		if (rc_update)
 		{
 			if( (rc_cnt <= 17) && (rc_first_frame == 1))

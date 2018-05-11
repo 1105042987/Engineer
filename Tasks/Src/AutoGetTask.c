@@ -33,8 +33,8 @@ void RefreshAnologRead()
 		ad4 = ad4 / 20 - 0;	//leftin
 		
 		distance_couple.front.vol_ref    = ad0;
-		distance_couple.leftin.vol_ref   = ad4;
-		distance_couple.leftout.vol_ref  = ad3;
+		distance_couple.leftin.vol_ref   = ad3;
+		distance_couple.leftout.vol_ref  = ad4;
 		distance_couple.rightin.vol_ref  = ad2;
 		distance_couple.rightout.vol_ref = ad1;
 		
@@ -54,12 +54,12 @@ void RefreshAnologRead()
 uint8_t Auto_StartTest(char signal)
 {
 	if(distance_couple.move_flags == 0x0) return 0;
-	//switch(signal)
-	//{
-		//case 'l':if(distance_couple.move_flags == 0x1) return 0;break;
-		//case 'r':if(distance_couple.move_flags == 0x8) return 0;break;
-		//default:break;
-	//}
+	switch(signal)
+	{
+		case 'l':if(distance_couple.move_flags == 0x1) return 0;break;
+		case 'r':if(distance_couple.move_flags == 0x8) return 0;break;
+		default:break;
+	}
 	return 1;
 }
 
@@ -67,37 +67,57 @@ int8_t Auto_ShiftTest(char signal)
 {
 	if(Auto_StartTest(signal))
 	{
-		if(distance_couple.move_flags == 0x6) //||
-				//distance_couple.move_flags == 0x4 ||
-				//distance_couple.move_flags == 0x6)
+		if(distance_couple.move_flags == 0x6 ||
+				distance_couple.move_flags == 0x4 ||
+				distance_couple.move_flags == 0x2)
 		return 1;
 		else return 0;
 	}
 	else return -1;
 }
 
+uint32_t auto_counter=0;
+
+#define AUTODELAY(TIM,execution)\
+{\
+	static uint8_t flag = 1;\
+	if(flag)\
+	{\
+		flag = 0;\
+		auto_counter = TIM;\
+	}\
+	if(!auto_counter)\
+	{\
+		flag = 1;\
+		execution\
+	}\
+}
 
 void AutoGet(char signal)
 {
 	static int8_t auto_flag;
+	static uint8_t step = 0;
+	
 	RefreshAnologRead();
 	switch(EngineerState)
 	{
 		case START_TEST:
 		{
-			if(Auto_StartTest(signal)) EngineerState = LEVEL_SHIFT;
-			else EngineerState = ERROR_HANDLE;
-			break;
+			AUTODELAY(1000,{
+				EngineerState = LEVEL_SHIFT;
+			});
 		}
 		case LEVEL_SHIFT:
 		{
-			ChassisSpeedRef.forward_back_ref = -10;
+			ChassisSpeedRef.forward_back_ref = -5;
 			auto_flag = Auto_ShiftTest(signal);
 			global_catch = auto_flag;
 			switch(auto_flag)
 			{
 				case 1: 
-					EngineerState = LEVEL_SHIFT;
+					auto_counter = 500;
+					EngineerState = ARM_STRETCH;
+					//EngineerState = LEVEL_SHIFT;
 					break;
 				case 0:
 					if(signal == 'l')
@@ -105,58 +125,48 @@ void AutoGet(char signal)
 					else ChassisSpeedRef.left_right_ref = -25;
 					break;
 				case -1:
-					EngineerState = NOAUTO_STATE;
+					EngineerState = ERROR_HANDLE;
 					break;
 			}
 			break;
 		}
-		case HEIGHT_ADJUST:
-		{
-			if(distance_couple.move_flags == 0x0)
-			{
-				if(auto_flag > 50)
-				{
-					EngineerState = ARM_STRETCH;
-					auto_flag = 0;
-				}
-				else {
-					auto_flag++;
-					AMUDAngleTarget += AMUD_ANGLE_STEP;
-				}
-			}
-			else {
-				AMUDAngleTarget += AMUD_ANGLE_STEP;
-				auto_flag = 0;
-			}
-			
-			if(AMUDAngleTarget < -400) //越界 AMANGLE_STEP是负值
-				EngineerState = ERROR_HANDLE;
-			
-			break;
-		}
 		case ARM_STRETCH:
 		{
-			
+			if(!auto_counter)
+			{
+				auto_counter=1000;
+				if(step == 9) {
+					step=0;
+					EngineerState = ERROR_HANDLE;
+				}
+				switch(step)
+				{
+					case 0: AMUDAngleTarget -= 200;	HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_RESET);	break;	//释放
+					case 1: auto_counter=3000;			ChassisSpeedRef.forward_back_ref = 40;						break;	//自行后退
+					case 2: auto_counter=3000;			ChassisSpeedRef.forward_back_ref = -40;										//自行前进
+																					HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_SET);		break;	//前伸
+					case 3:	auto_counter=1500;			HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_SET);		break;	//抓紧
+					case 4:	if(AMUDAngleTarget > 900)																						//抬高
+										{											AMUDAngleTarget = 1300;}
+									else
+										{auto_counter=4000;		AMUDAngleTarget = 1300;}
+									break;	
+					case 5: auto_counter=6000;			HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_RESET);	break;	//回缩
+					case 6: 												HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_SET);		break;	//前伸
+					case 7: 												HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_RESET);	break;	//释放
+					case 8: 												HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_RESET);	break;	//回缩
+				}
+				step++;
+			}
 			break;
 		}	
-		case BULLET_GET:
-		{
-			
-			
-			
-			
-			break;
-		}
 		case ERROR_HANDLE:
 		{
-			if(AMUDAngleTarget < -10) 
-			{
-				AMUDAngleTarget -= AMUD_ANGLE_STEP;
-			}
-			else{
-				
-			}
-			break;
+			AMUDAngleTarget = 10;																//降低
+			HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_RESET);		//回缩
+			HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_RESET);		//释放
+			step = 0;
+			EngineerState = NOAUTO_STATE;
 		}
 		case NOAUTO_STATE:
 			break;

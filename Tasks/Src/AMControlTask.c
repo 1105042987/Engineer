@@ -16,7 +16,7 @@ extern uint16_t GMPITCHIntensity;
 
 fw_PID_Regulator_t AMUDPositionPID = fw_PID_INIT(1200.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
 
-fw_PID_Regulator_t AMUDSpeedPID = fw_PID_INIT(0.7, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
+fw_PID_Regulator_t AMUDSpeedPID = fw_PID_INIT(1.5, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
 
 
 
@@ -47,8 +47,8 @@ void setAGMMotor()
 	AGMOTOR_CAN.pTxMsg->Data[1] = (uint8_t)AMUDIntensity;
 	AGMOTOR_CAN.pTxMsg->Data[2] = (uint8_t)(GMPITCHIntensity >> 8);
 	AGMOTOR_CAN.pTxMsg->Data[3] = (uint8_t)GMPITCHIntensity;
-	AGMOTOR_CAN.pTxMsg->Data[4] = 0;
-	AGMOTOR_CAN.pTxMsg->Data[5] = 0;
+	AGMOTOR_CAN.pTxMsg->Data[4] = (uint8_t)((-AMUDIntensity) >> 8);
+	AGMOTOR_CAN.pTxMsg->Data[5] = (uint8_t)(-AMUDIntensity);
 	AGMOTOR_CAN.pTxMsg->Data[6] = 0;
 	AGMOTOR_CAN.pTxMsg->Data[7] = 0;
 

@@ -19,7 +19,7 @@
 #define GMYAWReduction 96.0
 #define GMPITCHReduction 36.0
 
-#define TURN_BACK 156
+#define TURN_BACK 170
 
 extern float GSYAW_ZERO;
 
@@ -28,15 +28,17 @@ extern float GSYAW_ZERO;
 	if(GSYAW_ZERO < 40) \
 		{\
 			GSYAW_ZERO += TURN_BACK;\
+			GMPITCHAngleTarget = 0;\
 			DIR=1;\
 		}\
 }\
 
 #define GS_SET(DIR)\
 {\
-	if(GSYAW_ZERO > 140) \
+	if(GSYAW_ZERO > 120) \
 		{\
 			GSYAW_ZERO -= TURN_BACK;\
+			GMPITCHAngleTarget = 0;\
 			DIR=-1;\
 		}\
 }\
@@ -46,11 +48,13 @@ extern float GSYAW_ZERO;
 	if(GSYAW_ZERO < 40) \
 		{\
 			GSYAW_ZERO += TURN_BACK;\
+			GMPITCHAngleTarget = 0;\
 			DIR=1;\
 		}\
-	else if(GSYAW_ZERO > 140) \
+	else if(GSYAW_ZERO > 120) \
 		{\
 			GSYAW_ZERO -= TURN_BACK;\
+			GMPITCHAngleTarget = 0;\
 			DIR=-1;\
 		}\
 }\

@@ -20,14 +20,15 @@
 #define JUDGE_UART huart6
 
 //IO重命名
-#define STEER_TIM 		&htim2
-#define GIVE_CHANNEL	TIM_CHANNEL_4
-#define PITCH_CHANNEL	TIM_CHANNEL_3
-#define DOOR_OPEN 		1500
-#define DOOR_CLOSE 		2500
-#define E_MAGNET_IO 	GPIOI, GPIO_PIN_2
-#define M_VAVLE_FB_IO	GPIOI, GPIO_PIN_0
-#define M_VAVLE_OC_IO	GPIOH, GPIO_PIN_12
+#define STEER_TIM 			&htim2
+#define YAW_CHANNEL			TIM_CHANNEL_2
+#define GIVESML_CHANNEL	TIM_CHANNEL_3
+#define GIVEBIG_CHANNEL	TIM_CHANNEL_4
+#define BDOOR_CLOSE 			1300
+#define SDOOR_CLOSE 			1500
+#define E_MAGNET_IO 		GPIOI, GPIO_PIN_2
+#define M_VAVLE_FB_IO		GPIOI, GPIO_PIN_0
+#define M_VAVLE_OC_IO		GPIOH, GPIO_PIN_12
 
 
 //解算数据区
@@ -45,23 +46,23 @@
 
 #define IGNORE_RANGE 200
 
-//键鼠常量数据区
-//Bit0-----W			0x1
-//Bit1-----S			0x2
-//Bit2-----A			0x4
-//Bit3-----D			0x8
-//Bit4-----Shift	0x10
-//Bit5-----Ctrl		0x20
-//Bit6-----Q			0x40
-//Bit7-----E			0x80
-//Bit8-----R			0x100
-//Bit9-----F			0x200
-//Bit10-----G			0x400
-//Bit11-----Z			0x800
-//Bit12-----X			0x1000
-//Bit13-----C			0x2000
-//Bit14-----V			0x4000
-//Bit15-----B			0x8000
+#define KEY_W			0x1
+#define KEY_S			0x2
+#define KEY_A			0x4
+#define KEY_D			0x8
+#define KEY_SHIFT	0x10
+#define KEY_CTRL	0x20
+#define KEY_Q			0x40
+#define KEY_E			0x80
+#define KEY_R			0x100
+#define KEY_F			0x200
+#define KEY_G			0x400
+#define KEY_Z			0x800
+#define KEY_X			0x1000
+#define KEY_C			0x2000
+#define KEY_V			0x4000
+#define KEY_B			0x8000
+
 #define NORMAL_FORWARD_BACK_SPEED 	400
 #define NORMAL_LEFT_RIGHT_SPEED  		400
 #define HIGH_FORWARD_BACK_SPEED 		600
@@ -76,6 +77,30 @@
 
 
 
+#define OnePush(button,execution)\
+{\
+	static uint8_t cache;\
+	static uint8_t cnt=0;\
+	 if(cache != button){\
+		cache = button;\
+		cnt = 0;\
+	}\
+	else if(cnt == 5){\
+		if(cache) execution;\
+		cnt=11;\
+	}\
+	else if(cnt < 5) cnt++;\
+}
+
+#define Delay(TIM,execution)\
+{\
+	static uint16_t time=TIM;\
+	if(!time--)\
+	{\
+		time = TIM;\
+		execution;\
+	}\
+}
 
 #define VAL_LIMIT(val, min, max)\
 if(val<=min)\
