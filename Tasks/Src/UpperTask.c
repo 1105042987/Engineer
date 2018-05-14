@@ -108,7 +108,7 @@ uint8_t ComProtocal(char*rxbuf,char*head,char*end,char* separater,char dataout[]
 extern int16_t channel0,channel1,channel2,channel3;
 extern int16_t GMYAWIntensity,GMPITCHIntensity,AMUDIntensity;
 extern int16_t CMBRIntensity,CMBLIntensity,CMFRIntensity,CMFLIntensity;
-extern double GMYAWRealAngle,GMPITCHRealAngle,AMUDRealAngle;
+extern double GMYAWRealAngle,GMPITCHRealAngle,AMUD1RealAngle,AMUD2RealAngle;
 extern int16_t global_catch;
 extern int32_t ad0,ad1,ad2,ad3,ad4;
 extern Distance_Couple_t distance_couple;
@@ -121,7 +121,7 @@ void dataCallBack()
 			//printf("GSYAW:\t GMYAWAngleTarget: %f\r\n",GMYAWAngleTarget);
 			//printf("GMPITCH:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", GMPITCHIntensity,GMPITCHRealAngle,GMPITCHAngleTarget);
 			
-			printf("AMUD:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", AMUDIntensity,AMUDRealAngle,AMUDAngleTarget);
+			//printf("AMUD:\t Intensity %d,RealAngle %f,TargetAngle %f\r\n", AMUDIntensity,AMUDRealAngle,AMUDAngleTarget);
 			
 			
 			//printf("CMIntensity %d %d %d %d \n",CMBRIntensity,CMBLIntensity,CMFRIntensity,CMFLIntensity);

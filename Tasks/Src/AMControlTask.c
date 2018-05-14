@@ -11,26 +11,31 @@
   */
 #include "includes.h"
 
-uint16_t AMUDIntensity=0;
+uint16_t AMUD1Intensity=0;
+uint16_t AMUD2Intensity=0;
 extern uint16_t GMPITCHIntensity;
 
 fw_PID_Regulator_t AMUDPositionPID = fw_PID_INIT(1200.0, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 10000.0);
 
-fw_PID_Regulator_t AMUDSpeedPID = fw_PID_INIT(1.5, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
+fw_PID_Regulator_t AMUDSpeedPID = fw_PID_INIT(1, 0.0, 0.0, 10000.0, 10000.0, 10000.0, 4000.0);
 
 
 
 //机械臂电机实际物理角度值
-double AMUDRealAngle = 0.0;
+double AMUD1RealAngle = 0.0;
+double AMUD2RealAngle = 0.0;
 
 //机械臂电机上次物理角度值
-uint16_t AMUDLastAngle = 0.0;
+uint16_t AMUD1LastAngle = 0.0;
+uint16_t AMUD2LastAngle = 0.0;
 
 //是否初次进入
-static uint8_t AMUDFirstEnter = 1;
+static uint8_t AMUD1FirstEnter = 1;
+static uint8_t AMUD2FirstEnter = 1;
 
 //用于减小系统开销
-static uint8_t s_AMUDCount = 0;
+static uint8_t s_AMUD1Count = 0;
+static uint8_t s_AMUD2Count = 0;
 
 void setAGMMotor()
 {
@@ -43,16 +48,16 @@ void setAGMMotor()
 	AGMOTOR_CAN.pTxMsg->RTR = CAN_RTR_DATA;
 	AGMOTOR_CAN.pTxMsg->DLC = 0x08;
 	
-	AGMOTOR_CAN.pTxMsg->Data[0] = (uint8_t)(AMUDIntensity >> 8);
-	AGMOTOR_CAN.pTxMsg->Data[1] = (uint8_t)AMUDIntensity;
+	AGMOTOR_CAN.pTxMsg->Data[0] = (uint8_t)(AMUD1Intensity >> 8);
+	AGMOTOR_CAN.pTxMsg->Data[1] = (uint8_t)AMUD1Intensity;
 	AGMOTOR_CAN.pTxMsg->Data[2] = (uint8_t)(GMPITCHIntensity >> 8);
 	AGMOTOR_CAN.pTxMsg->Data[3] = (uint8_t)GMPITCHIntensity;
-	AGMOTOR_CAN.pTxMsg->Data[4] = (uint8_t)((-AMUDIntensity) >> 8);
-	AGMOTOR_CAN.pTxMsg->Data[5] = (uint8_t)(-AMUDIntensity);
+	AGMOTOR_CAN.pTxMsg->Data[4] = (uint8_t)(AMUD2Intensity >> 8);
+	AGMOTOR_CAN.pTxMsg->Data[5] = (uint8_t)AMUD2Intensity;
 	AGMOTOR_CAN.pTxMsg->Data[6] = 0;
 	AGMOTOR_CAN.pTxMsg->Data[7] = 0;
 
-	if(can1_update == 1 && can_type == 1)
+	if(can2_update == 1)
 	{
 		HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
 		HAL_NVIC_DisableIRQ(CAN2_RX0_IRQn);
@@ -66,8 +71,7 @@ void setAGMMotor()
 		{
 			Error_Handler();
 		}
-		can1_update = 0;
-		can_type = 0;
+		can2_update = 0;
 		HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(USART1_IRQn);
@@ -98,25 +102,46 @@ void StandardlizeAMRealAngle(double* AMRealAngle,uint16_t AMThisAngle,uint16_t A
 }
 
 
-void ControlAMUD()
+void ControlAMUD1()
 {
-		if(s_AMUDCount == 1)
+		if(s_AMUD1Count == 1)
 		{		
 			uint16_t 	ThisAngle;	
 			double 		ThisSpeed;	
-			ThisAngle = AMUDRx.angle;							//未处理角度
-			if(AMUDFirstEnter==1) {AMUDLastAngle = ThisAngle;AMUDFirstEnter = 0;return;}
-			StandardlizeAMRealAngle(&AMUDRealAngle,ThisAngle,AMUDLastAngle);//处理
-			ThisSpeed = AMUDRx.RotateSpeed * 6;		//单位：度每秒
+			ThisAngle = AMUD1Rx.angle;							//未处理角度
+			if(AMUD1FirstEnter==1) {AMUD1LastAngle = ThisAngle;AMUD1FirstEnter = 0;return;}
+			StandardlizeAMRealAngle(&AMUD1RealAngle,ThisAngle,AMUD1LastAngle);//处理
+			ThisSpeed = AMUD1Rx.RotateSpeed * 6;		//单位：度每秒
 			
-			AMUDIntensity = PID_PROCESS_Double(AMUDPositionPID,AMUDSpeedPID,AMUDAngleTarget,AMUDRealAngle,ThisSpeed);
+			AMUD1Intensity = PID_PROCESS_Double(AMUDPositionPID,AMUDSpeedPID,AMUDAngleTarget,AMUD1RealAngle,ThisSpeed);
 			
-			s_AMUDCount = 0;
-			AMUDLastAngle = ThisAngle;
+			s_AMUD1Count = 0;
+			AMUD1LastAngle = ThisAngle;
 		}
 		else
 		{
-			s_AMUDCount++;
+			s_AMUD1Count++;
+		}
+}
+void ControlAMUD2()
+{
+		if(s_AMUD2Count == 1)
+		{		
+			uint16_t 	ThisAngle;	
+			double 		ThisSpeed;	
+			ThisAngle = AMUD2Rx.angle;							//未处理角度
+			if(AMUD2FirstEnter==1) {AMUD2LastAngle = ThisAngle;AMUD2FirstEnter = 0;return;}
+			StandardlizeAMRealAngle(&AMUD2RealAngle,ThisAngle,AMUD2LastAngle);//处理
+			ThisSpeed = AMUD2Rx.RotateSpeed * 6;		//单位：度每秒
+			
+			AMUD2Intensity = -PID_PROCESS_Double(AMUDPositionPID,AMUDSpeedPID,-AMUDAngleTarget,AMUD2RealAngle,ThisSpeed);
+			
+			s_AMUD2Count = 0;
+			AMUD2LastAngle = ThisAngle;
+		}
+		else
+		{
+			s_AMUD2Count++;
 		}
 }
 
@@ -126,7 +151,8 @@ void ControlAMUD()
 void vice_controlLoop()
 {
 
-		ControlAMUD();
+		ControlAMUD1();
+		ControlAMUD2();
 	
 		//ControlGMYAW();
 		ControlGSYAW();
@@ -138,10 +164,14 @@ void vice_controlLoop()
 //机械臂控制初始化
 void AMControlInit()
 {
-	AMUDFirstEnter = 1;
-	AMUDRealAngle = 0.0;
-	AMUDLastAngle = 0.0;
+	AMUD1FirstEnter = 1;
+	AMUD1RealAngle = 0.0;
+	AMUD1LastAngle = 0.0;
+	AMUD2FirstEnter = 1;
+	AMUD2RealAngle = 0.0;
+	AMUD2LastAngle = 0.0;
 	
-	ControlAMUD();
+	ControlAMUD1();
+	ControlAMUD2();
 	HAL_TIM_PWM_Start(&BYPASS_TIM, TIM_CHANNEL_1);
 }

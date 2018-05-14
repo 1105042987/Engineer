@@ -23,6 +23,13 @@ typedef struct
     float remainPower;
 }tGameInfo;
 
+typedef struct 
+{
+    float data1;
+    float data2;
+    float data3;
+}tUserData;
+
 typedef enum
 {
 	ONLINE,

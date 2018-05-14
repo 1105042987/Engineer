@@ -61,8 +61,8 @@ int16_t channel3 = 0;
 
 void Limit_Position()
 {
-	VAL_LIMIT(AMUDAngleTarget, 10,1500);//1050 catch rise 1300 get
-	VAL_LIMIT(GMPITCHAngleTarget,-30,60);
+	VAL_LIMIT(AMUDAngleTarget, 10,1400);//1050 catch rise 1300 get
+	VAL_LIMIT(GMPITCHAngleTarget,-60,60);
 }
 
 void RemoteControlProcess(Remote *rc)
@@ -134,14 +134,15 @@ void RemoteControlProcess(Remote *rc)
 		}
 		
 		if(channel3 > IGNORE_RANGE) {
-			AMUDAngleTarget=950;
+			AMUDAngleTarget+=AMUD_ANGLE_STEP;
 		}
 		else if(channel3 < -IGNORE_RANGE) {
-			AMUDAngleTarget=10;
+			AMUDAngleTarget-=AMUD_ANGLE_STEP;
 		}
 		
 		Limit_Position();
 	}
+	AutoGet('l'); 
 }
 
 
@@ -281,7 +282,10 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 				{
 					 AMUDAngleTarget = 1050;
 				};
-				
+				if(key->v & KEY_X)	//x top
+				{
+					 AMUDAngleTarget = 1400;
+				};
 				if(key->v & KEY_V)	//v 下降
 				{	
 					AMUDAngleTarget = 10;
@@ -349,7 +353,7 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 			__HAL_TIM_SET_COMPARE(STEER_TIM, GIVESML_CHANNEL, SDOOR_CLOSE-900);
 			Delay(200,{
 				__HAL_TIM_SET_COMPARE(STEER_TIM, GIVESML_CHANNEL, SDOOR_CLOSE);
-				GiveBigBullet_State = 0;
+				GiveSmallBullet_State = 0;
 			})
 		}
 		

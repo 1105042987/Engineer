@@ -15,7 +15,7 @@
 uint8_t isRcanStarted_CM = 0, isRcanStarted_AUX = 0;
 CanRxMsgTypeDef CMCanRxMsg,AUXCanRxMsg;
 Motor820RRxMsg_t CMFLRx,CMFRRx,CMBLRx,CMBRRx;
-Motor820RRxMsg_t AMUDRx;
+Motor820RRxMsg_t AMUD1Rx,AMUD2Rx;
 Motor820RRxMsg_t GMYAWRx,GMPITCHRx;
 uint8_t can1_update = 1;
 uint8_t can_type = 1;
@@ -96,14 +96,6 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan){
 				CMBRRx.angle = CanRxGetU16(CMCanRxMsg, 0);
 				CMBRRx.RotateSpeed = CanRxGetU16(CMCanRxMsg, 1);
 				break;
-			case AMUD_RXID:
-				AMUDRx.angle = CanRxGetU16(CMCanRxMsg, 0);
-				AMUDRx.RotateSpeed = CanRxGetU16(CMCanRxMsg, 1);
-				break;
-			case GMPITCH_RXID:
-				GMPITCHRx.angle = CanRxGetU16(CMCanRxMsg, 0);
-				GMPITCHRx.RotateSpeed = CanRxGetU16(CMCanRxMsg, 1);
-				break;
 			default:
 			Error_Handler();
 		}
@@ -115,31 +107,23 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan){
 	}
 	else if(hcan == &AUXMOTOR_CAN)//CAN2数据
 	{
-		/*switch(AUXCanRxMsg.StdId)
+		switch(AUXCanRxMsg.StdId)
 		{
 			case AMUD1_RXID:
 				AMUD1Rx.angle = CanRxGetU16(AUXCanRxMsg, 0);
 				AMUD1Rx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
 				break;
-			case AMUD2_RXID:
-				AMUD2Rx.angle = CanRxGetU16(AUXCanRxMsg, 0);
-				AMUD2Rx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
-				break;
-			case AMFB_RXID:
-				AMFBRx.angle = CanRxGetU16(AUXCanRxMsg, 0);
-				AMFBRx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
-				break;
-			case GMYAW_RXID:
-				GMYAWRx.angle = CanRxGetU16(AUXCanRxMsg, 0);
-				GMYAWRx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
-				break;
 			case GMPITCH_RXID:
 				GMPITCHRx.angle = CanRxGetU16(AUXCanRxMsg, 0);
 				GMPITCHRx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
 				break;
+			case AMUD2_RXID:
+				AMUD2Rx.angle = CanRxGetU16(AUXCanRxMsg, 0);
+				AMUD2Rx.RotateSpeed = CanRxGetU16(AUXCanRxMsg, 1);
+				break;
 			default:
 			Error_Handler();
-		}*/
+		}
 		if(HAL_CAN_Receive_IT(&AUXMOTOR_CAN, CAN_FIFO0) != HAL_OK)
 		{
 			isRcanStarted_AUX = 0;

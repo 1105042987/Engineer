@@ -16,7 +16,7 @@
 
 #define CMMOTOR_CAN hcan1
 #define AUXMOTOR_CAN hcan2
-#define AGMOTOR_CAN hcan1
+#define AGMOTOR_CAN hcan2
 
 //RxID
 //can1
@@ -24,8 +24,9 @@
 #define CMFR_RXID 0x202u
 #define CMBL_RXID 0x203u
 #define CMBR_RXID 0x204u
-#define AMUD_RXID 0x205u
-#define GMPITCH_RXID 0x206u
+#define AMUD1_RXID 0x201u
+#define AMUD2_RXID 0x203u
+#define GMPITCH_RXID 0x202u
 
 #define GMYAW_RXID 0x207u
 //			GSYAW 用PA2引脚
@@ -35,7 +36,7 @@
 //TxID
 //can1
 #define CM_TXID 0x200u
-#define AGM_TXID 0x1FFu
+#define AGM_TXID 0x200u
 
 
 typedef struct{
@@ -49,7 +50,8 @@ extern Motor820RRxMsg_t CMFLRx;
 extern Motor820RRxMsg_t CMFRRx;
 extern Motor820RRxMsg_t CMBLRx;
 extern Motor820RRxMsg_t CMBRRx;
-extern Motor820RRxMsg_t AMUDRx;
+extern Motor820RRxMsg_t AMUD1Rx;
+extern Motor820RRxMsg_t AMUD2Rx;
 extern Motor820RRxMsg_t GMYAWRx;
 extern Motor820RRxMsg_t GMPITCHRx;
 

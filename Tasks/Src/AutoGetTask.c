@@ -33,10 +33,10 @@ void RefreshAnologRead()
 		ad4 = ad4 / 20 - 0;	//leftin
 		
 		distance_couple.front.vol_ref    = ad0;
-		distance_couple.leftin.vol_ref   = ad3;
+		distance_couple.leftin.vol_ref   = ad1;
 		distance_couple.leftout.vol_ref  = ad4;
-		distance_couple.rightin.vol_ref  = ad2;
-		distance_couple.rightout.vol_ref = ad1;
+		distance_couple.rightin.vol_ref  = ad3;
+		distance_couple.rightout.vol_ref = ad2;
 		
 		FLAG_SET(distance_couple.front.vol_ref,		distance_couple.front.flag	 );
 		FLAG_SET(distance_couple.leftin.vol_ref,	distance_couple.leftin.flag	 );
@@ -68,8 +68,7 @@ int8_t Auto_ShiftTest(char signal)
 	if(Auto_StartTest(signal))
 	{
 		if(distance_couple.move_flags == 0x6 ||
-				distance_couple.move_flags == 0x4 ||
-				distance_couple.move_flags == 0x2)
+				distance_couple.move_flags == 0x4)
 		return 1;
 		else return 0;
 	}
@@ -121,8 +120,8 @@ void AutoGet(char signal)
 					break;
 				case 0:
 					if(signal == 'l')
-						ChassisSpeedRef.left_right_ref = 25;
-					else ChassisSpeedRef.left_right_ref = -25;
+						ChassisSpeedRef.left_right_ref = 35;
+					else ChassisSpeedRef.left_right_ref = -35;
 					break;
 				case -1:
 					EngineerState = ERROR_HANDLE;
@@ -141,15 +140,15 @@ void AutoGet(char signal)
 				}
 				switch(step)
 				{
-					case 0: AMUDAngleTarget -= 200;	HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_RESET);	break;	//释放
+					case 0: AMUDAngleTarget -= 300;	HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_RESET);	break;	//释放
 					case 1: auto_counter=3000;			ChassisSpeedRef.forward_back_ref = 40;						break;	//自行后退
 					case 2: auto_counter=3000;			ChassisSpeedRef.forward_back_ref = -40;										//自行前进
 																					HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_SET);		break;	//前伸
 					case 3:	auto_counter=1500;			HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_SET);		break;	//抓紧
-					case 4:	if(AMUDAngleTarget > 900)																						//抬高
-										{											AMUDAngleTarget = 1300;}
+					case 4:	if(AMUDAngleTarget > 900)																													//抬高
+										{auto_counter=1500;		AMUDAngleTarget = 1400;}
 									else
-										{auto_counter=4000;		AMUDAngleTarget = 1300;}
+										{auto_counter=4000;		AMUDAngleTarget = 1400;}
 									break;	
 					case 5: auto_counter=6000;			HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_RESET);	break;	//回缩
 					case 6: 												HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_SET);		break;	//前伸
