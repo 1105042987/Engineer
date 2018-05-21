@@ -22,6 +22,7 @@ RampGen_t LRSpeedRamp = RAMP_GEN_DAFAULT;   	//键盘速度斜坡
 RampGen_t FBSpeedRamp = RAMP_GEN_DAFAULT;
 extern Engineer_State_e EngineerState;
 extern double GMPITCHRealAngle;
+extern tUserData data;
 KeyboardMode_e KeyboardMode=NO_CHANGE;
 
 float rotate_speed;
@@ -68,7 +69,7 @@ void Limit_Position()
 void RemoteControlProcess(Remote *rc)
 {
 	//max=297
-	static int8_t help_direction = 1;
+	static int8_t help_direction = -1;
 	channel0 = (rc->ch0 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET); //右横
 	channel1 = (rc->ch1 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET); //右纵
 	channel2 = (rc->ch2 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET); //左横
@@ -78,22 +79,29 @@ void RemoteControlProcess(Remote *rc)
 		GS_SET(help_direction);
 		
 		ChassisSpeedRef.forward_back_ref = help_direction * channel1 * RC_CHASSIS_SPEED_REF;
-		ChassisSpeedRef.left_right_ref   = help_direction * channel0 * RC_CHASSIS_SPEED_REF;
+		ChassisSpeedRef.left_right_ref   = help_direction * channel0 * RC_CHASSIS_SPEED_REF/2;
 		rotate_speed = channel2 * RC_ROTATE_SPEED_REF;
 		
 		if(channel3 > IGNORE_RANGE)	
 		{
 			//__HAL_TIM_SET_COMPARE(STEER_TIM, GIVESML_CHANNEL,DOOR_CLOSE);
+			__HAL_TIM_SET_COMPARE(STEER_TIM, GIVEBIG_CHANNEL, BDOOR_CLOSE+900);
 		}
 		else if(channel3 < -IGNORE_RANGE) 
 		{
 			//__HAL_TIM_SET_COMPARE(STEER_TIM, GIVESML_CHANNEL,DOOR_OPEN);
+			__HAL_TIM_SET_COMPARE(STEER_TIM, GIVESML_CHANNEL, SDOOR_CLOSE-900);
 		}		
+		else
+		{
+			__HAL_TIM_SET_COMPARE(STEER_TIM, GIVESML_CHANNEL, SDOOR_CLOSE);
+			__HAL_TIM_SET_COMPARE(STEER_TIM, GIVEBIG_CHANNEL, BDOOR_CLOSE);
+		}
 	}
 	if(WorkState == HELP_STATE)
 	{
 		ChassisSpeedRef.forward_back_ref = help_direction * channel1 * RC_CHASSIS_SPEED_REF;
-		ChassisSpeedRef.left_right_ref   = help_direction * channel0 * RC_CHASSIS_SPEED_REF;
+		ChassisSpeedRef.left_right_ref   = help_direction * channel0 * RC_CHASSIS_SPEED_REF/2;
 		rotate_speed = channel2 * RC_ROTATE_SPEED_REF;
 		
 		OnePush((channel3 > IGNORE_RANGE),{
@@ -142,7 +150,7 @@ void RemoteControlProcess(Remote *rc)
 		
 		Limit_Position();
 	}
-	AutoGet('l'); 
+	//AutoGet('l'); 
 }
 
 
@@ -199,17 +207,17 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 		
 		if(mouse->press_r) GMPITCHAngleTarget -= move_direction * mouse->y* 0.12;
 		
-		if(EngineerState == NOAUTO_STATE)
+		//if(EngineerState == NOAUTO_STATE)
 		{
 			rotate_speed = mouse->x * MK_ROTATE_SPEED_REF;	//非自动时 允许车身旋转
 			GMYAWAngleTarget = 0;
 		}
-		else
-		{
+		//else
+		/*{
 			rotate_speed = 0;
-			GMYAWAngleTarget += mouse->x * 0.03;
+			GMYAWAngleTarget -= mouse->x * 0.03;
 			VAL_LIMIT(GMYAWAngleTarget,-30,30);
-		}
+		}*/
 		
 		KeyboardModeFSM(key);
 		
@@ -227,22 +235,22 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 					GMPITCHRealAngle = 0;
 				}
 				//Auto Bullet Get
-				if(key->v & KEY_Z)//z左寻
+				if(key->v & KEY_Z)//z搜索置位
 				{
-					if(EngineerState == NOAUTO_STATE) EngineerState = START_TEST;
+					if(EngineerState == NOAUTO_STATE) EngineerState = LEVEL_SHIFT;
 					auto_direction = 'l';
-					if(AMUDAngleTarget == 10 || AMUDAngleTarget == 1050) AMUDAngleTarget += 300;
+					//if(AMUDAngleTarget == 10 || AMUDAngleTarget == 1050) AMUDAngleTarget += 300;
 					
-					HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
+					//HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
 					GS_SET(move_direction);
 				}
-				else if(key->v & KEY_X)//x右寻
+				else if(key->v & KEY_X)//x自动获取
 				{
-					if(EngineerState == NOAUTO_STATE) EngineerState = START_TEST;
+					if(EngineerState == NOAUTO_STATE) EngineerState = ARM_STRETCH;
 					auto_direction = 'r';
-					if(AMUDAngleTarget == 10 || AMUDAngleTarget == 1050) AMUDAngleTarget += 300;
+					//if(AMUDAngleTarget == 10 || AMUDAngleTarget == 1050) AMUDAngleTarget += 300;
 					
-					HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
+					//HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
 					GS_SET(move_direction);
 				}
 				else if(key->v & KEY_C)//c取消
@@ -260,6 +268,7 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 					{
 						static int8_t flag=0;
 						flag=!flag;
+						data.data2=flag;
 						if(flag) HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_SET);
 						else HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
 					}
@@ -357,7 +366,7 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 			})
 		}
 		
-		AutoGet(auto_direction); 
+		AutoGet(auto_direction,(key->v & KEY_CTRL)); 
 		Limit_Position();
 
 		/*裁判系统离线时的功率限制方式*/

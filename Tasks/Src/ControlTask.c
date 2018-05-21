@@ -241,7 +241,8 @@ void controlLoop()
 }
 
 extern int32_t auto_counter;
-
+tUserData data;
+extern double AMUD1RealAngle,AMUD2RealAngle;
 //时间中断入口函数
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
@@ -280,7 +281,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	}
 	else if (htim->Instance == htim10.Instance)  //10ms，处理上位机数据，优先级不高
 	{
-		
+		data.data1 = AMUD1RealAngle;
+		data.data3=0;
+		data.mask=0;
+		Send_User_Data(&data,7);
 		#ifdef DEBUG_MODE
 		//zykProcessData();
 		//dataCallBack();

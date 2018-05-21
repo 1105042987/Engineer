@@ -14,7 +14,7 @@
 
 #include "includes.h"
 
-#define CHANGE_POINT 2600
+#define CHANGE_POINT 2200
 //1v/5v 	27cm
 
 #define FLAG_SET(val, flag)\
@@ -58,6 +58,6 @@ typedef enum
 	ERROR_HANDLE
 }Engineer_State_e;
 
-void AutoGet(char signal);
+void AutoGet(char signal,uint8_t flag);
 
 #endif //__AUTO_GET_TASK_H

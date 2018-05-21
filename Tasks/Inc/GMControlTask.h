@@ -19,7 +19,7 @@
 #define GMYAWReduction 96.0
 #define GMPITCHReduction 36.0
 
-#define TURN_BACK 170
+#define TURN_BACK 160
 
 extern float GSYAW_ZERO;
 

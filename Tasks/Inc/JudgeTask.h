@@ -25,10 +25,27 @@ typedef struct
 
 typedef struct 
 {
-    float data1;
-    float data2;
-    float data3;
+	float data1;
+  float data2;
+  float data3;
+	uint8_t mask;
 }tUserData;
+
+typedef struct 
+{
+	uint8_t sof;
+	uint16_t data_length;
+	uint8_t seq;
+	uint8_t crc8;
+}frame_header_t;
+
+typedef struct
+{
+	frame_header_t head;
+	uint16_t cmdID;
+	tUserData data;
+	uint16_t CRC16;
+}SendData_t;
 
 typedef enum
 {
@@ -39,5 +56,6 @@ typedef enum
 void judgeUartRxCpltCallback(void);
 void InitJudgeUart(void);
 void Judge_Refresh(void);
+void Send_User_Data(tUserData *data, uint16_t len);
 
 #endif /*__ JUDGETASK_H */

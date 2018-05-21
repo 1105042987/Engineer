@@ -92,11 +92,11 @@ uint32_t auto_counter=0;
 	}\
 }
 
-void AutoGet(char signal)
+void AutoGet(char signal,uint8_t flag)
 {
-	static int8_t auto_flag;
+//	static int8_t auto_flag;
 	static uint8_t step = 0;
-	
+	static uint8_t inTimes=0;
 	RefreshAnologRead();
 	switch(EngineerState)
 	{
@@ -108,14 +108,15 @@ void AutoGet(char signal)
 		}
 		case LEVEL_SHIFT:
 		{
-			ChassisSpeedRef.forward_back_ref = -5;
+			/*ChassisSpeedRef.forward_back_ref = -5;
 			auto_flag = Auto_ShiftTest(signal);
 			global_catch = auto_flag;
 			switch(auto_flag)
 			{
 				case 1: 
 					auto_counter = 500;
-					EngineerState = ARM_STRETCH;
+					EngineerState = NOAUTO_STATE;
+					//EngineerState = ARM_STRETCH;
 					//EngineerState = LEVEL_SHIFT;
 					break;
 				case 0:
@@ -126,6 +127,27 @@ void AutoGet(char signal)
 				case -1:
 					EngineerState = ERROR_HANDLE;
 					break;
+			}*/
+			if(inTimes==0) {
+				AMUDAngleTarget+=300;
+				inTimes++;
+			}
+			if(inTimes>0)
+			{	
+				if((distance_couple.move_flags & 6)==0)
+				{
+					inTimes++;
+					if(inTimes==10)
+					{	
+						HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_SET);	//前伸
+						AMUDAngleTarget-=300;
+						EngineerState = NOAUTO_STATE;
+						inTimes=0;
+					}
+				}
+				else{
+				inTimes=1;
+				}
 			}
 			break;
 		}
@@ -134,28 +156,28 @@ void AutoGet(char signal)
 			if(!auto_counter)
 			{
 				auto_counter=1000;
-				if(step == 9) {
+				if(step == 7) {
 					step=0;
-					EngineerState = ERROR_HANDLE;
+					EngineerState = NOAUTO_STATE;
 				}
 				switch(step)
 				{
-					case 0: AMUDAngleTarget -= 300;	HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_RESET);	break;	//释放
+					/*case 0: AMUDAngleTarget -= 300;	HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_RESET);	break;	//释放
 					case 1: auto_counter=3000;			ChassisSpeedRef.forward_back_ref = 40;						break;	//自行后退
 					case 2: auto_counter=3000;			ChassisSpeedRef.forward_back_ref = -40;										//自行前进
-																					HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_SET);		break;	//前伸
-					case 3:	auto_counter=1500;			HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_SET);		break;	//抓紧
-					case 4:	if(AMUDAngleTarget > 900)																													//抬高
+																					HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_SET);		break;	//前伸*/
+					case 1:													HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_SET);		break;	//抓紧
+					case 2:	if(AMUDAngleTarget > 900)																													//抬高
 										{auto_counter=1500;		AMUDAngleTarget = 1400;}
 									else
 										{auto_counter=4000;		AMUDAngleTarget = 1400;}
 									break;	
-					case 5: auto_counter=6000;			HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_RESET);	break;	//回缩
-					case 6: 												HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_SET);		break;	//前伸
-					case 7: 												HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_RESET);	break;	//释放
-					case 8: 												HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_RESET);	break;	//回缩
+					case 3: auto_counter=500;				HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_RESET);	break;	//回缩
+					case 4: 												HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_SET);		break;	//前伸
+					case 5: 												HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_RESET);	break;	//释放
+					case 6: 												HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_RESET);	break;	//回缩
 				}
-				step++;
+				if(step != 3 || !flag) step++;
 			}
 			break;
 		}	
@@ -165,6 +187,7 @@ void AutoGet(char signal)
 			HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_RESET);		//回缩
 			HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_RESET);		//释放
 			step = 0;
+			inTimes = 0;
 			EngineerState = NOAUTO_STATE;
 		}
 		case NOAUTO_STATE:
