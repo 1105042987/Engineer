@@ -43,9 +43,9 @@ void CMControlInit(void)
 //单个底盘电机的控制，下同
 void ControlCMFL(void)
 {			
-	CM1SpeedPID.ref =  ChassisSpeedRef.forward_back_ref*0.075 
-											 + ChassisSpeedRef.left_right_ref*0.075 
-											 + ChassisSpeedRef.rotate_ref*0.075;	
+	CM1SpeedPID.ref =  	  ChassisSpeedRef.forward_back_ref*0.075 
+						+ ChassisSpeedRef.left_right_ref*0.075 
+						+ ChassisSpeedRef.rotate_ref*0.075;	
 	CM1SpeedPID.ref = 160 * CM1SpeedPID.ref;
 			
 			
@@ -53,13 +53,15 @@ void ControlCMFL(void)
 
 	CM1SpeedPID.Calc(&CM1SpeedPID);
 	CMFLIntensity = CHASSIS_SPEED_ATTENUATION * CM1SpeedPID.output;
+	
+	CML.Intensity=CMFLIntensity;
 }
 
 void ControlCMFR(void)
 {			
-	CM2SpeedPID.ref = - ChassisSpeedRef.forward_back_ref*0.075 
-										 + ChassisSpeedRef.left_right_ref*0.075 
-										 + ChassisSpeedRef.rotate_ref*0.075;
+	CM2SpeedPID.ref = 	- ChassisSpeedRef.forward_back_ref*0.075 
+						+ ChassisSpeedRef.left_right_ref*0.075 
+						+ ChassisSpeedRef.rotate_ref*0.075;
 	CM2SpeedPID.ref = 160 * CM2SpeedPID.ref;
 			
 			
@@ -67,13 +69,15 @@ void ControlCMFR(void)
 
 	CM2SpeedPID.Calc(&CM2SpeedPID);
 	CMFRIntensity = CHASSIS_SPEED_ATTENUATION * CM2SpeedPID.output;
+	
+	CMR.Intensity=CMFRIntensity;
 }
 
 void ControlCMBL(void)
 {		
-	CM3SpeedPID.ref =  ChassisSpeedRef.forward_back_ref*0.075 
-											 - ChassisSpeedRef.left_right_ref*0.075 
-											 + ChassisSpeedRef.rotate_ref*0.075;
+	CM3SpeedPID.ref =  	  ChassisSpeedRef.forward_back_ref*0.075 
+						- ChassisSpeedRef.left_right_ref*0.075 
+						+ ChassisSpeedRef.rotate_ref*0.075;
 	CM3SpeedPID.ref = 160 * CM3SpeedPID.ref;
 			
 			
@@ -85,9 +89,9 @@ void ControlCMBL(void)
 
 void ControlCMBR(void)
 {		
-	CM4SpeedPID.ref = - ChassisSpeedRef.forward_back_ref*0.075 
-											- ChassisSpeedRef.left_right_ref*0.075 
-											 + ChassisSpeedRef.rotate_ref*0.075;
+	CM4SpeedPID.ref = 	- ChassisSpeedRef.forward_back_ref*0.075 
+						- ChassisSpeedRef.left_right_ref*0.075 
+						+ ChassisSpeedRef.rotate_ref*0.075;
 	CM4SpeedPID.ref = 160 * CM4SpeedPID.ref;
 			
 			
@@ -113,24 +117,24 @@ void ControlRotate(void)
 void setCMMotor()
 {
 	CanTxMsgTypeDef pData;
-	CMMOTOR_CAN.pTxMsg = &pData;
+	hcan1.pTxMsg = &pData;
 	
-	CMMOTOR_CAN.pTxMsg->StdId = CM_TXID;
-	CMMOTOR_CAN.pTxMsg->ExtId = 0;
-	CMMOTOR_CAN.pTxMsg->IDE = CAN_ID_STD;
-	CMMOTOR_CAN.pTxMsg->RTR = CAN_RTR_DATA;
-	CMMOTOR_CAN.pTxMsg->DLC = 0x08;
+	hcan1.pTxMsg->StdId = 0x200;
+	hcan1.pTxMsg->ExtId = 0;
+	hcan1.pTxMsg->IDE = CAN_ID_STD;
+	hcan1.pTxMsg->RTR = CAN_RTR_DATA;
+	hcan1.pTxMsg->DLC = 0x08;
 	
-	CMMOTOR_CAN.pTxMsg->Data[0] = (uint8_t)(CMFLIntensity >> 8);
-	CMMOTOR_CAN.pTxMsg->Data[1] = (uint8_t)CMFLIntensity;
-	CMMOTOR_CAN.pTxMsg->Data[2] = (uint8_t)(CMFRIntensity >> 8);
-	CMMOTOR_CAN.pTxMsg->Data[3] = (uint8_t)CMFRIntensity;
-	CMMOTOR_CAN.pTxMsg->Data[4] = (uint8_t)(CMBLIntensity >> 8);
-	CMMOTOR_CAN.pTxMsg->Data[5] = (uint8_t)CMBLIntensity;
-	CMMOTOR_CAN.pTxMsg->Data[6] = (uint8_t)(CMBRIntensity >> 8);
-	CMMOTOR_CAN.pTxMsg->Data[7] = (uint8_t)CMBRIntensity;
+	hcan1.pTxMsg->Data[0] = (uint8_t)(CMFLIntensity >> 8);
+	hcan1.pTxMsg->Data[1] = (uint8_t)CMFLIntensity;
+	hcan1.pTxMsg->Data[2] = (uint8_t)(CMFRIntensity >> 8);
+	hcan1.pTxMsg->Data[3] = (uint8_t)CMFRIntensity;
+	hcan1.pTxMsg->Data[4] = (uint8_t)(CMBLIntensity >> 8);
+	hcan1.pTxMsg->Data[5] = (uint8_t)CMBLIntensity;
+	hcan1.pTxMsg->Data[6] = (uint8_t)(CMBRIntensity >> 8);
+	hcan1.pTxMsg->Data[7] = (uint8_t)CMBRIntensity;
 
-	if(can1_update == 1)
+	if(can1_update == 1 & can1_type == 1)
 	{
 		//CAN通信前关中断
 		HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
@@ -141,11 +145,14 @@ void setCMMotor()
 		#ifdef DEBUG_MODE
 			HAL_NVIC_DisableIRQ(TIM1_UP_TIM10_IRQn);
 		#endif
-		if(HAL_CAN_Transmit_IT(&CMMOTOR_CAN) != HAL_OK)
+		if(HAL_CAN_Transmit_IT(&hcan1) != HAL_OK)
 		{
 			Error_Handler();
 		}
 		can1_update = 0;
+		#ifdef CAN12
+		can1_type = 2;
+		#endif
 		//CAN通信后开中断，防止中断影响CAN信号发送
 		HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
@@ -168,13 +175,13 @@ void WorkStateFSM(void)
 		case PREPARE_STATE:			//准备模式
 		{
 			if (inputmode == STOP) WorkState = STOP_STATE;
-			if(prepare_time < 3000) 
+			if(prepare_time < 1000) 
 			{
 				prepare_time++;
-				AMUDAngleTarget = 0;
-				AMControlInit();
+				InitMotor(&UD1);
+				InitMotor(&UD2);
 			}
-			if(prepare_time == 3000)//开机三秒进入正常模式
+			if(prepare_time == 1000)//开机三秒进入正常模式
 			{
 				WorkState = NORMAL_STATE;
 				prepare_time = 0;
@@ -236,13 +243,23 @@ void controlLoop()
 		
 		setCMMotor();
 		
-		vice_controlLoop();
+		#ifdef CAN12
+		for(int i=4;i<8;i++) ControlMotor(can1[i]);
+		setCAN12();
+		#endif
+		#ifdef CAN21
+		for(int i=0;i<4;i++) ControlMotor(can2[i]);
+		setCAN21();
+		#endif
+		#ifdef CAN22
+		//for(int i=4;i<8;i++) ControlMotor(can2[i]);
+		setCAN22();
+		#endif
 	}
 }
 
 extern int32_t auto_counter;
-tUserData data;
-extern double AMUD1RealAngle,AMUD2RealAngle;
+//tUserData data;
 //时间中断入口函数
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
@@ -264,8 +281,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			if( (rc_cnt <= 17) && (rc_first_frame == 1))
 			{
 				RemoteDataProcess(rc_data);				//遥控器数据解算
-		    HAL_UART_AbortReceive(&RC_UART);
-		    HAL_UART_Receive_DMA(&RC_UART, rc_data, 18);
+				HAL_UART_AbortReceive(&RC_UART);
+				HAL_UART_Receive_DMA(&RC_UART, rc_data, 18);
 				rc_cnt = 0;
 			}
 			else
@@ -281,10 +298,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	}
 	else if (htim->Instance == htim10.Instance)  //10ms，处理上位机数据，优先级不高
 	{
-		data.data1 = AMUD1RealAngle;
-		data.data3=0;
-		data.mask=0;
-		Send_User_Data(&data,7);
+		//data.data1 = AMUD1RealAngle;
+		//data.data3=0;
+		//data.mask=0;
+		//Send_User_Data(&data,7);
 		#ifdef DEBUG_MODE
 		//zykProcessData();
 		//dataCallBack();

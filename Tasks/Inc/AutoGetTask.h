@@ -59,5 +59,6 @@ typedef enum
 }Engineer_State_e;
 
 void AutoGet(char signal,uint8_t flag);
+void RefreshAnologRead(void);
 
 #endif //__AUTO_GET_TASK_H

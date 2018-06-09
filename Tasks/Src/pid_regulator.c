@@ -23,7 +23,7 @@ void fw_PID_Calc(fw_PID_Regulator_t *pid){
 		pid->SumCount++;
 		}
 	else {
-	  pid->errorSum = 0;
+		pid->errorSum = 0;
 		pid->SumCount = 0;
 	}
 	pid->componentKp = pid->kp * pid->errorCurr;

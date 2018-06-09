@@ -17,20 +17,13 @@ InputMode_e inputmode = REMOTE_INPUT;
 FunctionMode_e functionmode = NORMAL;
 ChassisSpeed_Ref_t ChassisSpeedRef; 
 RemoteSwitch_t g_switch1;
-
 RampGen_t LRSpeedRamp = RAMP_GEN_DAFAULT;   	//键盘速度斜坡
 RampGen_t FBSpeedRamp = RAMP_GEN_DAFAULT;
 extern Engineer_State_e EngineerState;
-extern double GMPITCHRealAngle;
-extern tUserData data;
+//extern tUserData data;
 KeyboardMode_e KeyboardMode=NO_CHANGE;
 
 float rotate_speed;
-
-double AMUDAngleTarget = 0;//0 -> -400
-
-double GMYAWAngleTarget = 0;
-double GMPITCHAngleTarget = 0;
 
 //遥控器控制量初始化
 void RemoteTaskInit()
@@ -41,9 +34,9 @@ void RemoteTaskInit()
 	FBSpeedRamp.ResetCounter(&FBSpeedRamp);
 	
 	//机械臂电机目标物理角度值
-	AMUDAngleTarget = 0;
-	GMYAWAngleTarget = 0;
-	GMPITCHAngleTarget = 0;
+	UD1.TargetAngle = 0;
+	GMY.TargetAngle = 0;
+	GMP.TargetAngle = 0;
 	/*底盘速度初始化*/
 	ChassisSpeedRef.forward_back_ref = 0.0f;
 	ChassisSpeedRef.left_right_ref = 0.0f;
@@ -62,8 +55,8 @@ int16_t channel3 = 0;
 
 void Limit_Position()
 {
-	VAL_LIMIT(AMUDAngleTarget, 10,1400);//1050 catch rise 1300 get
-	VAL_LIMIT(GMPITCHAngleTarget,-60,60);
+	VAL_LIMIT(UD1.TargetAngle, 10,1400);//1050 catch rise 1300 get
+	VAL_LIMIT(GMP.TargetAngle,-60,60);
 }
 
 void RemoteControlProcess(Remote *rc)
@@ -76,7 +69,7 @@ void RemoteControlProcess(Remote *rc)
 	channel3 = (rc->ch3 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET); //左纵
 	if(WorkState == NORMAL_STATE)
 	{
-		GS_SET(help_direction);
+		//GS_SET(help_direction);
 		
 		ChassisSpeedRef.forward_back_ref = help_direction * channel1 * RC_CHASSIS_SPEED_REF;
 		ChassisSpeedRef.left_right_ref   = help_direction * channel0 * RC_CHASSIS_SPEED_REF/2;
@@ -106,7 +99,7 @@ void RemoteControlProcess(Remote *rc)
 		
 		OnePush((channel3 > IGNORE_RANGE),{
 			HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_SET);
-			GS_REVERSAL(help_direction);
+			//GS_REVERSAL(help_direction);
 		});
 	 if(channel3 < -IGNORE_RANGE) {
 			HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
@@ -114,14 +107,14 @@ void RemoteControlProcess(Remote *rc)
 	}
 	if(WorkState == GET_STATE)
 	{
-		GS_SET(help_direction);
+		//GS_SET(help_direction);
 		
 		ChassisSpeedRef.forward_back_ref = 0;
 		ChassisSpeedRef.left_right_ref   = 0;
 		rotate_speed = 0;
 		
-		if(channel0 > IGNORE_RANGE) GMPITCHAngleTarget += GMANGLE_STEP*0.6;
-		else if(channel0 < -IGNORE_RANGE) GMPITCHAngleTarget -= GMANGLE_STEP*0.6;
+		if(channel0 > IGNORE_RANGE) GMP.TargetAngle += GMANGLE_STEP*0.6;
+		else if(channel0 < -IGNORE_RANGE) GMP.TargetAngle -= GMANGLE_STEP*0.6;
 		
 		if(channel1 > IGNORE_RANGE) {
 			//AMFBAngleTarget = AMFBAngleTarget + AMFB_ANGLE_STEP;
@@ -142,10 +135,10 @@ void RemoteControlProcess(Remote *rc)
 		}
 		
 		if(channel3 > IGNORE_RANGE) {
-			AMUDAngleTarget+=AMUD_ANGLE_STEP;
+			UD1.TargetAngle+=AMUD_ANGLE_STEP;
 		}
 		else if(channel3 < -IGNORE_RANGE) {
-			AMUDAngleTarget-=AMUD_ANGLE_STEP;
+			UD2.TargetAngle-=AMUD_ANGLE_STEP;
 		}
 		
 		Limit_Position();
@@ -154,8 +147,8 @@ void RemoteControlProcess(Remote *rc)
 }
 
 
-uint16_t MK_FORWORD_BACK_SPEED = NORMAL_FORWARD_BACK_SPEED;
-uint16_t MK_LEFT_RIGHT_SPEED 	 = NORMAL_LEFT_RIGHT_SPEED;
+uint16_t MK_FORWORD_BACK_SPEED 	= NORMAL_FORWARD_BACK_SPEED;
+uint16_t MK_LEFT_RIGHT_SPEED  	= NORMAL_LEFT_RIGHT_SPEED;
 
 //键鼠控制量解算
 void KeyboardModeFSM(Key *key)
@@ -195,22 +188,22 @@ void KeyboardModeFSM(Key *key)
 
 void MouseKeyControlProcess(Mouse *mouse, Key *key)
 {
-	static uint8_t GiveBigBullet_State = 0;
-	static uint8_t GiveSmallBullet_State = 0;
-	static int8_t  move_direction = -1;
-	static char 	 auto_direction='l';
+	static uint8_t 	GiveBigBullet_State = 0;
+	static uint8_t 	GiveSmallBullet_State = 0;
+	static int8_t  	move_direction = -1;
+	static char 	auto_direction='l';
 	
 	if(WorkState != STOP_STATE && WorkState != PREPARE_STATE)
 	{
 		VAL_LIMIT(mouse->x, -150, 150); 
 		VAL_LIMIT(mouse->y, -150, 150); 
 		
-		if(mouse->press_r) GMPITCHAngleTarget -= move_direction * mouse->y* 0.12;
+		if(mouse->press_r) GMP.TargetAngle -= move_direction * mouse->y* 0.12;
 		
 		//if(EngineerState == NOAUTO_STATE)
 		{
 			rotate_speed = mouse->x * MK_ROTATE_SPEED_REF;	//非自动时 允许车身旋转
-			GMYAWAngleTarget = 0;
+			GMY.TargetAngle = 0;
 		}
 		//else
 		/*{
@@ -226,13 +219,13 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 			case SHIFT_CTRL:	//细节微调与自动控制按钮
 			{//GM Yaw Adjust
 				if(key->v & KEY_V)//v
-					GSYAW_ZERO += GMANGLE_STEP * 0.6;
+					//GSYAW_ZERO += GMANGLE_STEP * 0.6;
 				if(key->v & KEY_B)//b
-					GSYAW_ZERO -= GMANGLE_STEP * 0.6;
+					//GSYAW_ZERO -= GMANGLE_STEP * 0.6;
 				if(key->v & KEY_R)//r
 				{
-					GMPITCHAngleTarget = 0;
-					GMPITCHRealAngle = 0;
+					GMP.TargetAngle = 0;
+					GMP.RealAngle = 0;
 				}
 				//Auto Bullet Get
 				if(key->v & KEY_Z)//z搜索置位
@@ -242,7 +235,7 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 					//if(AMUDAngleTarget == 10 || AMUDAngleTarget == 1050) AMUDAngleTarget += 300;
 					
 					//HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
-					GS_SET(move_direction);
+					//GS_SET(move_direction);
 				}
 				else if(key->v & KEY_X)//x自动获取
 				{
@@ -251,7 +244,7 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 					//if(AMUDAngleTarget == 10 || AMUDAngleTarget == 1050) AMUDAngleTarget += 300;
 					
 					//HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
-					GS_SET(move_direction);
+					//GS_SET(move_direction);
 				}
 				else if(key->v & KEY_C)//c取消
 					EngineerState = ERROR_HANDLE;
@@ -260,7 +253,7 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 				OnePush((key->v & KEY_Q),{//q转头
 					if(EngineerState == NOAUTO_STATE) 
 					{
-							GS_REVERSAL(move_direction);
+						//GS_REVERSAL(move_direction);
 					}
 				});
 				OnePush((key->v & KEY_W),{//W救援
@@ -268,7 +261,7 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 					{
 						static int8_t flag=0;
 						flag=!flag;
-						data.data2=flag;
+						//data.data2=flag;
 						if(flag) HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_SET);
 						else HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
 					}
@@ -289,15 +282,15 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 			{//AM Movement Process
 				if(key->v & KEY_C)	//c 上升
 				{
-					 AMUDAngleTarget = 1050;
+					UD1.TargetAngle = 1050;
 				};
 				if(key->v & KEY_X)	//x top
 				{
-					 AMUDAngleTarget = 1400;
+					UD1.TargetAngle = 1400;
 				};
 				if(key->v & KEY_V)	//v 下降
 				{	
-					AMUDAngleTarget = 10;
+					UD1.TargetAngle = 10;
 				};
 				
 				if(key->v & KEY_G)				//g 前伸

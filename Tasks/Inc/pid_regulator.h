@@ -23,8 +23,8 @@
 	KpMax, KiMax, KdMax, 0.0, \
 	OutputMax, \
 	&fw_PID_Calc, &fw_PID_Reset \
-};
-typedef struct fw_PID_Regulator_t
+}
+typedef __packed struct fw_PID_Regulator_t
 {
 	float target;
 	float feedback;

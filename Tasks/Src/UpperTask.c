@@ -106,9 +106,6 @@ uint8_t ComProtocal(char*rxbuf,char*head,char*end,char* separater,char dataout[]
 //--------------------任务循环部分-------------------//
 //debug监测变量
 extern int16_t channel0,channel1,channel2,channel3;
-extern int16_t GMYAWIntensity,GMPITCHIntensity,AMUDIntensity;
-extern int16_t CMBRIntensity,CMBLIntensity,CMFRIntensity,CMFLIntensity;
-extern double GMYAWRealAngle,GMPITCHRealAngle,AMUD1RealAngle,AMUD2RealAngle;
 extern int16_t global_catch;
 extern int32_t ad0,ad1,ad2,ad3,ad4;
 extern Distance_Couple_t distance_couple;

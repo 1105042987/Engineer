@@ -514,19 +514,14 @@
               <FilePath>..\Tasks\Src\CANTask.c</FilePath>
             </File>
             <File>
+              <FileName>CANMotor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Tasks\Src\CANMotor.c</FilePath>
+            </File>
+            <File>
               <FileName>ControlTask.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Tasks\Src\ControlTask.c</FilePath>
-            </File>
-            <File>
-              <FileName>GMControlTask.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Tasks\Src\GMControlTask.c</FilePath>
-            </File>
-            <File>
-              <FileName>AMControlTask.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Tasks\Src\AMControlTask.c</FilePath>
             </File>
             <File>
               <FileName>IMUTask.c</FileName>

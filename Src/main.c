@@ -130,8 +130,8 @@ int main(void)
 	InitRemoteControl();
 	InitMPU6500();
 	CMControlInit();
-	AMControlInit();
-	GMControlInit();
+	for(int i=0;i<8;i++) {InitMotor(can1[i]);InitMotor(can2[i]);}
+	InitPWM();
 	InitCanReception();
 	
 	#ifdef DEBUG_MODE

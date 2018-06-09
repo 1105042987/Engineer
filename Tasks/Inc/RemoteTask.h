@@ -19,39 +19,28 @@
 #define CTRL_UART huart3
 #define JUDGE_UART huart6
 
-//IO重命名
-#define STEER_TIM 			&htim2
-#define YAW_CHANNEL			TIM_CHANNEL_2
-#define GIVESML_CHANNEL	TIM_CHANNEL_3
-#define GIVEBIG_CHANNEL	TIM_CHANNEL_4
-#define BDOOR_CLOSE 			1300
-#define SDOOR_CLOSE 			1500
-#define E_MAGNET_IO 		GPIOI, GPIO_PIN_2
-#define M_VAVLE_FB_IO		GPIOI, GPIO_PIN_0
-#define M_VAVLE_OC_IO		GPIOH, GPIO_PIN_12
-
 
 //解算数据区
 #define REMOTE_CONTROLLER_STICK_OFFSET  1024u
 
 #define REMOTE_SWITCH_VALUE_UP         	0x01u  
-#define REMOTE_SWITCH_VALUE_DOWN				0x02u
-#define REMOTE_SWITCH_VALUE_CENTRAL			0x03u
+#define REMOTE_SWITCH_VALUE_DOWN		0x02u
+#define REMOTE_SWITCH_VALUE_CENTRAL		0x03u
 
-#define REMOTE_SWITCH_VALUE_BUF_DEEP   16u
+#define REMOTE_SWITCH_VALUE_BUF_DEEP   	16u
 
 //遥控常量数据区
-#define RC_CHASSIS_SPEED_REF    0.60f
-#define RC_ROTATE_SPEED_REF 		0.05f
+#define RC_CHASSIS_SPEED_REF    		0.60f
+#define RC_ROTATE_SPEED_REF 			0.05f
 
-#define IGNORE_RANGE 200
+#define IGNORE_RANGE 					200
 
 #define KEY_W			0x1
 #define KEY_S			0x2
 #define KEY_A			0x4
 #define KEY_D			0x8
-#define KEY_SHIFT	0x10
-#define KEY_CTRL	0x20
+#define KEY_SHIFT		0x10
+#define KEY_CTRL		0x20
 #define KEY_Q			0x40
 #define KEY_E			0x80
 #define KEY_R			0x100
@@ -63,7 +52,7 @@
 #define KEY_V			0x4000
 #define KEY_B			0x8000
 
-#define NORMAL_FORWARD_BACK_SPEED 	400
+#define NORMAL_FORWARD_BACK_SPEED 		400
 #define NORMAL_LEFT_RIGHT_SPEED  		400/2
 #define HIGH_FORWARD_BACK_SPEED 		700
 #define HIGH_LEFT_RIGHT_SPEED   		700/2
@@ -73,7 +62,7 @@
 #define MOUSE_LR_RAMP_TICK_COUNT		50
 #define MOUSR_FB_RAMP_TICK_COUNT		60
 
-#define MK_ROTATE_SPEED_REF 				0.80f
+#define MK_ROTATE_SPEED_REF 			0.80f
 
 
 
@@ -190,9 +179,6 @@ extern ChassisSpeed_Ref_t ChassisSpeedRef;
 extern InputMode_e inputmode;
 extern FunctionMode_e functionmode;
 extern float rotate_speed;
-extern double AMUDAngleTarget;
-extern double GMYAWAngleTarget;
-extern double GMPITCHAngleTarget;
 
 extern uint8_t rc_data[18];
 extern uint8_t rc_first_frame;
