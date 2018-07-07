@@ -13,6 +13,9 @@
 #define __INCLUDES_H
 
 //#define DEBUG_MODE
+#define CAN12
+#define CAN21
+#define CAN22
 
 #include "main.h"
 #include "stm32f4xx_hal.h"
@@ -27,10 +30,10 @@
 #include "AuxDevice.h"
 #include "RemoteTask.h"
 #include "pid_regulator.h"
-#include "ControlTask.h"
 #include "IMUTask.h"
 #include "CANTask.h"
 #include "CANMotor.h"
+#include "ControlTask.h"
 #include "drivers_ramp.h"
 #include "ManifoldTask.h"
 #include "JudgeTask.h"

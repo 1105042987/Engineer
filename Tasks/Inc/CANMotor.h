@@ -43,5 +43,8 @@ extern MotorINFO *can1[8],*can2[8];
 
 void InitMotor(MotorINFO *id);
 void ControlMotor(MotorINFO *id);
+void setCAN21(void);
+void setCAN12(void);
+void setCAN22(void);
 
 #endif /*__ CANMOTOR_H */

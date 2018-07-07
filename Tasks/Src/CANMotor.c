@@ -10,16 +10,13 @@
   ******************************************************************************
   */
 #include "includes.h"
-#define CAN12
-#define CAN21
-#define CAN22
 
 MotorINFO UD1 = MOTORINFO_Init( &hcan1,0x1ff,0x205,19.0,
-								fw_PID_INIT(1200.0, 0.0, 0.0, 	10000.0, 10000.0, 10000.0, 10000.0),
-								fw_PID_INIT(1, 0.0, 0.0, 		10000.0, 10000.0, 10000.0, 4000.0));
+								fw_PID_INIT(1200.0, 0.0, 0.0, 	15000.0, 15000.0, 15000.0, 15000.0),
+								fw_PID_INIT(1, 0.0, 0.0, 		15000.0, 15000.0, 15000.0, 15000.0));
 MotorINFO UD2 = MOTORINFO_Init( &hcan1,0x1ff,0x206,19.0,
-								fw_PID_INIT(1200.0, 0.0, 0.0, 	10000.0, 10000.0, 10000.0, 10000.0),
-								fw_PID_INIT(1, 0.0, 0.0, 		10000.0, 10000.0, 10000.0, 4000.0));
+								fw_PID_INIT(1200.0, 0.0, 0.0, 	15000.0, 15000.0, 15000.0, 15000.0),
+								fw_PID_INIT(1, 0.0, 0.0, 		15000.0, 15000.0, 15000.0, 15000.0));
 
 
 MotorINFO AMR = MOTORINFO_Init( &hcan2,0x200,0x203,19.0,
@@ -28,19 +25,19 @@ MotorINFO AMR = MOTORINFO_Init( &hcan2,0x200,0x203,19.0,
 								
 								
 MotorINFO GMP = MOTORINFO_Init( &hcan2,0x200,0x201,36.0,
-								fw_PID_INIT(200.0, 0.0, 0.0, 	10000.0, 10000.0, 10000.0, 10000.0),
+								fw_PID_INIT(1200.0, 0.0, 0.0, 	10000.0, 10000.0, 10000.0, 10000.0),
 								fw_PID_INIT(0.7, 0.0, 0.0, 		10000.0, 10000.0, 10000.0, 4000.0));
 MotorINFO GMY = MOTORINFO_Init( &hcan2,0x200,0x202,36.0,
-								fw_PID_INIT(200.0, 0.0, 0.0, 	10000.0, 10000.0, 10000.0, 10000.0),
+								fw_PID_INIT(1200.0, 0.0, 0.0, 	10000.0, 10000.0, 10000.0, 10000.0),
 								fw_PID_INIT(0.7, 0.0, 0.0, 		10000.0, 10000.0, 10000.0, 4000.0));
 								
 								
 MotorINFO CML = MOTORINFO_Init( &hcan2,0x1ff,0x205,19.0,
-								fw_PID_INIT(1.0, 0.0, 0.0, 		10000.0, 10000.0, 10000.0, 10000.0),
-								fw_PID_INIT(1, 0.0, 0.0, 		10000.0, 10000.0, 10000.0, 4000.0));
+								fw_PID_INIT(1200.0, 0.0, 0.0, 	15000.0, 15000.0, 15000.0, 15000.0),
+								fw_PID_INIT(1, 0.0, 1.0, 		15000.0, 15000.0, 15000.0, 15000.0));
 MotorINFO CMR = MOTORINFO_Init( &hcan2,0x1ff,0x206,19.0,
-								fw_PID_INIT(1.0, 0.0, 0.0,	 	10000.0, 10000.0, 10000.0, 10000.0),
-								fw_PID_INIT(1, 0.0, 0.0, 		10000.0, 10000.0, 10000.0, 4000.0));
+								fw_PID_INIT(1200.0, 0.0, 0.0,	15000.0, 15000.0, 15000.0, 15000.0),
+								fw_PID_INIT(1, 0.0, 1.0, 		15000.0, 15000.0, 15000.0, 15000.0));
 
 MotorINFO* can1[8]={0,0,0,0,&UD1,&UD2,0,0};
 MotorINFO* can2[8]={&GMP,&GMY,&AMR,0,&CML,&CMR,0,0};
@@ -58,14 +55,14 @@ void ControlMotor(MotorINFO* id)
 		{
 			if((id->lastRead-ThisAngle)>3000)//编码器上溢
 				id->RealAngle = id->RealAngle + (ThisAngle+8192-id->lastRead) * 360 / 8192.0 / id->ReductionRate;
-			else//??
+			else//正常
 				id->RealAngle = id->RealAngle - (id->lastRead - ThisAngle) * 360 / 8192.0 / id->ReductionRate;
 		}
 		else
 		{
 			if((ThisAngle-id->lastRead)>3000)//编码器下溢
 				id->RealAngle = id->RealAngle - (id->lastRead+8192-ThisAngle) *360 / 8192.0 / id->ReductionRate;
-			else//??
+			else//正常
 				id->RealAngle = id->RealAngle + (ThisAngle - id->lastRead) * 360 / 8192.0 / id->ReductionRate;
 		}
 		ThisSpeed = id->RxMsg.RotateSpeed * 6;		//单位：度每秒

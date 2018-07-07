@@ -12,67 +12,64 @@
 #include "includes.h"
 Distance_Couple_t distance_couple;
 Engineer_State_e EngineerState = NOAUTO_STATE;
-int32_t ad0=0,ad1=0,ad2=0,ad3=0,ad4=0;
+int32_t ad1=0,ad2=0,ad3=0,ad4=0,ad5=0,ad6=0,ad7=0,ad8=0;
+int8_t TOTAL_HIGHT=0;
 extern uint32_t ADC_Value[];
 
 void RefreshAnologRead()
 {
-		for(uint16_t i=0;i<100;i++)
+		for(uint16_t i=0;i<160;i++)
 		{
-			if(i%5==0)ad0+=ADC_Value[i];
-			if(i%5==1)ad1+=ADC_Value[i];
-			if(i%5==2)ad2+=ADC_Value[i];
-			if(i%5==3)ad3+=ADC_Value[i];
-			if(i%5==4)ad4+=ADC_Value[i];
+			if(i%8==0)ad1+=ADC_Value[i];
+			if(i%8==1)ad2+=ADC_Value[i];
+			if(i%8==2)ad3+=ADC_Value[i];
+			if(i%8==3)ad4+=ADC_Value[i];
+			if(i%8==4)ad5+=ADC_Value[i];
+			if(i%8==5)ad6+=ADC_Value[i];
+			if(i%8==6)ad7+=ADC_Value[i];
+			if(i%8==7)ad8+=ADC_Value[i];
 		}
 		//     average  bias
-		ad0 = ad0 / 20 - 0;	//front
-		ad1 = ad1 / 20 - 0;	//rightout
-		ad2 = ad2 / 20 - 0;	//rightin
-		ad3 = ad3 / 20 - 0;	//leftout
-		ad4 = ad4 / 20 - 0;	//leftin
+		ad1 = ad1 / 21 - 0;	//rightout
+		ad2 = ad2 / 21 - 0;	//rightin
+		ad3 = ad3 / 21 - 0;	//leftout
+		ad4 = ad4 / 21 - 0;	//leftin
+		ad5 = ad5 / 21 - 0;	//rightout
+		ad6 = ad6 / 21 - 0;	//rightin
+		ad7 = ad7 / 21 - 0;	//leftout
+		ad8 = ad8 / 21 - 0;	//leftin
 		
-		distance_couple.front.vol_ref    = ad0;
-		distance_couple.leftin.vol_ref   = ad1;
-		distance_couple.leftout.vol_ref  = ad4;
-		distance_couple.rightin.vol_ref  = ad3;
-		distance_couple.rightout.vol_ref = ad2;
+		distance_couple.frontf.val_ref	= ad8;
+		distance_couple.frontr.val_ref	= ad7;
+		distance_couple.frontl.val_ref	= ad6;
+		distance_couple.backb.val_ref	= ad5;
+		distance_couple.backr.val_ref	= ad4;
+		distance_couple.backl.val_ref	= ad3;
+		distance_couple.left.val_ref	= ad2;
+		distance_couple.right.val_ref	= ad1;
 		
-		FLAG_SET(distance_couple.front.vol_ref,		distance_couple.front.flag	 );
-		FLAG_SET(distance_couple.leftin.vol_ref,	distance_couple.leftin.flag	 );
-		FLAG_SET(distance_couple.leftout.vol_ref,	distance_couple.leftout.flag );
-		FLAG_SET(distance_couple.rightin.vol_ref,	distance_couple.rightin.flag );
-		FLAG_SET(distance_couple.rightout.vol_ref,distance_couple.rightout.flag);
 		
-		distance_couple.move_flags = distance_couple.leftout.flag  * 8 +
-																 distance_couple.leftin.flag   * 4 +
-																 distance_couple.rightin.flag  * 2 +
-																 distance_couple.rightout.flag * 1;
-}
-
-
-uint8_t Auto_StartTest(char signal)
-{
-	if(distance_couple.move_flags == 0x0) return 0;
-	switch(signal)
-	{
-		case 'l':if(distance_couple.move_flags == 0x1) return 0;break;
-		case 'r':if(distance_couple.move_flags == 0x8) return 0;break;
-		default:break;
-	}
-	return 1;
-}
-
-int8_t Auto_ShiftTest(char signal)
-{
-	if(Auto_StartTest(signal))
-	{
-		if(distance_couple.move_flags == 0x6 ||
-				distance_couple.move_flags == 0x4)
-		return 1;
-		else return 0;
-	}
-	else return -1;
+		FLAG_SET(distance_couple.frontf);
+		FLAG_SET(distance_couple.frontr);
+		FLAG_SET(distance_couple.frontl);
+		FLAG_SET(distance_couple.backb);
+		FLAG_SET(distance_couple.backr);
+		FLAG_SET(distance_couple.backl);
+		FLAG_SET(distance_couple.left);
+		FLAG_SET(distance_couple.right);
+		
+		distance_couple.move_flags = ((distance_couple.left.flag)								*512) +
+									 ((distance_couple.right.flag) 								*256) +
+									 ((distance_couple.frontl.flag) 							*128) +
+									 ((distance_couple.frontr.flag) 							* 64) +
+									 ((distance_couple.backl.flag) 								* 32) +
+									 ((distance_couple.backr.flag) 								* 16) +
+									 ((distance_couple.frontr.flag&distance_couple.frontl.flag) *  8) +
+									 ((distance_couple.frontf.flag) 							*  4) +
+									 ((distance_couple.backb.flag)								*  2) +
+									 ((distance_couple.backr.flag&distance_couple.backl.flag)	*  1);
+		//低八位：低四位 基础判定，高四位 精细判定（转向）
+		//高八位：低四位 抓取判定
 }
 
 uint32_t auto_counter=0;
@@ -92,17 +89,16 @@ uint32_t auto_counter=0;
 	}\
 }
 
-void AutoGet(char signal,uint8_t flag)
+void AutoGet(uint8_t flag)
 {
 //	static int8_t auto_flag;
 	static uint8_t step = 0;
 	static uint8_t inTimes=0;
-	RefreshAnologRead();
 	switch(EngineerState)
 	{
 		case START_TEST:
 		{
-			AUTODELAY(1000,{
+			AUTODELAY(100,{
 				EngineerState = LEVEL_SHIFT;
 			});
 		}
@@ -114,7 +110,7 @@ void AutoGet(char signal,uint8_t flag)
 				inTimes++;
 			}
 			if(inTimes>0){	
-				if((distance_couple.move_flags & 6)==0){
+				if((distance_couple.move_flags>>8)==0){
 					inTimes++;
 					if(inTimes==10){	
 						HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_SET);	//前伸
@@ -166,4 +162,95 @@ void AutoGet(char signal,uint8_t flag)
 		case NOAUTO_STATE:	break;
 	}
 	Limit_Position();
+}
+
+void Chassis_Choose()
+{
+	static uint8_t signal1=0;
+	static uint8_t signal2=0;
+	if(UD1.RealAngle<-600)
+	{//small chassis
+		signal1=0;
+		switch(distance_couple.move_flags&0x000f)
+		{
+			case 9:
+				if (ChassisSpeedRef.forward_back_ref < 0) {
+					ChassisSpeedRef.forward_back_ref=0;
+					CML.TargetAngle=0;
+					CMR.TargetAngle=0;
+					if(signal2==0){
+						UD1.TargetAngle+=STEPHIGHT;
+						UD2.TargetAngle-=STEPHIGHT;
+						signal2=1;
+					}
+						
+				}
+				break;
+			case 15:
+				if(ChassisSpeedRef.forward_back_ref > 0){
+					ChassisSpeedRef.forward_back_ref=0;
+					CML.TargetAngle=0;
+					CMR.TargetAngle=0;
+					if(signal2==0){
+						UD1.TargetAngle+=STEPHIGHT;
+						UD2.TargetAngle-=STEPHIGHT;
+						signal2=1;
+					}
+				}
+				break;
+			default:break;
+		}
+	}
+	else if(UD1.RealAngle>-50)
+	{// chassis
+		signal2=0;
+		switch(distance_couple.move_flags&0xf)
+		{
+			case 6:
+				if (ChassisSpeedRef.forward_back_ref < 0) {
+					//ChassisSpeedRef.forward_back_ref=0;
+					CML.TargetAngle=0;
+					CMR.TargetAngle=0;
+					switch((distance_couple.move_flags>>4)&0x3)
+					{
+						case 1://右转
+							rotate_speed=ChassisSpeedRef.forward_back_ref/4;
+							ChassisSpeedRef.forward_back_ref=5;
+							break;
+						case 2://左转
+							rotate_speed=ChassisSpeedRef.forward_back_ref/-4;
+							ChassisSpeedRef.forward_back_ref=5;
+							break;
+						case 0:
+							ChassisSpeedRef.forward_back_ref=0;
+							if(signal1==0){
+								UD1.TargetAngle-=STEPHIGHT;
+								UD2.TargetAngle+=STEPHIGHT;
+								signal1=1;
+								TOTAL_HIGHT--;
+							}break;
+					}	
+				}
+				break;
+			case 15:
+				if(ChassisSpeedRef.forward_back_ref>0){
+					ChassisSpeedRef.forward_back_ref=0;
+					CML.TargetAngle=0;
+					CMR.TargetAngle=0;
+					if(signal1==0){
+						UD1.TargetAngle-=STEPHIGHT;
+						UD2.TargetAngle+=STEPHIGHT;
+						signal1=1;
+						TOTAL_HIGHT++;
+					}
+				}
+				break;
+			default:break;
+		}
+	}
+	else{
+		ChassisSpeedRef.forward_back_ref=0;
+		CML.TargetAngle=0;
+		CMR.TargetAngle=0;
+	}
 }

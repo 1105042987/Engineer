@@ -16,7 +16,7 @@
 #include "includes.h"
   
 #define AMFB_ANGLE_STEP -3.5
-#define AMUD_ANGLE_STEP 2.8
+#define AMUD_ANGLE_STEP 8.4
 #define GMANGLE_STEP 	1.5
   
 //IOÖØÃüÃû

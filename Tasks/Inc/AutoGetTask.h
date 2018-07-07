@@ -14,33 +14,30 @@
 
 #include "includes.h"
 
-#define CHANGE_POINT 2200
+#define STEPHIGHT 800
+#define GETHIGHT 400
+#define CHANGE_POINT 1500
 //1v/5v 	27cm
 
-#define FLAG_SET(val, flag)\
-if(val>=CHANGE_POINT)\
-{\
-	flag = 1;\
-}\
-else\
-{\
-	flag = 0;\
-}\
+#define FLAG_SET(target) if(target.val_ref<CHANGE_POINT) target.flag = 0; else target.flag = 1;
 
 typedef __packed struct
 {
-	uint32_t vol_ref;
+	uint32_t val_ref;
 	int8_t flag;						//1阻断，0开放
 }Distance_Sensor_t;
 
 typedef __packed struct
 {
-	Distance_Sensor_t front;
-	Distance_Sensor_t leftin;
-	Distance_Sensor_t leftout;
-	Distance_Sensor_t rightin;
-	Distance_Sensor_t rightout;
-	int8_t move_flags;
+	Distance_Sensor_t frontf;
+	Distance_Sensor_t frontr;
+	Distance_Sensor_t frontl;
+	Distance_Sensor_t backb;
+	Distance_Sensor_t backr;
+	Distance_Sensor_t backl;
+	Distance_Sensor_t left;
+	Distance_Sensor_t right;
+	uint16_t move_flags;
 }Distance_Couple_t;
 
 //move_flags 16进制：编码准则：lo li ri ro
@@ -58,7 +55,8 @@ typedef enum
 	ERROR_HANDLE
 }Engineer_State_e;
 
-void AutoGet(char signal,uint8_t flag);
+void AutoGet(uint8_t flag);
+void Chassis_Choose(void);
 void RefreshAnologRead(void);
 
 #endif //__AUTO_GET_TASK_H

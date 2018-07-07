@@ -52,17 +52,18 @@ int16_t channel0 = 0;
 int16_t channel1 = 0;
 int16_t channel2 = 0;
 int16_t channel3 = 0;
-
+extern int8_t TOTAL_HIGHT;
 void Limit_Position()
 {
-	VAL_LIMIT(UD1.TargetAngle, 10,1400);//1050 catch rise 1300 get
-	VAL_LIMIT(GMP.TargetAngle,-60,60);
+	VAL_LIMIT(UD1.TargetAngle, -700,100);
+	//VAL_LIMIT(UD2.TargetAngle, -103,752);
+	//VAL_LIMIT(GMP.TargetAngle,-60,60);
 }
 
 void RemoteControlProcess(Remote *rc)
 {
 	//max=297
-	static int8_t help_direction = -1;
+	static int8_t help_direction = 1;
 	channel0 = (rc->ch0 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET); //右横
 	channel1 = (rc->ch1 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET); //右纵
 	channel2 = (rc->ch2 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET); //左横
@@ -72,7 +73,7 @@ void RemoteControlProcess(Remote *rc)
 		//GS_SET(help_direction);
 		
 		ChassisSpeedRef.forward_back_ref = help_direction * channel1 * RC_CHASSIS_SPEED_REF;
-		ChassisSpeedRef.left_right_ref   = help_direction * channel0 * RC_CHASSIS_SPEED_REF/2;
+		ChassisSpeedRef.left_right_ref   = help_direction * channel0 * RC_CHASSIS_SPEED_REF;
 		rotate_speed = channel2 * RC_ROTATE_SPEED_REF;
 		
 		if(channel3 > IGNORE_RANGE)	
@@ -94,12 +95,11 @@ void RemoteControlProcess(Remote *rc)
 	if(WorkState == HELP_STATE)
 	{
 		ChassisSpeedRef.forward_back_ref = help_direction * channel1 * RC_CHASSIS_SPEED_REF;
-		ChassisSpeedRef.left_right_ref   = help_direction * channel0 * RC_CHASSIS_SPEED_REF/2;
+		ChassisSpeedRef.left_right_ref   = help_direction * channel0 * RC_CHASSIS_SPEED_REF;
 		rotate_speed = channel2 * RC_ROTATE_SPEED_REF;
 		
 		OnePush((channel3 > IGNORE_RANGE),{
 			HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_SET);
-			//GS_REVERSAL(help_direction);
 		});
 	 if(channel3 < -IGNORE_RANGE) {
 			HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
@@ -107,43 +107,35 @@ void RemoteControlProcess(Remote *rc)
 	}
 	if(WorkState == GET_STATE)
 	{
-		//GS_SET(help_direction);
-		
-		ChassisSpeedRef.forward_back_ref = 0;
-		ChassisSpeedRef.left_right_ref   = 0;
 		rotate_speed = 0;
 		
-		if(channel0 > IGNORE_RANGE) GMP.TargetAngle += GMANGLE_STEP*0.6;
-		else if(channel0 < -IGNORE_RANGE) GMP.TargetAngle -= GMANGLE_STEP*0.6;
-		
-		if(channel1 > IGNORE_RANGE) {
-			//AMFBAngleTarget = AMFBAngleTarget + AMFB_ANGLE_STEP;
-			HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_SET);
-		}
-		else if(channel1 < -IGNORE_RANGE) {
-			//AMFBAngleTarget = AMFBAngleTarget - AMFB_ANGLE_STEP;
-			HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_RESET);
-		}
+		ChassisSpeedRef.forward_back_ref = channel1 * RC_CHASSIS_SPEED_REF;
+		ChassisSpeedRef.left_right_ref   = channel0 * RC_CHASSIS_SPEED_REF/2;
+		if(TOTAL_HIGHT!=0) ChassisSpeedRef.forward_back_ref/=5;
+		CML.RealAngle=0;
+		CMR.RealAngle=0;
+		CML.TargetAngle=-channel1;
+		CMR.TargetAngle=-channel1;
+
 		
 		if(channel2 > IGNORE_RANGE) {
-			//__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1300);
-			HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_SET);
+			AMR.TargetAngle+=AMFB_ANGLE_STEP;
 		}
 		else if(channel2 < -IGNORE_RANGE) {
-			//__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1000);
-			HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_RESET);
+			AMR.TargetAngle-=AMFB_ANGLE_STEP;
 		}
 		
 		if(channel3 > IGNORE_RANGE) {
 			UD1.TargetAngle+=AMUD_ANGLE_STEP;
 		}
 		else if(channel3 < -IGNORE_RANGE) {
-			UD2.TargetAngle-=AMUD_ANGLE_STEP;
+			UD1.TargetAngle-=AMUD_ANGLE_STEP;
 		}
-		
+		RefreshAnologRead();
+		Chassis_Choose();
 		Limit_Position();
+		UD2.TargetAngle=-UD1.TargetAngle;
 	}
-	//AutoGet('l'); 
 }
 
 
@@ -191,7 +183,6 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 	static uint8_t 	GiveBigBullet_State = 0;
 	static uint8_t 	GiveSmallBullet_State = 0;
 	static int8_t  	move_direction = -1;
-	static char 	auto_direction='l';
 	
 	if(WorkState != STOP_STATE && WorkState != PREPARE_STATE)
 	{
@@ -213,6 +204,7 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 		}*/
 		
 		KeyboardModeFSM(key);
+		RefreshAnologRead();
 		
 		switch (KeyboardMode)
 		{
@@ -231,25 +223,16 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 				if(key->v & KEY_Z)//z搜索置位
 				{
 					if(EngineerState == NOAUTO_STATE) EngineerState = LEVEL_SHIFT;
-					auto_direction = 'l';
-					//if(AMUDAngleTarget == 10 || AMUDAngleTarget == 1050) AMUDAngleTarget += 300;
-					
-					//HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
-					//GS_SET(move_direction);
 				}
 				else if(key->v & KEY_X)//x自动获取
 				{
 					if(EngineerState == NOAUTO_STATE) EngineerState = ARM_STRETCH;
-					auto_direction = 'r';
-					//if(AMUDAngleTarget == 10 || AMUDAngleTarget == 1050) AMUDAngleTarget += 300;
-					
-					//HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
-					//GS_SET(move_direction);
 				}
 				else if(key->v & KEY_C)//c取消
 					EngineerState = ERROR_HANDLE;
 				
 				//Electromagnet 
+				/*
 				OnePush((key->v & KEY_Q),{//q转头
 					if(EngineerState == NOAUTO_STATE) 
 					{
@@ -265,7 +248,7 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 						if(flag) HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_SET);
 						else HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
 					}
-				});
+				});*/
 				
 				//Give Bullet
 				if (key->v & KEY_S)//s		small
@@ -359,7 +342,8 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 			})
 		}
 		
-		AutoGet(auto_direction,(key->v & KEY_CTRL)); 
+		AutoGet((key->v & KEY_CTRL)); 
+		Chassis_Choose();
 		Limit_Position();
 
 		/*裁判系统离线时的功率限制方式*/

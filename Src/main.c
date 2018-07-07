@@ -54,7 +54,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint32_t ADC_Value[100];
+uint32_t ADC_Value[160];
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE END PV */
@@ -146,7 +146,7 @@ int main(void)
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
 	
 	//ADC
-	HAL_ADC_Start_DMA(&hadc1,(uint32_t*)&ADC_Value,100);
+	HAL_ADC_Start_DMA(&hadc1,(uint32_t*)&ADC_Value,160);
 	
 	//其他中断
 	HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);

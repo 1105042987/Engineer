@@ -53,8 +53,6 @@ void ControlCMFL(void)
 
 	CM1SpeedPID.Calc(&CM1SpeedPID);
 	CMFLIntensity = CHASSIS_SPEED_ATTENUATION * CM1SpeedPID.output;
-	
-	CML.Intensity=CMFLIntensity;
 }
 
 void ControlCMFR(void)
@@ -69,8 +67,6 @@ void ControlCMFR(void)
 
 	CM2SpeedPID.Calc(&CM2SpeedPID);
 	CMFRIntensity = CHASSIS_SPEED_ATTENUATION * CM2SpeedPID.output;
-	
-	CMR.Intensity=CMFRIntensity;
 }
 
 void ControlCMBL(void)
@@ -84,7 +80,7 @@ void ControlCMBL(void)
 	CM3SpeedPID.fdb = CMBLRx.RotateSpeed;
 
 	CM3SpeedPID.Calc(&CM3SpeedPID);
-	CMBLIntensity = -CHASSIS_SPEED_ATTENUATION * CM3SpeedPID.output;
+	CMBLIntensity = CHASSIS_SPEED_ATTENUATION * CM3SpeedPID.output;
 }
 
 void ControlCMBR(void)
@@ -98,7 +94,7 @@ void ControlCMBR(void)
 	CM4SpeedPID.fdb = CMBRRx.RotateSpeed;
 
 	CM4SpeedPID.Calc(&CM4SpeedPID);
-	CMBRIntensity = -CHASSIS_SPEED_ATTENUATION * CM4SpeedPID.output;
+	CMBRIntensity = CHASSIS_SPEED_ATTENUATION * CM4SpeedPID.output;
 }
 
 #define NORMALIZE_ANGLE180(angle) angle = ((angle) > 180) ? ((angle) - 360) : (((angle) < -180) ? (angle) + 360 : angle)
@@ -252,7 +248,7 @@ void controlLoop()
 		setCAN21();
 		#endif
 		#ifdef CAN22
-		//for(int i=4;i<8;i++) ControlMotor(can2[i]);
+		for(int i=4;i<8;i++) ControlMotor(can2[i]);
 		setCAN22();
 		#endif
 	}
@@ -289,7 +285,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			{
 				if(rc_first_frame) WorkState = PREPARE_STATE;
 				HAL_UART_AbortReceive(&RC_UART);
-		    HAL_UART_Receive_DMA(&RC_UART, rc_data, 18);
+				HAL_UART_Receive_DMA(&RC_UART, rc_data, 18);
 				rc_cnt = 0;
 				rc_first_frame = 1;
 			}

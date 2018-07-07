@@ -81,38 +81,35 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan){
 	if(hcan == &hcan1)	//CAN1数据
 	{
 		int num=Can1RxMsg.StdId-0x201;
-		if(num>3&&num<8)//4,5,6,7
-		{
-			if(can1[num]!=0)
-			{
-				can1[num]->RxMsg.angle		= CanRxGetU16(Can1RxMsg, 0);
-				can1[num]->RxMsg.RotateSpeed= CanRxGetU16(Can1RxMsg, 1);
-				can1[num]->RxMsg.moment		= CanRxGetU16(Can1RxMsg, 2);
-			}
-			else Error_Handler();
-		}
-		else 
-		{
-			switch(Can1RxMsg.StdId){
-				case CMFL_RXID:
-					CMFLRx.angle = CanRxGetU16(Can1RxMsg, 0);
-					CMFLRx.RotateSpeed = CanRxGetU16(Can1RxMsg, 1);
-					break;
-				case CMFR_RXID:
-					CMFRRx.angle = CanRxGetU16(Can1RxMsg, 0);
-					CMFRRx.RotateSpeed = CanRxGetU16(Can1RxMsg, 1);
-					break;
-				case CMBL_RXID:
-					CMBLRx.angle = CanRxGetU16(Can1RxMsg, 0);
-					CMBLRx.RotateSpeed = CanRxGetU16(Can1RxMsg, 1);
-					break;
-				case CMBR_RXID:
-					CMBRRx.angle = CanRxGetU16(Can1RxMsg, 0);
-					CMBRRx.RotateSpeed = CanRxGetU16(Can1RxMsg, 1);
-					break;
-				default:
-				Error_Handler();
-			}
+		switch(Can1RxMsg.StdId){
+			case CMFL_RXID:
+				CMFLRx.angle = CanRxGetU16(Can1RxMsg, 0);
+				CMFLRx.RotateSpeed = CanRxGetU16(Can1RxMsg, 1);
+				break;
+			case CMFR_RXID:
+				CMFRRx.angle = CanRxGetU16(Can1RxMsg, 0);
+				CMFRRx.RotateSpeed = CanRxGetU16(Can1RxMsg, 1);
+				break;
+			case CMBL_RXID:
+				CMBLRx.angle = CanRxGetU16(Can1RxMsg, 0);
+				CMBLRx.RotateSpeed = CanRxGetU16(Can1RxMsg, 1);
+				break;
+			case CMBR_RXID:
+				CMBRRx.angle = CanRxGetU16(Can1RxMsg, 0);
+				CMBRRx.RotateSpeed = CanRxGetU16(Can1RxMsg, 1);
+				break;
+			default:
+				if(num>3&&num<8)//4,5,6,7
+				{
+					if(can1[num]!=0)
+					{
+						can1[num]->RxMsg.angle		= CanRxGetU16(Can1RxMsg, 0);
+						can1[num]->RxMsg.RotateSpeed= CanRxGetU16(Can1RxMsg, 1);
+						can1[num]->RxMsg.moment		= CanRxGetU16(Can1RxMsg, 2);
+					}
+					else Error_Handler();
+				}
+				else Error_Handler();
 		}
 		if(HAL_CAN_Receive_IT(&hcan1, CAN_FIFO0) != HAL_OK){
 			isRcan1Started = 0;
@@ -127,9 +124,9 @@ void HAL_CAN_RxCpltCallback(CAN_HandleTypeDef* hcan){
 		{
 			if(can2[num]!=0)
 			{
-				can2[num]->RxMsg.angle		= CanRxGetU16(Can1RxMsg, 0);
-				can2[num]->RxMsg.RotateSpeed= CanRxGetU16(Can1RxMsg, 1);
-				can2[num]->RxMsg.moment		= CanRxGetU16(Can1RxMsg, 2);
+				can2[num]->RxMsg.angle		= CanRxGetU16(Can2RxMsg, 0);
+				can2[num]->RxMsg.RotateSpeed= CanRxGetU16(Can2RxMsg, 1);
+				can2[num]->RxMsg.moment		= CanRxGetU16(Can2RxMsg, 2);
 			}
 			else Error_Handler();
 		}
