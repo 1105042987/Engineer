@@ -40,15 +40,15 @@ void fw_PID_Calc(fw_PID_Regulator_t *pid){
 }
 
 
-int16_t PID_PROCESS_Double(fw_PID_Regulator_t pid_position,fw_PID_Regulator_t pid_speed,float target, float position_feedback, float velocity_feedback)
+int16_t PID_PROCESS_Double(fw_PID_Regulator_t* pid_position,fw_PID_Regulator_t* pid_speed,float target, float position_feedback, float velocity_feedback)
 {
 	//position		
-	pid_position.target = target;
-	pid_position.feedback = position_feedback;
-	pid_position.Calc(&pid_position);
+	pid_position->target = target;
+	pid_position->feedback = position_feedback;
+	pid_position->Calc(pid_position);
 	//speed
-	pid_speed.target = pid_position.output;
-	pid_speed.feedback = velocity_feedback;
-	pid_speed.Calc(&pid_speed);
-	return pid_speed.output;
+	pid_speed->target = pid_position->output;
+	pid_speed->feedback = velocity_feedback;
+	pid_speed->Calc(pid_speed);
+	return pid_speed->output;
 }

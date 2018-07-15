@@ -22,6 +22,10 @@ RampGen_t FBSpeedRamp = RAMP_GEN_DAFAULT;
 extern Engineer_State_e EngineerState;
 //extern tUserData data;
 KeyboardMode_e KeyboardMode=NO_CHANGE;
+int16_t  GM_ZERO=0;
+int16_t  GM_SKEW=0;
+int8_t 	move_direction = 1;
+int8_t 	init_count=0;
 
 float rotate_speed;
 
@@ -35,8 +39,11 @@ void RemoteTaskInit()
 	
 	//机械臂电机目标物理角度值
 	UD1.TargetAngle = 0;
+	UD2.TargetAngle = 0;
 	GMY.TargetAngle = 0;
 	GMP.TargetAngle = 0;
+	AMR.TargetAngle = 0;
+	AML.TargetAngle = 0;
 	/*底盘速度初始化*/
 	ChassisSpeedRef.forward_back_ref = 0.0f;
 	ChassisSpeedRef.left_right_ref = 0.0f;
@@ -55,54 +62,55 @@ int16_t channel3 = 0;
 extern int8_t TOTAL_HIGHT;
 void Limit_Position()
 {
-	VAL_LIMIT(UD1.TargetAngle, -700,100);
-	//VAL_LIMIT(UD2.TargetAngle, -103,752);
-	//VAL_LIMIT(GMP.TargetAngle,-60,60);
+	VAL_LIMIT(UD1.TargetAngle, -850,270);
+	UD2.TargetAngle=-UD1.TargetAngle;
+	VAL_LIMIT(AMR.TargetAngle, 0,AM_FRONT);
+	AML.TargetAngle=-AMR.TargetAngle;
+	VAL_LIMIT(GMP.TargetAngle,-45,45);
+	VAL_LIMIT(GM_SKEW,-60,60);
 }
 
 void RemoteControlProcess(Remote *rc)
 {
 	//max=297
-	static int8_t help_direction = 1;
+	static int8_t flag=0;
 	channel0 = (rc->ch0 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET); //右横
 	channel1 = (rc->ch1 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET); //右纵
 	channel2 = (rc->ch2 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET); //左横
 	channel3 = (rc->ch3 - (int16_t)REMOTE_CONTROLLER_STICK_OFFSET); //左纵
 	if(WorkState == NORMAL_STATE)
-	{
-		//GS_SET(help_direction);
+	{	
+		ChassisSpeedRef.forward_back_ref = move_direction * channel1 * RC_CHASSIS_SPEED_REF;
+		ChassisSpeedRef.left_right_ref   = move_direction * channel0 * RC_CHASSIS_SPEED_REF/2;
+		rotate_speed = -channel2 * RC_ROTATE_SPEED_REF;
 		
-		ChassisSpeedRef.forward_back_ref = help_direction * channel1 * RC_CHASSIS_SPEED_REF;
-		ChassisSpeedRef.left_right_ref   = help_direction * channel0 * RC_CHASSIS_SPEED_REF;
-		rotate_speed = channel2 * RC_ROTATE_SPEED_REF;
+		if(channel3 > IGNORE_RANGE)	Open_BDOOR();
+		else Close_BDOOR();
 		
-		if(channel3 > IGNORE_RANGE)	
-		{
-			//__HAL_TIM_SET_COMPARE(STEER_TIM, GIVESML_CHANNEL,DOOR_CLOSE);
-			__HAL_TIM_SET_COMPARE(STEER_TIM, GIVEBIG_CHANNEL, BDOOR_CLOSE+900);
-		}
-		else if(channel3 < -IGNORE_RANGE) 
-		{
-			//__HAL_TIM_SET_COMPARE(STEER_TIM, GIVESML_CHANNEL,DOOR_OPEN);
-			__HAL_TIM_SET_COMPARE(STEER_TIM, GIVESML_CHANNEL, SDOOR_CLOSE-900);
-		}		
-		else
-		{
-			__HAL_TIM_SET_COMPARE(STEER_TIM, GIVESML_CHANNEL, SDOOR_CLOSE);
-			__HAL_TIM_SET_COMPARE(STEER_TIM, GIVEBIG_CHANNEL, BDOOR_CLOSE);
-		}
+		OnePush((channel3<-IGNORE_RANGE),{
+			flag=!flag;
+		})
+		if(flag) Open_ElectroMagnet();
+		else Close_ElectroMagnet();
 	}
 	if(WorkState == HELP_STATE)
 	{
-		ChassisSpeedRef.forward_back_ref = help_direction * channel1 * RC_CHASSIS_SPEED_REF;
-		ChassisSpeedRef.left_right_ref   = help_direction * channel0 * RC_CHASSIS_SPEED_REF;
-		rotate_speed = channel2 * RC_ROTATE_SPEED_REF;
+		GMP.TargetAngle += move_direction * channel1 * 0.01;
+		GM_SKEW += move_direction * channel0 * 0.01;
+		Limit_Position();
+		GMY.TargetAngle = GM_ZERO + GM_SKEW;
+		if(channel3 > IGNORE_RANGE) {
+			AMR.TargetAngle = AM_FRONT;
+		}
+		else if(channel3 < -IGNORE_RANGE) {
+			if(AMR.TargetAngle>AM_BACK) AMR.TargetAngle-=2;
+		}
 		
-		OnePush((channel3 > IGNORE_RANGE),{
-			HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_SET);
-		});
-	 if(channel3 < -IGNORE_RANGE) {
-			HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
+		if(channel2 > IGNORE_RANGE) {
+			Open_Gripper();
+		}
+		else if(channel2 < -IGNORE_RANGE) {
+			Close_Gripper();
 		}
 	}
 	if(WorkState == GET_STATE)
@@ -111,12 +119,6 @@ void RemoteControlProcess(Remote *rc)
 		
 		ChassisSpeedRef.forward_back_ref = channel1 * RC_CHASSIS_SPEED_REF;
 		ChassisSpeedRef.left_right_ref   = channel0 * RC_CHASSIS_SPEED_REF/2;
-		if(TOTAL_HIGHT!=0) ChassisSpeedRef.forward_back_ref/=5;
-		CML.RealAngle=0;
-		CMR.RealAngle=0;
-		CML.TargetAngle=-channel1;
-		CMR.TargetAngle=-channel1;
-
 		
 		if(channel2 > IGNORE_RANGE) {
 			AMR.TargetAngle+=AMFB_ANGLE_STEP;
@@ -132,10 +134,9 @@ void RemoteControlProcess(Remote *rc)
 			UD1.TargetAngle-=AMUD_ANGLE_STEP;
 		}
 		RefreshAnologRead();
-		Chassis_Choose();
-		Limit_Position();
-		UD2.TargetAngle=-UD1.TargetAngle;
+		Chassis_Choose(1);
 	}
+	Limit_Position();
 }
 
 
@@ -181,28 +182,33 @@ void KeyboardModeFSM(Key *key)
 void MouseKeyControlProcess(Mouse *mouse, Key *key)
 {
 	static uint8_t 	GiveBigBullet_State = 0;
-	static uint8_t 	GiveSmallBullet_State = 0;
-	static int8_t  	move_direction = -1;
+	//static uint8_t 	GiveSmallBullet_State = 0;
+	static uint8_t 	AUTO_UPDOWN_STATE = 0;
+	static uint8_t 	HELP_OTHERS_STATE = 0;
 	
 	if(WorkState != STOP_STATE && WorkState != PREPARE_STATE)
 	{
 		VAL_LIMIT(mouse->x, -150, 150); 
 		VAL_LIMIT(mouse->y, -150, 150); 
 		
-		if(mouse->press_r) GMP.TargetAngle -= move_direction * mouse->y* 0.12;
-		
-		//if(EngineerState == NOAUTO_STATE)
-		{
-			rotate_speed = mouse->x * MK_ROTATE_SPEED_REF;	//非自动时 允许车身旋转
-			GMY.TargetAngle = 0;
-		}
-		//else
-		/*{
+		if((mouse->press_l ^ HELP_OTHERS_STATE) == 1) {
+			GMP.TargetAngle += move_direction * mouse->y * 0.24;
+			GM_SKEW -= mouse->x * 0.24;
 			rotate_speed = 0;
-			GMYAWAngleTarget -= mouse->x * 0.03;
-			VAL_LIMIT(GMYAWAngleTarget,-30,30);
-		}*/
-		
+		}
+		else
+		{
+			rotate_speed = - mouse->x * MK_ROTATE_SPEED_REF;
+		}
+		OnePush(mouse->press_r,{
+			move_direction=-move_direction;
+			if(GM_ZERO==0) GM_ZERO=180;
+			else GM_ZERO=0;
+			GM_SKEW=0;
+			GMP.TargetAngle=0;
+		})
+		GMY.TargetAngle = GM_ZERO + GM_SKEW;
+
 		KeyboardModeFSM(key);
 		RefreshAnologRead();
 		
@@ -210,100 +216,46 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 		{
 			case SHIFT_CTRL:	//细节微调与自动控制按钮
 			{//GM Yaw Adjust
-				if(key->v & KEY_V)//v
-					//GSYAW_ZERO += GMANGLE_STEP * 0.6;
-				if(key->v & KEY_B)//b
-					//GSYAW_ZERO -= GMANGLE_STEP * 0.6;
 				if(key->v & KEY_R)//r
 				{
 					GMP.TargetAngle = 0;
 					GMP.RealAngle = 0;
-				}
-				//Auto Bullet Get
-				if(key->v & KEY_Z)//z搜索置位
-				{
-					if(EngineerState == NOAUTO_STATE) EngineerState = LEVEL_SHIFT;
-				}
-				else if(key->v & KEY_X)//x自动获取
-				{
-					if(EngineerState == NOAUTO_STATE) EngineerState = ARM_STRETCH;
-				}
-				else if(key->v & KEY_C)//c取消
-					EngineerState = ERROR_HANDLE;
-				
-				//Electromagnet 
-				/*
-				OnePush((key->v & KEY_Q),{//q转头
-					if(EngineerState == NOAUTO_STATE) 
-					{
-						//GS_REVERSAL(move_direction);
-					}
-				});
-				OnePush((key->v & KEY_W),{//W救援
-					if(EngineerState == NOAUTO_STATE) 
-					{
-						static int8_t flag=0;
-						flag=!flag;
-						//data.data2=flag;
-						if(flag) HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_SET);
-						else HAL_GPIO_WritePin(E_MAGNET_IO, GPIO_PIN_RESET);
-					}
-				});*/
-				
-				//Give Bullet
-				if (key->v & KEY_S)//s		small
-				{
-					GiveSmallBullet_State = 1;
-				}
-				if (key->v & KEY_E)//e		enormous
-				{
-					GiveBigBullet_State = 1;
+					GMY.TargetAngle = 0;
+					GMY.RealAngle = 0;
 				}
 				break;
 			}
 			case CTRL:				//手动机械臂调整，慢速底盘
 			{//AM Movement Process
-				if(key->v & KEY_C)	//c 上升
+				if(key->v & KEY_Z)	//z 上升
 				{
-					UD1.TargetAngle = 1050;
+					UD1.TargetAngle = -1000;
 				};
-				if(key->v & KEY_X)	//x top
+				if(key->v & KEY_X)	//x 下降
 				{
-					UD1.TargetAngle = 1400;
+					UD1.TargetAngle = 400;
 				};
-				if(key->v & KEY_V)	//v 下降
-				{	
-					UD1.TargetAngle = 10;
-				};
-				
-				if(key->v & KEY_G)				//g 前伸
+				if(key->v & KEY_C)  //c 供弹
 				{
-					//AMFBAngleTarget = AMFBAngleTarget + AMFB_ANGLE_STEP;
-					HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_SET);
-				}
-				else if(key->v & KEY_B)	//b 回缩
-				{
-					//AMFBAngleTarget = AMFBAngleTarget - AMFB_ANGLE_STEP;
-					HAL_GPIO_WritePin(M_VAVLE_FB_IO, GPIO_PIN_RESET);
+					GiveBigBullet_State=1;
 				}
 				
-				//Bypass Motor or Magnet value claw catch/release
-				if (key->v & KEY_F)				//f	catch
-				{	
-					//__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1300);
-					HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_SET);
-				}
-				else if (key->v & KEY_R)	//r release
+				if(key->v & KEY_G)
 				{
-					//__HAL_TIM_SET_COMPARE(&BYPASS_TIM, TIM_CHANNEL_1,1000);
-					HAL_GPIO_WritePin(M_VAVLE_OC_IO, GPIO_PIN_RESET);
+					AUTO_UPDOWN_STATE = 1;
 				}
+				
+				if(key->v & KEY_B)
+				{
+					AUTO_UPDOWN_STATE = 0;
+				}
+				
 				//注意这里不用break！
 			}
-			case SHIFT:							//高速底盘
+			case SHIFT:						//高速底盘
 			case NO_CHANGE:					//正常底盘
 			{//CM Movement Process
-				if(key->v & KEY_W)  			//key: w
+				if(key->v & KEY_W)  		//key: w
 					ChassisSpeedRef.forward_back_ref =  move_direction * MK_FORWORD_BACK_SPEED* FBSpeedRamp.Calc(&FBSpeedRamp);
 				else if(key->v & KEY_S) 	//key: s
 					ChassisSpeedRef.forward_back_ref = -move_direction * MK_FORWORD_BACK_SPEED* FBSpeedRamp.Calc(&FBSpeedRamp);
@@ -312,7 +264,7 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 					ChassisSpeedRef.forward_back_ref = 0;
 					FBSpeedRamp.ResetCounter(&FBSpeedRamp);
 				}
-				if(key->v & KEY_D)  			//key: d
+				if(key->v & KEY_D)  		//key: d
 					ChassisSpeedRef.left_right_ref =  move_direction * MK_LEFT_RIGHT_SPEED * LRSpeedRamp.Calc(&LRSpeedRamp);
 				else if(key->v & KEY_A) 	//key: a
 					ChassisSpeedRef.left_right_ref = -move_direction * MK_LEFT_RIGHT_SPEED * LRSpeedRamp.Calc(&LRSpeedRamp);
@@ -321,29 +273,47 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 					ChassisSpeedRef.left_right_ref = 0;
 					LRSpeedRamp.ResetCounter(&LRSpeedRamp);
 				}
+				
+				if(key->v & KEY_Q)
+				{
+					Open_ElectroMagnet();
+					HELP_OTHERS_STATE = 1;
+				}
+				if(key->v & KEY_E)
+				{
+					Close_ElectroMagnet();
+					HELP_OTHERS_STATE = 0;
+				}
+				if(key->v & KEY_R)		//r搜索置位
+				{
+					AMR.TargetAngle = AM_FRONT;
+					//if(EngineerState == NOAUTO_STATE) EngineerState = LEVEL_SHIFT;
+				}
+				else if(key->v & KEY_F)//f自动获取
+				{
+					if(EngineerState == NOAUTO_STATE) EngineerState = ARM_STRETCH;
+				}
+				else if(key->v & KEY_G)//g取消
+					EngineerState = ERROR_HANDLE;
 				break;
 			}
 		}
 		
 		if(GiveBigBullet_State)//2s自动关
 		{
-			__HAL_TIM_SET_COMPARE(STEER_TIM, GIVEBIG_CHANNEL, BDOOR_CLOSE+900);
-			Delay(200,{
-				__HAL_TIM_SET_COMPARE(STEER_TIM, GIVEBIG_CHANNEL, BDOOR_CLOSE);
-				GiveBigBullet_State = 0;
-			})
-		}
-		if(GiveSmallBullet_State)//2s自动关
-		{
-			__HAL_TIM_SET_COMPARE(STEER_TIM, GIVESML_CHANNEL, SDOOR_CLOSE-900);
-			Delay(200,{
-				__HAL_TIM_SET_COMPARE(STEER_TIM, GIVESML_CHANNEL, SDOOR_CLOSE);
-				GiveSmallBullet_State = 0;
+			UD1.TargetAngle = 0;
+			Delay(20,{
+				Open_BDOOR();
+				Delay(10,{
+					Close_BDOOR();
+					GiveBigBullet_State = 0;
+					UD1.TargetAngle = 300;
+				})
 			})
 		}
 		
 		AutoGet((key->v & KEY_CTRL)); 
-		Chassis_Choose();
+		Chassis_Choose(AUTO_UPDOWN_STATE);
 		Limit_Position();
 
 		/*裁判系统离线时的功率限制方式*/
@@ -439,6 +409,7 @@ void GetRemoteSwitchAction(RemoteSwitch_t *sw, uint8_t val)
 //遥控器数据解算
 void RemoteDataProcess(uint8_t *pData)
 {
+	 HAL_IWDG_Refresh(&hiwdg);
 	if(pData == NULL)
 	{
 			return;
@@ -483,14 +454,14 @@ void RemoteDataProcess(uint8_t *pData)
 	{
 		case REMOTE_INPUT:               
 		{
-			if(WorkState != STOP_STATE && WorkState != PREPARE_STATE)
+			if(WorkState != STOP_STATE && WorkState != PREPARE_STATE && WorkState != TEST_STATE)
 			{ 
 				RemoteControlProcess(&(RC_CtrlData.rc));
 			}
 		}break;
 		case KEY_MOUSE_INPUT:              
 		{
-			if(WorkState != STOP_STATE && WorkState != PREPARE_STATE)
+			if(WorkState != STOP_STATE && WorkState != PREPARE_STATE && WorkState != TEST_STATE)
 			{ 
 				MouseKeyControlProcess(&RC_CtrlData.mouse,&RC_CtrlData.key);
 			}

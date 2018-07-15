@@ -26,8 +26,8 @@ typedef struct
 typedef struct 
 {
 	float data1;
-  float data2;
-  float data3;
+	float data2;
+	float data3;
 	uint8_t mask;
 }tUserData;
 
@@ -56,6 +56,7 @@ typedef enum
 void judgeUartRxCpltCallback(void);
 void InitJudgeUart(void);
 void Judge_Refresh(void);
-void Send_User_Data(tUserData *data, uint16_t len);
+void Send_User_Data(void);
+extern tUserData user_data;
 
 #endif /*__ JUDGETASK_H */

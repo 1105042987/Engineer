@@ -365,7 +365,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F427xx</Define>
               <Undefine />
-              <IncludePath>../Inc;                     ../Drivers/STM32F4xx_HAL_Driver/Inc;                     ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;                     ../Drivers/CMSIS/Device/ST/STM32F4xx/Include;                     ../Drivers/CMSIS/Include;                     ..\Tasks\Inc</IncludePath>
+              <IncludePath>../Inc;                       ../Drivers/STM32F4xx_HAL_Driver/Inc;                       ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;                       ../Drivers/CMSIS/Device/ST/STM32F4xx/Include;                       ../Drivers/CMSIS/Include;                       ..\Tasks\Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -503,7 +503,11 @@
               <FileType>1</FileType>
               <FilePath>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c</FilePath>
             </File>
-          </Files>
+          <File>
+              <FileName>stm32f4xx_hal_iwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_iwdg.c</FilePath>
+            </File></Files>
         </Group>
         <Group>
           <GroupName>Tasks</GroupName>
@@ -631,7 +635,11 @@
               <FileType>1</FileType>
               <FilePath>../Src/adc.c</FilePath>
             </File>
-          </Files>
+          <File>
+              <FileName>iwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Src/iwdg.c</FilePath>
+            </File></Files>
         </Group>
         <Group>
           <GroupName>Application/MDK-ARM</GroupName>

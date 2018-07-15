@@ -19,17 +19,20 @@ MotorINFO UD2 = MOTORINFO_Init( &hcan1,0x1ff,0x206,19.0,
 								fw_PID_INIT(1, 0.0, 0.0, 		15000.0, 15000.0, 15000.0, 15000.0));
 
 
-MotorINFO AMR = MOTORINFO_Init( &hcan2,0x200,0x203,19.0,
-								fw_PID_INIT(1200.0, 0.0, 0.0, 	10000.0, 10000.0, 10000.0, 10000.0),
-								fw_PID_INIT(1, 0.0, 0.0, 		10000.0, 10000.0, 10000.0, 4000.0));
+MotorINFO AMR = MOTORINFO_Init( &hcan2,0x200,0x204,19.0,
+								fw_PID_INIT(1200.0, 0.0, 0.0, 	15000.0, 15000.0, 15000.0, 15000.0),
+								fw_PID_INIT(0.8, 0.0, 0.0, 		15000.0, 15000.0, 15000.0, 15000.0));
+MotorINFO AML = MOTORINFO_Init( &hcan2,0x200,0x203,19.0,
+								fw_PID_INIT(1200.0, 0.0, 0.0, 	15000.0, 15000.0, 15000.0, 15000.0),
+								fw_PID_INIT(0.8, 0.0, 0.0, 		15000.0, 15000.0, 15000.0, 15000.0));
 								
 								
 MotorINFO GMP = MOTORINFO_Init( &hcan2,0x200,0x201,36.0,
-								fw_PID_INIT(1200.0, 0.0, 0.0, 	10000.0, 10000.0, 10000.0, 10000.0),
-								fw_PID_INIT(0.7, 0.0, 0.0, 		10000.0, 10000.0, 10000.0, 4000.0));
+								fw_PID_INIT(1200.0, 0.0, 0.0, 	15000.0, 15000.0, 15000.0, 15000.0),
+								fw_PID_INIT(0.7, 0.0, 0.0, 		15000.0, 15000.0, 15000.0, 15000.0));
 MotorINFO GMY = MOTORINFO_Init( &hcan2,0x200,0x202,36.0,
-								fw_PID_INIT(1200.0, 0.0, 0.0, 	10000.0, 10000.0, 10000.0, 10000.0),
-								fw_PID_INIT(0.7, 0.0, 0.0, 		10000.0, 10000.0, 10000.0, 4000.0));
+								fw_PID_INIT(1200.0, 0.0, 0.0, 	15000.0, 15000.0, 15000.0, 15000.0),
+								fw_PID_INIT(0.7, 0.0, 0.0, 		15000.0, 15000.0, 15000.0, 15000.0));
 								
 								
 MotorINFO CML = MOTORINFO_Init( &hcan2,0x1ff,0x205,19.0,
@@ -40,7 +43,7 @@ MotorINFO CMR = MOTORINFO_Init( &hcan2,0x1ff,0x206,19.0,
 								fw_PID_INIT(1, 0.0, 1.0, 		15000.0, 15000.0, 15000.0, 15000.0));
 
 MotorINFO* can1[8]={0,0,0,0,&UD1,&UD2,0,0};
-MotorINFO* can2[8]={&GMP,&GMY,&AMR,0,&CML,&CMR,0,0};
+MotorINFO* can2[8]={&GMP,&GMY,&AML,&AMR,&CML,&CMR,0,0};
 
 void ControlMotor(MotorINFO* id)
 {
@@ -67,7 +70,7 @@ void ControlMotor(MotorINFO* id)
 		}
 		ThisSpeed = id->RxMsg.RotateSpeed * 6;		//单位：度每秒
 		
-		id->Intensity = PID_PROCESS_Double(id->positionPID,id->speedPID,id->TargetAngle,id->RealAngle,ThisSpeed);
+		id->Intensity = PID_PROCESS_Double(&(id->positionPID),&(id->speedPID),id->TargetAngle,id->RealAngle,ThisSpeed);
 		
 		id->s_count = 0;
 		id->lastRead = ThisAngle;
@@ -106,6 +109,7 @@ void setCAN12()
 		HAL_NVIC_DisableIRQ(CAN2_RX0_IRQn);
 		HAL_NVIC_DisableIRQ(USART1_IRQn);
 		HAL_NVIC_DisableIRQ(DMA2_Stream2_IRQn);
+		HAL_NVIC_DisableIRQ(TIM6_DAC_IRQn);
 		HAL_NVIC_DisableIRQ(TIM7_IRQn);
 		#ifdef DEBUG_MODE
 			HAL_NVIC_DisableIRQ(TIM1_UP_TIM10_IRQn);
@@ -120,6 +124,7 @@ void setCAN12()
 		HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(USART1_IRQn);
 		HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
+		HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
 		HAL_NVIC_EnableIRQ(TIM7_IRQn);
 		#ifdef DEBUG_MODE
 			HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
@@ -154,6 +159,7 @@ void setCAN22()
 		HAL_NVIC_DisableIRQ(CAN2_RX0_IRQn);
 		HAL_NVIC_DisableIRQ(USART1_IRQn);
 		HAL_NVIC_DisableIRQ(DMA2_Stream2_IRQn);
+		HAL_NVIC_DisableIRQ(TIM6_DAC_IRQn);
 		HAL_NVIC_DisableIRQ(TIM7_IRQn);
 		#ifdef DEBUG_MODE
 			HAL_NVIC_DisableIRQ(TIM1_UP_TIM10_IRQn);
@@ -168,6 +174,7 @@ void setCAN22()
 		HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(USART1_IRQn);
 		HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
+		HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
 		HAL_NVIC_EnableIRQ(TIM7_IRQn);
 		#ifdef DEBUG_MODE
 			HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
@@ -202,6 +209,7 @@ void setCAN21()
 		HAL_NVIC_DisableIRQ(CAN2_RX0_IRQn);
 		HAL_NVIC_DisableIRQ(USART1_IRQn);
 		HAL_NVIC_DisableIRQ(DMA2_Stream2_IRQn);
+		HAL_NVIC_DisableIRQ(TIM6_DAC_IRQn);
 		HAL_NVIC_DisableIRQ(TIM7_IRQn);
 		#ifdef DEBUG_MODE
 			HAL_NVIC_DisableIRQ(TIM1_UP_TIM10_IRQn);
@@ -218,6 +226,7 @@ void setCAN21()
 		HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
 		HAL_NVIC_EnableIRQ(USART1_IRQn);
 		HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
+		HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
 		HAL_NVIC_EnableIRQ(TIM7_IRQn);
 		#ifdef DEBUG_MODE
 			HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);

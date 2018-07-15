@@ -75,7 +75,7 @@ typedef struct PID_Regulator_t
 }PID_Regulator_t;
 void PID_Reset(PID_Regulator_t *pid);
 void PID_Calc(PID_Regulator_t *pid);
-int16_t PID_PROCESS_Double(fw_PID_Regulator_t pid_position,fw_PID_Regulator_t pid_speed,
+int16_t PID_PROCESS_Double(fw_PID_Regulator_t* pid_position,fw_PID_Regulator_t* pid_speed,
                             float target, float position_feedback, float velocity_feedback);
 #endif
 

@@ -34,16 +34,15 @@ const unsigned char CRC8_TAB[256] =
 0xe9, 0xb7, 0x55, 0x0b, 0x88, 0xd6, 0x34, 0x6a, 0x2b, 0x75, 0x97, 0xc9, 0x4a, 0x14, 0xf6, 0xa8,
 0x74, 0x2a, 0xc8, 0x96, 0x15, 0x4b, 0xa9, 0xf7, 0xb6, 0xe8, 0x0a, 0x54, 0xd7, 0x89, 0x6b, 0x35,
 };
-unsigned char Get_CRC8_Check_Sum(unsigned char *pchMessage,unsigned int dwLength,unsigned
-char ucCRC8)
+unsigned char Get_CRC8_Check_Sum(unsigned char *pchMessage,unsigned int dwLength,unsigned char ucCRC8)
 {
-unsigned char ucIndex;
-while (dwLength--)
-{
-ucIndex = ucCRC8^(*pchMessage++);
-ucCRC8 = CRC8_TAB[ucIndex];
-}
-return(ucCRC8);
+	unsigned char ucIndex;
+	while (dwLength--)
+	{
+		ucIndex = ucCRC8^(*pchMessage++);
+		ucCRC8 = CRC8_TAB[ucIndex];
+	}
+	return(ucCRC8);
 }
 /*
 ** Descriptions: CRC8 Verify function
@@ -112,18 +111,17 @@ const uint16_t wCRC_Table[256] =
 */
 uint16_t Get_CRC16_Check_Sum(uint8_t *pchMessage,uint32_t dwLength,uint16_t wCRC)
 {
-uint8_t chData;
-if (pchMessage == NULL)
-{
-return 0xFFFF;
-}
-while(dwLength--)
-{
-chData = *pchMessage++;
-(wCRC) = ((uint16_t)(wCRC) >> 8) ^ wCRC_Table[((uint16_t)(wCRC) ^ (uint16_t)(chData)) &
-0x00ff];
-}
-return wCRC;
+	uint8_t chData;
+	if (pchMessage == NULL)
+	{
+		return 0xFFFF;
+	}
+	while(dwLength--)
+	{
+		chData = *pchMessage++;
+		(wCRC) = ((uint16_t)(wCRC) >> 8) ^ wCRC_Table[((uint16_t)(wCRC) ^ (uint16_t)(chData)) & 0x00ff];
+	}
+	return wCRC;
 }
 /*
 ** Descriptions: CRC16 Verify function
@@ -164,6 +162,12 @@ void InitJudgeUart(void){
 			Error_Handler();
 	}
 }
+
+
+
+
+
+
 uint8_t receiving = 0;
 uint8_t received = 0;
 uint8_t buffer[44] = {0}; 
@@ -246,24 +250,35 @@ void Judge_Refresh(void)
 	JUDGE_Received = 1;
 }
 
-void Send_User_Data(tUserData *data, uint16_t len)
+
+tUserData user_data;
+void Send_User_Data()
 {
-	void* tx_buf;
-	tx_buf=malloc(30);
-	memset(tx_buf,0,30);
-	SendData_t *senddata=(SendData_t*)tx_buf;
-	
-	senddata->head.sof = 0xA5;
-	senddata->head.data_length=len;
-	senddata->cmdID=0x0005;
-	Append_CRC8_Check_Sum(tx_buf,5);
-	senddata->data.data1=data->data1;
-	senddata->data.data2=data->data2;
-	senddata->data.data3=data->data3;
-	senddata->data.mask=data->mask;
-	Append_CRC16_Check_Sum(tx_buf,22);
-	HAL_UART_Transmit_DMA(&JUDGE_UART,tx_buf,11);
+	uint8_t Buffer[22]={0};
+	user_data.data1 += 0.1f;
+	user_data.data2 += 0.2f;
+	user_data.data3 += 0.3f;
+	user_data.mask = 0xFF;
+	unsigned char * bs1 = (unsigned char*)&user_data.data1;
+	unsigned char * bs2 = (unsigned char*)&user_data.data2;
+	unsigned char * bs3 = (unsigned char*)&user_data.data3;
+	Buffer[0] = 0xA5;
+	Buffer[1]  = 13;
+	Buffer[3] = 1;
+	Buffer[4] = Get_CRC8_Check_Sum (&Buffer[0], 5-1, CRC8_INIT);
+	Buffer[5] = 0x00;
+	Buffer[6] = 0x01;
+	for(int i=7;i<11;i++) Buffer[i] = bs1[i-7];
+	for(int i=11;i<15;i++) Buffer[i] = bs2[i-11];
+	for(int i=15;i<19;i++) Buffer[i] = bs3[i-15];
+	Buffer[19] = user_data.mask;
+	static uint16_t CRC16=0;
+	CRC16 = Get_CRC16_Check_Sum ( Buffer, 20, CRC_INIT);
+	Buffer[20] = CRC16 & 0xff;
+	Buffer[21] = (CRC16 >> 8) & 0xff;
+	HAL_UART_Transmit(&JUDGE_UART,Buffer,22,0xff);
 }
+
 //void HAL_UART_TxHalfCpltCallback(UART_HandleTypeDef *huart)
 //{
 //	huart->gState=HAL_UART_STATE_READY;

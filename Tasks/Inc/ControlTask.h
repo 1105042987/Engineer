@@ -63,7 +63,8 @@
 
 typedef enum
 {
-	PREPARE_STATE,     	
+	PREPARE_STATE, 
+	TEST_STATE,
 	NORMAL_STATE,
 	HELP_STATE,
 	GET_STATE,

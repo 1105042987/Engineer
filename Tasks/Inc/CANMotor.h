@@ -38,7 +38,7 @@ typedef __packed struct
 	ppid,spid,0\
 }
 
-extern MotorINFO UD1,UD2,GMP,GMY,AMR,CML,CMR;
+extern MotorINFO UD1,UD2,GMP,GMY,AML,AMR,CML,CMR;
 extern MotorINFO *can1[8],*can2[8];
 
 void InitMotor(MotorINFO *id);

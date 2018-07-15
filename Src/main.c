@@ -42,6 +42,7 @@
 #include "adc.h"
 #include "can.h"
 #include "dma.h"
+#include "iwdg.h"
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
@@ -124,6 +125,7 @@ int main(void)
   MX_TIM10_Init();
   MX_ADC1_Init();
   MX_TIM2_Init();
+  MX_IWDG_Init();
 
   /* USER CODE BEGIN 2 */
 	//各模块初始化
@@ -168,10 +170,7 @@ int main(void)
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
-//		VisualScope(&huart3,0,0,0,0);
-		//IMU数据更新放在主循环中
 		IMURefresh();
-		
   }
   /* USER CODE END 3 */
 
@@ -193,8 +192,9 @@ void SystemClock_Config(void)
 
     /**Initializes the CPU, AHB and APB busses clocks 
     */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 6;

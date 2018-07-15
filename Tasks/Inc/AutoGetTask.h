@@ -14,7 +14,7 @@
 
 #include "includes.h"
 
-#define STEPHIGHT 800
+#define STEPHIGHT 1250
 #define GETHIGHT 400
 #define CHANGE_POINT 1500
 //1v/5v 	27cm
@@ -56,7 +56,7 @@ typedef enum
 }Engineer_State_e;
 
 void AutoGet(uint8_t flag);
-void Chassis_Choose(void);
+void Chassis_Choose(uint8_t flag);
 void RefreshAnologRead(void);
 
 #endif //__AUTO_GET_TASK_H

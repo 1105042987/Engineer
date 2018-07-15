@@ -26,6 +26,7 @@
 #include "usart.h"
 #include "gpio.h"
 #include "adc.h"
+#include "iwdg.h"
 
 #include "AuxDevice.h"
 #include "RemoteTask.h"

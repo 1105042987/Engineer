@@ -137,6 +137,7 @@ void setCMMotor()
 		HAL_NVIC_DisableIRQ(CAN2_RX0_IRQn);
 		HAL_NVIC_DisableIRQ(USART1_IRQn);
 		HAL_NVIC_DisableIRQ(DMA2_Stream2_IRQn);
+		HAL_NVIC_DisableIRQ(TIM6_DAC_IRQn);
 		HAL_NVIC_DisableIRQ(TIM7_IRQn);
 		#ifdef DEBUG_MODE
 			HAL_NVIC_DisableIRQ(TIM1_UP_TIM10_IRQn);
@@ -155,6 +156,7 @@ void setCMMotor()
 		HAL_NVIC_EnableIRQ(USART1_IRQn);
 		HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
 		HAL_NVIC_EnableIRQ(TIM7_IRQn);
+		HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
 		#ifdef DEBUG_MODE
 			HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
 		#endif
@@ -171,16 +173,62 @@ void WorkStateFSM(void)
 		case PREPARE_STATE:			//准备模式
 		{
 			if (inputmode == STOP) WorkState = STOP_STATE;
-			if(prepare_time < 1000) 
+			if(prepare_time < 1000) prepare_time++;
+			if(prepare_time == 1000)//开机一秒进入正常模式
 			{
-				prepare_time++;
-				InitMotor(&UD1);
-				InitMotor(&UD2);
-			}
-			if(prepare_time == 1000)//开机三秒进入正常模式
-			{
-				WorkState = NORMAL_STATE;
+				WorkState = TEST_STATE;
 				prepare_time = 0;
+			}
+		}break;
+		case TEST_STATE:
+		{
+			static uint16_t UDcounter = 0;
+			static uint16_t AMcounter = 0;
+			static double UDRA=0;
+			static double AMRA=0;
+			if(AMcounter<300)
+			{
+				if((AMR.RealAngle-AMRA)<0.1&&(AMR.RealAngle-AMRA)>-0.1) AMcounter++;
+				else
+				{
+					AMcounter=0;
+					AMRA=AMR.RealAngle;
+				}
+				if(AMcounter<60) {AMR.TargetAngle+=0.5;AML.TargetAngle=-AMR.TargetAngle;}
+			}
+			if(UDcounter<300)
+			{
+				if((UD1.RealAngle-UDRA)<0.1&&(UD1.RealAngle-UDRA)>-0.1) UDcounter++;
+				else
+				{
+					UDcounter=0;
+					UDRA=UD1.RealAngle;
+				}
+				if(UDcounter<60) {UD1.TargetAngle+=1;UD2.TargetAngle=-UD1.TargetAngle;}
+			}
+			if(UDcounter==300&&AMcounter==300)
+			{				
+				Open_Gripper();
+				
+				Delay(300,{
+					AMR.RealAngle=230;
+					AML.RealAngle=-AMR.RealAngle;
+					AMR.TargetAngle=30;
+					AML.TargetAngle=-30;
+				
+					UD1.RealAngle=300;
+					UD2.RealAngle=-UD1.RealAngle;
+					UD1.TargetAngle=300;
+					UD2.TargetAngle=-300;
+					
+					Close_Gripper();
+					
+					UDcounter = 0;
+					AMcounter = 0;
+					UDRA=0;
+					AMRA=0;
+					WorkState = NORMAL_STATE;
+				});
 			}
 		}break;
 		case NORMAL_STATE:			//正常模式
@@ -255,11 +303,10 @@ void controlLoop()
 }
 
 extern int32_t auto_counter;
-//tUserData data;
 //时间中断入口函数
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	if (htim->Instance == htim6.Instance)//2ms时钟
+	if (htim->Instance == htim6.Instance)//2ms时钟`
 	{
 		HAL_NVIC_DisableIRQ(TIM6_DAC_IRQn);
 		
@@ -297,7 +344,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		//data.data1 = AMUD1RealAngle;
 		//data.data3=0;
 		//data.mask=0;
-		//Send_User_Data(&data,7);
+		
 		#ifdef DEBUG_MODE
 		//zykProcessData();
 		//dataCallBack();
