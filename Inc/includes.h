@@ -12,6 +12,7 @@
 #ifndef __INCLUDES_H
 #define __INCLUDES_H
 
+#define SLOW_UPDOWN
 //#define DEBUG_MODE
 #define CAN12
 #define CAN21

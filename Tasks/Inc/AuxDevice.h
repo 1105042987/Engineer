@@ -18,8 +18,10 @@
 #define AMFB_ANGLE_STEP 1.4
 #define AMUD_ANGLE_STEP 8.4
 #define GMANGLE_STEP 	1.5
-#define AM_BACK			60
-#define AM_FRONT		210
+#define AM_BACK			41
+#define AM_FRONT		203
+#define UD_TOP			270
+#define UD_BOTTOM		-900
   
 //IO÷ÿ√¸√˚
 #define STEER_TIM 			&htim2
@@ -28,7 +30,7 @@
 //#define GIVESML_CHANNEL	TIM_CHANNEL_3
 #define GIVEBIG_CHANNEL		TIM_CHANNEL_4
 //#define SDOOR_CLOSE 		1500
-#define BDOOR_CLOSE 		1300
+#define BDOOR_CLOSE 		2130
 #define E_MAGNET_IO 		GPIOI, GPIO_PIN_2
 //#define M_VAVLE_FB_IO		GPIOI, GPIO_PIN_12
 #define M_VAVLE_OC_IO		GPIOH, GPIO_PIN_0

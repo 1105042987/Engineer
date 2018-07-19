@@ -20,6 +20,7 @@ RemoteSwitch_t g_switch1;
 RampGen_t LRSpeedRamp = RAMP_GEN_DAFAULT;   	//键盘速度斜坡
 RampGen_t FBSpeedRamp = RAMP_GEN_DAFAULT;
 extern Engineer_State_e EngineerState;
+extern int8_t Test_UD_Direction;
 //extern tUserData data;
 KeyboardMode_e KeyboardMode=NO_CHANGE;
 int16_t  GM_ZERO=0;
@@ -62,7 +63,9 @@ int16_t channel3 = 0;
 extern int8_t TOTAL_HIGHT;
 void Limit_Position()
 {
-	VAL_LIMIT(UD1.TargetAngle, -850,270);
+	#ifndef SLOW_UPDOWN 
+		VAL_LIMIT(UD1.TargetAngle, UD_BOTTOM, UD_TOP);
+	#endif 
 	UD2.TargetAngle=-UD1.TargetAngle;
 	VAL_LIMIT(AMR.TargetAngle, 0,AM_FRONT);
 	AML.TargetAngle=-AMR.TargetAngle;
@@ -134,7 +137,7 @@ void RemoteControlProcess(Remote *rc)
 			UD1.TargetAngle-=AMUD_ANGLE_STEP;
 		}
 		RefreshAnologRead();
-		Chassis_Choose(1);
+		Chassis_Choose(1,1);
 	}
 	Limit_Position();
 }
@@ -227,17 +230,36 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 			}
 			case CTRL:				//手动机械臂调整，慢速底盘
 			{//AM Movement Process
-				if(key->v & KEY_Z)	//z 上升
+				if(key->v & KEY_Z)	//z 下降
 				{
-					UD1.TargetAngle = -1000;
+					#ifdef SLOW_UPDOWN
+						Test_UD_Direction = -1;
+					#else
+						UD1.TargetAngle = UD_BOTTOM;
+					#endif
 				};
-				if(key->v & KEY_X)	//x 下降
+				if(key->v & KEY_X)	//x 上升
 				{
-					UD1.TargetAngle = 400;
+					#ifdef SLOW_UPDOWN
+						Test_UD_Direction = 1;
+					#else
+						UD1.TargetAngle = UD_TOP;
+					#endif
 				};
 				if(key->v & KEY_C)  //c 供弹
 				{
 					GiveBigBullet_State=1;
+				}
+				
+				if(key->v & KEY_Q)
+				{
+					Open_ElectroMagnet();
+					HELP_OTHERS_STATE = 1;
+				}
+				if(key->v & KEY_E)
+				{
+					Close_ElectroMagnet();
+					HELP_OTHERS_STATE = 0;
 				}
 				
 				if(key->v & KEY_G)
@@ -273,17 +295,7 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 					ChassisSpeedRef.left_right_ref = 0;
 					LRSpeedRamp.ResetCounter(&LRSpeedRamp);
 				}
-				
-				if(key->v & KEY_Q)
-				{
-					Open_ElectroMagnet();
-					HELP_OTHERS_STATE = 1;
-				}
-				if(key->v & KEY_E)
-				{
-					Close_ElectroMagnet();
-					HELP_OTHERS_STATE = 0;
-				}
+
 				if(key->v & KEY_R)		//r搜索置位
 				{
 					AMR.TargetAngle = AM_FRONT;
@@ -307,13 +319,17 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 				Delay(10,{
 					Close_BDOOR();
 					GiveBigBullet_State = 0;
-					UD1.TargetAngle = 300;
+					#ifdef SLOW_UPDOWN
+						Test_UD_Direction = 1;
+					#else
+						UD1.TargetAngle = UD_TOP;
+					#endif
 				})
 			})
 		}
 		
 		AutoGet((key->v & KEY_CTRL)); 
-		Chassis_Choose(AUTO_UPDOWN_STATE);
+		Chassis_Choose(AUTO_UPDOWN_STATE,(key->v&KEY_Q));
 		Limit_Position();
 
 		/*裁判系统离线时的功率限制方式*/

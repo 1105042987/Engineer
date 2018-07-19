@@ -97,7 +97,6 @@ void ControlCMBR(void)
 	CMBRIntensity = CHASSIS_SPEED_ATTENUATION * CM4SpeedPID.output;
 }
 
-#define NORMALIZE_ANGLE180(angle) angle = ((angle) > 180) ? ((angle) - 360) : (((angle) < -180) ? (angle) + 360 : angle)
 float gap_angle = 0.0;
 //底盘旋转控制
 void ControlRotate(void)
@@ -271,11 +270,55 @@ void WorkStateFSM(void)
 	}
 }
 
-
+int8_t Test_UD_Direction = 0;
+void Slowly_Test_UD()
+{
+	static uint16_t UDcounter = 0;
+	static double UDRA=0;
+	if(Test_UD_Direction != 0)
+	{
+		if(UDcounter<300)
+		{
+			if((UD1.RealAngle-UDRA)<0.1&&(UD1.RealAngle-UDRA)>-0.1) 
+				UDcounter++;
+			else
+			{
+				UDcounter=0;
+				UDRA=UD1.RealAngle;
+			}
+			if(UDcounter<60) {
+				UD1.TargetAngle += 1.5 * Test_UD_Direction;
+				UD2.TargetAngle =  -UD1.TargetAngle;
+			}
+		}
+		if(UDcounter==300)
+		{	
+			if(Test_UD_Direction==1)
+			{
+				UD1.RealAngle   = 300;
+				UD2.RealAngle   = -UD1.RealAngle;
+				UD1.TargetAngle = UD1.RealAngle - 30;
+				UD2.TargetAngle = -UD1.TargetAngle;
+			}
+			else
+			{
+				UD1.RealAngle   = -900;
+				UD2.RealAngle   = -UD1.RealAngle;
+				UD1.TargetAngle = UD1.RealAngle + 50;
+				UD2.TargetAngle = -UD1.TargetAngle;
+			}				
+			UDcounter = 0;
+			UDRA=0;
+			Test_UD_Direction = 0;
+		}
+	}
+}
 //主控制循环
 void controlLoop()
 {
 	WorkStateFSM();
+	
+	Slowly_Test_UD();
 	
 	if(WorkState != STOP_STATE && WorkState != PREPARE_STATE)
 	{

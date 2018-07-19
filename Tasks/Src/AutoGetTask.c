@@ -14,6 +14,7 @@ Distance_Couple_t distance_couple;
 Engineer_State_e EngineerState = NOAUTO_STATE;
 int32_t ad1=0,ad2=0,ad3=0,ad4=0,ad5=0,ad6=0,ad7=0,ad8=0;
 extern uint32_t ADC_Value[];
+extern int8_t Test_UD_Direction;
 
 void RefreshAnologRead()
 {
@@ -160,7 +161,7 @@ void AutoGet(uint8_t flag)
 	Limit_Position();
 }
 
-void Chassis_Choose(uint8_t flag)
+void Chassis_Choose(uint8_t flag,uint8_t ensure)
 {
 	static uint8_t signal1=0;
 	static uint8_t signal2=0;
@@ -179,7 +180,11 @@ void Chassis_Choose(uint8_t flag)
 					CML.TargetAngle=0;
 					CMR.TargetAngle=0;
 					if(signal2==0){
-						UD1.TargetAngle+=STEPHIGHT;
+						#ifdef SLOW_UPDOWN
+							Test_UD_Direction = 1;
+						#else
+							UD1.TargetAngle = UD_TOP;
+						#endif
 						signal2=1;
 					}	
 				}
@@ -193,7 +198,11 @@ void Chassis_Choose(uint8_t flag)
 					CML.TargetAngle=0;
 					CMR.TargetAngle=0;
 					if(signal2==0){
-						UD1.TargetAngle+=STEPHIGHT;
+						#ifdef SLOW_UPDOWN
+							Test_UD_Direction = 1;
+						#else
+							UD1.TargetAngle = UD_TOP;
+						#endif
 						signal2=1;
 					}
 				}
@@ -215,18 +224,22 @@ void Chassis_Choose(uint8_t flag)
 					switch((distance_couple.move_flags>>4)&0x3)
 					{
 						case 1://右转
-							rotate_speed=ChassisSpeedRef.forward_back_ref/5;
+							rotate_speed=ChassisSpeedRef.forward_back_ref/8;
 							ChassisSpeedRef.forward_back_ref=5;
 							break;
 						case 2://左转
-							rotate_speed=ChassisSpeedRef.forward_back_ref/-5;
+							rotate_speed=ChassisSpeedRef.forward_back_ref/-8;
 							ChassisSpeedRef.forward_back_ref=5;
 							break;
 						case 0:
 							ChassisSpeedRef.forward_back_ref=0;
-							if(signal1==0)
+							if(signal1==0 && ensure==1)
 							{
-								UD1.TargetAngle-=STEPHIGHT;
+								#ifdef SLOW_UPDOWN
+									Test_UD_Direction = -1;
+								#else
+									UD1.TargetAngle = UD_BOTTOM;
+								#endif
 								signal1=1;
 							}break;
 					}	
@@ -234,11 +247,15 @@ void Chassis_Choose(uint8_t flag)
 				break;				
 			case 15:
 				if(ChassisSpeedRef.forward_back_ref>0){
-					ChassisSpeedRef.forward_back_ref=0;
+					ChassisSpeedRef.forward_back_ref/=2;
 					CML.TargetAngle=0;
 					CMR.TargetAngle=0;
-					if(signal1==0){
-						UD1.TargetAngle-=STEPHIGHT;
+					if(signal1==0 && ensure==1){
+						#ifdef SLOW_UPDOWN
+							Test_UD_Direction = -1;
+						#else
+							UD1.TargetAngle = UD_BOTTOM;
+						#endif
 						signal1=1;
 					}
 				}
