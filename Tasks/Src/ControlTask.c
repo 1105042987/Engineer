@@ -318,7 +318,9 @@ void controlLoop()
 {
 	WorkStateFSM();
 	
-	Slowly_Test_UD();
+	#ifdef SLOW_UPDOWN
+		Slowly_Test_UD();
+	#endif
 	
 	if(WorkState != STOP_STATE && WorkState != PREPARE_STATE)
 	{
