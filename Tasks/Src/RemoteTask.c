@@ -122,6 +122,8 @@ void RemoteControlProcess(Remote *rc)
 		
 		ChassisSpeedRef.forward_back_ref = channel1 * RC_CHASSIS_SPEED_REF;
 		ChassisSpeedRef.left_right_ref   = channel0 * RC_CHASSIS_SPEED_REF/2;
+		CML.TargetAngle=ChassisSpeedRef.forward_back_ref*5;
+		CMR.TargetAngle=-ChassisSpeedRef.forward_back_ref*5;
 		
 		if(channel2 > IGNORE_RANGE) {
 			AMR.TargetAngle+=AMFB_ANGLE_STEP;
@@ -137,7 +139,7 @@ void RemoteControlProcess(Remote *rc)
 			UD1.TargetAngle-=AMUD_ANGLE_STEP;
 		}
 		RefreshAnologRead();
-		Chassis_Choose(1,1);
+		//Chassis_Choose(1,1);
 	}
 	Limit_Position();
 }
@@ -328,6 +330,11 @@ void MouseKeyControlProcess(Mouse *mouse, Key *key)
 			})
 		}
 		
+		if(AUTO_UPDOWN_STATE) HAL_GPIO_WritePin(GPIOI, GPIO_PIN_7, GPIO_PIN_SET);
+		else HAL_GPIO_WritePin(GPIOI, GPIO_PIN_7, GPIO_PIN_RESET);
+		if(HELP_OTHERS_STATE) HAL_GPIO_WritePin(GPIOI, GPIO_PIN_6, GPIO_PIN_SET);
+		else HAL_GPIO_WritePin(GPIOI, GPIO_PIN_6, GPIO_PIN_RESET);
+		
 		AutoGet((key->v & KEY_CTRL)); 
 		Chassis_Choose(AUTO_UPDOWN_STATE,(key->v&KEY_Q));
 		Limit_Position();
@@ -425,7 +432,7 @@ void GetRemoteSwitchAction(RemoteSwitch_t *sw, uint8_t val)
 //遥控器数据解算
 void RemoteDataProcess(uint8_t *pData)
 {
-	 HAL_IWDG_Refresh(&hiwdg);
+	HAL_IWDG_Refresh(&hiwdg);
 	if(pData == NULL)
 	{
 			return;

@@ -197,7 +197,7 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>distance_couple.backr.flag</ItemText>
+          <ItemText>prepare_time</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
@@ -237,7 +237,7 @@
         <Ww>
           <count>8</count>
           <WinNumber>1</WinNumber>
-          <ItemText>ad8,0x0A</ItemText>
+          <ItemText>WorkState</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

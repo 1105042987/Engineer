@@ -101,10 +101,10 @@ float gap_angle = 0.0;
 //底盘旋转控制
 void ControlRotate(void)
 {	
-		CMRotatePID.ref = 0;
-		CMRotatePID.fdb = rotate_speed;
-		CMRotatePID.Calc(&CMRotatePID);   
-		ChassisSpeedRef.rotate_ref = CMRotatePID.output * 13 + ChassisSpeedRef.forward_back_ref * 0.01 + ChassisSpeedRef.left_right_ref * 0.01;
+	CMRotatePID.ref = 0;
+	CMRotatePID.fdb = rotate_speed;
+	CMRotatePID.Calc(&CMRotatePID);   
+	ChassisSpeedRef.rotate_ref = CMRotatePID.output * 13 + ChassisSpeedRef.forward_back_ref * 0.01 + ChassisSpeedRef.left_right_ref * 0.01;
 }
 
 

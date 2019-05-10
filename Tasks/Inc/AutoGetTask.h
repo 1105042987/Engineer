@@ -18,7 +18,20 @@
 #define CHANGE_POINT 1500
 //1v/5v 	27cm
 
-#define FLAG_SET(target) if(target.val_ref<CHANGE_POINT) target.flag = 0; else target.flag = 1;
+#define FLAG_SET(target) \
+{\
+	static uint8_t cnt=0;\
+	static uint8_t cache;\
+	cache = target.val_ref<CHANGE_POINT;\
+	if(cache != target.flag){\
+		cnt++;\
+	}\
+	else cnt=0;\
+	if(cnt == 20){\
+		cnt=0;\
+		target.flag = cache;\
+	}\
+}
 
 typedef __packed struct
 {
